@@ -1,24 +1,33 @@
-var _scroll_check_interval = 100;
-var _slide_speed = 500;
+var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
 
-//var _current_slide_n = 1;
-//var _current_slide = null;
-//var _multiple_slides_visible = false;
+var _scroll_check_interval = 100;
+var _slide_speed = 300;
 var _slides_visible = null;
 
 var has_scrolled = true;
 
-window.onscroll = function() {
-    has_scrolled = true;
-};
+// Only run this if we are not on mobile
+// We should actually capture these events better, right now
+// animation triggers them
+/*
+if(!isMobile) {
+    window.onscroll = function() {
+        has_scrolled = true;
+    };
+}
 
-setInterval(function() {
-    if(has_scrolled) {
-        has_scrolled = false;
-        onmove();
-    }
-}, _scroll_check_interval);
-
+if(!isMobile) {
+    setInterval(function() {
+        if(has_scrolled) {
+            has_scrolled = false;
+            onmove();
+        }
+    }, _scroll_check_interval);
+}
+*/
+$( document ).ready(function() {
+    onmove();
+});
 
 function checkVisible(elm) {
     var rect = elm.getBoundingClientRect();
@@ -28,6 +37,7 @@ function checkVisible(elm) {
 }
 
 function onmove() {
+    //console.log("ONMOVE");
 
     // Find and mark the least most visible slide
     _slides_visible = [];
@@ -36,17 +46,9 @@ function onmove() {
         if( checkVisible(this) ) {
             _slides_visible.push( $(this) );
             //return false;
-        }
-        
+        }        
     });
     
-    //console.log(_slides_visible);
-
-    /*
-    $('html, body').animate({
-        scrollTop: item.offset().top
-    }, _slide_speed);
-    */
 }
 
 function moveTO(item) {
@@ -69,7 +71,7 @@ function moveDOWN() {
         }
     }
 
-    console.log("DOWN", _slides_visible); 
+    //console.log("DOWN", _slides_visible); 
 }
 
 function moveUP() {
@@ -86,8 +88,6 @@ function moveUP() {
             _slides_visible = [item,];
         }
     }
-
-    console.log("UP", _slides_visible); 
 }
 
 

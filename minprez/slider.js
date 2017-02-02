@@ -45,7 +45,9 @@ function onmove() {
     $('section').each( function( index, element ){
         if( checkVisible(this) ) {
             _slides_visible.push( $(this) );
-            //return false;
+
+            if(_slides_visible.length >= 2)
+                return false;
         }        
     });
     

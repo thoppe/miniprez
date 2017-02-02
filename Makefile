@@ -1,4 +1,4 @@
-target = demo
+target = test
 
 all:
 	python minprez/minprez.py $(target).md
@@ -8,6 +8,12 @@ clean:
 
 edit:
 	emacs $(target).md &
+
+view:
+	xdg-open $(target).html &
+
+build:
+	watch -n 1 make
 
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
 # Build dependencies

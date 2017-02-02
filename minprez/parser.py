@@ -1,5 +1,4 @@
 import itertools
-import collections 
 import bs4
 import string
 import pyparsing as pyp
@@ -147,9 +146,13 @@ class tagline(object):
         if self.classnames:
             tag['class'] = self.classnames
 
+        options = self.tag[1]
+        for key,val in options.items():
+            tag[key] = val
+
         for key,val in kwargs.items():
             tag[key] = val
-        
+
         return tag
 
 

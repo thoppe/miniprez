@@ -1,13 +1,21 @@
 import sys
+import bs4
+import os
 import codecs
-from parser import file_iterator, section_iterator
+from parser import file_iterator, section_iterator, section
+
+__location__ = os.path.realpath(os.path.join(
+    os.getcwd(), os.path.dirname(__file__)))
+
 
 if __name__ == "__main__":
 
     f_md = sys.argv[1]
     F = file_iterator(f_md)
 
-    with open("base.html") as FIN:
+    f_base = os.path.join(__location__, "base.html")
+
+    with open(f_base) as FIN:
         raw = FIN.read()
         base = bs4.BeautifulSoup(raw,'lxml')
         slides = base.find("article",{"id":"webslidesX"})

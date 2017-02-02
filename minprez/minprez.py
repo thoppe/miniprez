@@ -18,11 +18,11 @@ if __name__ == "__main__":
     with open(f_base) as FIN:
         raw = FIN.read()
         base = bs4.BeautifulSoup(raw,'lxml')
-        slides = base.find("article",{"id":"webslidesX"})
+        slides = base.find("article",{"id":"minslides"})
 
     for k,x in enumerate(section_iterator(F)):
         soup = section(x).soup
-        soup.section["id"] = 'slide{:d}'.format(k+1)
+        soup.section["slide-number"] = k+1
         slides.append(soup)
 
     with codecs.open('test.html','w','utf-8') as FOUT:

@@ -1,7 +1,7 @@
 target = test
 
 all:
-	python minprez/minprez.py $(target).md
+	python miniprez/miniprez.py $(target).md
 
 clean:
 	rm -vf *~ $(target).html *.pyc

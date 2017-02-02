@@ -18,7 +18,7 @@ if __name__ == "__main__":
     with open(f_base) as FIN:
         raw = FIN.read()
         base = bs4.BeautifulSoup(raw,'lxml')
-        slides = base.find("article",{"id":"minslides"})
+        slides = base.find("article",{"id":"minislides"})
 
     for k,x in enumerate(section_iterator(F)):
         soup = section(x).soup

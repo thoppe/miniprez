@@ -20,8 +20,10 @@ if __name__ == "__main__":
         base = bs4.BeautifulSoup(raw,'lxml')
         slides = base.find("article",{"id":"webslidesX"})
 
-    for x in section_iterator(F):
-        slides.append( section(x).soup )
+    for k,x in enumerate(section_iterator(F)):
+        soup = section(x).soup
+        soup.section["id"] = 'slide{:d}'.format(k+1)
+        slides.append(soup)
 
     with codecs.open('test.html','w','utf-8') as FOUT:
         FOUT.write( base.prettify() )

@@ -9,6 +9,7 @@ from emoji import emojize
 _registered_custom_tags = {
     "background" : custom_tags.background,
     "line" : custom_tags.line,
+    "button" : custom_tags.button,
 }
 
 _section_header_token = '----'
@@ -148,7 +149,7 @@ class tagline(object):
             tag = soup.new_tag(name)
         
         if self.classnames:
-            tag['class'] = self.classnames
+            tag['class'] = tag.get('class',[]) + self.classnames
 
         options = self.tag[1]
         for key,val in options.items():
@@ -195,7 +196,7 @@ class section(object):
                 assert(z.name == "section")
                 z.append(tag)
                 tag = soup.new_tag("div",indent=-1)
-                tag["class"] = "wrap"
+                tag["class"] = ["wrap",]
                 z.append(tag)
             
             elif x.indent > z["indent"]:

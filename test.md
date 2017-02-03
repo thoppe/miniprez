@@ -1,8 +1,13 @@
 ---- .aligncenter   
 @background(url="https://webslides.tv/static/images/nature.jpg")
 
-.text-data miniprez
-.text-into Beautiful presentations in minimalist format
+.text-data miniprez <br>
+<br>
+@h3 Beautiful presentations in minimalist format <br>
+
+@p 
+ @button(href="https://github.com/thoppe/miniprez") .ghost ::github:: Project repo
+ @button(href="https://twitter.com/metasemantic") .ghost ::twitter:: @metasemantic
 
 @p .text-intro 
   WebSlides makes HTML presentations easy.
@@ -10,10 +15,8 @@
     Just the essentials and using lovely CSS.
     and back again!
 
-@img(src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Sirani%2C_Elisabetta_-_Timoclea_uccide_il_capitano_di_Alessandro_Magno_-_1659.jpg" width=100)
+// @img(src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Sirani%2C_Elisabetta_-_Timoclea_uccide_il_capitano_di_Alessandro_Magno_-_1659.jpg" width=100)
   
-// @button(href="https://github.com/jlantunez/webslides/archive/master.zip", svg="fa-cloud-download") .zoomIn final_text?
-
 ---- .align-left .bg-apple
 .text-data Slide 2
 @h2 _simple markdown support_
@@ -42,5 +45,6 @@
 
 ---- .aligncenter
 @h1 Slide 5
+
 
  

@@ -29,5 +29,5 @@ if __name__ == "__main__":
         output = unicode(base)#.prettify())
         FOUT.write(output)
 
-    print slides.prettify().encode('utf-8')
+    #print slides.prettify().encode('utf-8')
 

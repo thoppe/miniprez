@@ -7,7 +7,8 @@ import custom_tags
 from emoji import emojize
 
 _registered_custom_tags = {
-    "background" : custom_tags.background
+    "background" : custom_tags.background,
+    "line" : custom_tags.line,
 }
 
 _section_header_token = '----'

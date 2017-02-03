@@ -12,3 +12,6 @@ def background(tagline, soup):
     del info[1]["url"]
     
     return tag
+
+def line(tagline, soup):
+    return soup.new_tag("hr")

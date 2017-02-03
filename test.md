@@ -24,7 +24,7 @@ so _super_ beautiful
 ---- .aligncenter
 .text-data Slide 3
 @h2 _emoji_
-<hr>
+@line
 @h3
   @p Font-awesome  `::plug::` -> ::plug::
   @p Emoji  `:battery:` -> :battery:

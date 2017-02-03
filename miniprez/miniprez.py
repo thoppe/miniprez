@@ -26,7 +26,8 @@ if __name__ == "__main__":
         slides.append(soup)
 
     with codecs.open('test.html','w','utf-8') as FOUT:
-        FOUT.write( unicode(base) )
+        output = unicode(base)
+        FOUT.write(output)
 
-    print slides
+    print slides.prettify()
 

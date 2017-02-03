@@ -8,7 +8,7 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 + [x] Basic emoji markdown usage (:smile:)
 + [x] Direct SVG Font awesome usage through emoji syntax
 + [ ] More advanced markdown support (links, images)
-+ [ ] MathJax the equations!
++ [ ] MathJax the equations! (maybe [KaTeX](https://github.com/Khan/KaTeX)?)
 + [ ] Embedding tools (convert project to monolith html)
 + [ ] Global options (font?)
 + [ ] Fix meta info to this project

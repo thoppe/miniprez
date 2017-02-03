@@ -15,23 +15,28 @@ so _super_ beautiful
   
 // @button(href="https://github.com/jlantunez/webslides/archive/master.zip", svg="fa-cloud-download") .zoomIn final_text?
 
----- .aligncenter .bg-apple
+---- .align-left .bg-apple
 .text-data Slide 2
-@h3 .alignleft
+@h2 _simple markdown support_
+@line
+@h3
   This is **bold**, `**text**` <br>
   This is _emph_, `_text_`
 
----- .aligncenter
+---- .align-left
 .text-data Slide 3
 @h2 _emoji_
 @line
 @h3
-  @p Font-awesome  `::plug::` -> ::plug::
-  @p Emoji  `:battery:` -> :battery:
+  Font-awesome  `::plug::` -> ::plug:: <br>
+  Emoji  `:battery:` -> :battery:
 
----- .bg-apple .aligncenter
+---- .bg-apple .align-left
 .text-data Slide 4
-@h2 _math_ $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
+@h2 _math support_
+@line
+@h3
+  $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
 
 ---- .aligncenter
 @h1 Slide 5

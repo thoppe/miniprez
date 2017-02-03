@@ -8,11 +8,14 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 + [x] Basic emoji markdown usage (:smile:)
 + [x] Direct SVG Font awesome usage through emoji syntax
 + [ ] More advanced markdown support (links, images)
-+ [ ] MathJax the equations! (maybe [KaTeX](https://github.com/Khan/KaTeX)?)
++ [x] [KaTeX](https://github.com/Khan/KaTeX) equations!
 + [ ] Embedding tools (convert project to monolith html)
 + [ ] Global options (font?)
 + [ ] Fix meta info to this project
++ [ ] Selectively load libraries (eg. font-awesome & katex) on use
 
 ### known bugs
 
-+ [ ] Using inline markdown on first slide
++ [ ] support for page down and up
++ [ ] <hr> on `.bgapple` is the wrong color
++ [x] Using inline markdown on first slide

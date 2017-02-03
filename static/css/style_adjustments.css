@@ -1,0 +1,13 @@
+/* Adjust hr lines for the darker background, original is included for ref*/
+
+hr{
+    background: radial-gradient(ellipse at center,
+				rgba(0, 20, 80, 0.2) 0,
+				rgba(255, 255, 255, 0) 75%);
+}
+
+.bg-apple hr {
+    background: radial-gradient(ellipse at center,
+				rgba(255, 255, 255, 0.2) 0,
+				rgba(0, 20, 80, 0) 75%);
+}

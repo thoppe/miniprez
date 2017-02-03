@@ -104,7 +104,17 @@ $(document).keydown(function(e) {
         moveUP();
         break;
 
+    case 33: // up
+        e.preventDefault();
+        moveUP();
+        break;
+
     case 40: // down
+        e.preventDefault();
+        moveDOWN();
+        break;
+
+    case 34: // pagedown
         e.preventDefault();
         moveDOWN();
         break;

@@ -22,13 +22,16 @@ so _super_ beautiful
   This is _emph_, `_text_`
 
 ---- .aligncenter
-@h1 Slide 3
+.text-data Slide 3
+@h2 _emoji_
+<hr>
 @h3
-  Font-awesome ::plug:: `::plug::` <br>
-  Emoji :battery: `:battery:` 
+  @p Font-awesome  `::plug::` -> ::plug::
+  @p Emoji  `:battery:` -> :battery:
 
 ---- .bg-apple .aligncenter
-@h1 Slide 4
+.text-data Slide 4
+@h2 _math_ $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
 
 ---- .aligncenter
 @h1 Slide 5

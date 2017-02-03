@@ -1,5 +1,6 @@
 import itertools
 import bs4
+import re
 import string
 import pyparsing as pyp
 import custom_tags
@@ -93,7 +94,7 @@ class tagline(object):
         except pyp.ParseException as Ex:
             print 'Failed parsing "{}"'.format(line)
             raise Ex
-            
+
         self.text = res['text'].strip()
         
         if len(tags)>1:
@@ -112,6 +113,7 @@ class tagline(object):
             self.tag = ('text',{})
 
         self.primary_name = self.tag[0]
+
 
     @property
     def indent(self):
@@ -157,14 +159,8 @@ class tagline(object):
         if self.text:
             # Make any markdown modifications
             text = _INLINE_MARKDOWN_PARSER(self.text)
-            html_text = bs4.BeautifulSoup(text,'lxml').p
-
+            html_text = bs4.BeautifulSoup(text,'html.parser')
             tag.append(html_text)
-            try:
-                html_text["id"] = "_remove"
-                tag.find('p',{"id":"_remove"}).unwrap()
-            except ValueError:
-                pass
 
         return tag
 
@@ -262,19 +258,30 @@ class inline_markdown_paser(object):
         emoji = pyp.QuotedString(":")
         func = lambda x: emojize(":{}:".format(x[0]), use_aliases=True)
         emoji = emoji.setParseAction(func)
-        
-        self.grammar = strong|strong2|italic|code|font_awesome|emoji
 
+        math = pyp.QuotedString(quoteChar="$$",convertWhitespaceEscapes=False)
+        html = r'''<div class="equation" data-expr="{eq}"></div>'''
+        func = lambda x:html.format(eq=x[0])
+        math = math.setParseAction(func)
+
+        transforms = math|strong|strong2|italic|code|font_awesome|emoji
+        plain_text = pyp.Word(pyp.printables)
+        whitespace = pyp.White(' ') | pyp.White('\t')
+        self.grammar = pyp.OneOrMore(transforms|plain_text|whitespace)
 
     def __call__(self, text):
-        return self.grammar.transformString(text)
+        return ' '.join(self.grammar.parseString(text))
 
 _INLINE_MARKDOWN_PARSER = inline_markdown_paser()
             
 ########################################################################
 
 if __name__ == "__main__":
-    T = tagline("This is **bold** _text_ with `code`.")
+
     P = inline_markdown_paser()
     
+    T = tagline("This is **bold** _text_ with `code`.")    
+    print P(T.text)
+
+    T = tagline(r"This is $$\int_a^b a*b*c x^2 \frac{x}{y}$$ math.")
     print P(T.text)

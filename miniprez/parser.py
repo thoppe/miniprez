@@ -158,9 +158,13 @@ class tagline(object):
             # Make any markdown modifications
             text = _INLINE_MARKDOWN_PARSER(self.text)
             html_text = bs4.BeautifulSoup(text,'lxml').p
-            html_text["id"] = "_remove"
+
             tag.append(html_text)
-            tag.find('p',{"id":"_remove"}).unwrap()
+            try:
+                html_text["id"] = "_remove"
+                tag.find('p',{"id":"_remove"}).unwrap()
+            except ValueError:
+                pass
 
         return tag
 
@@ -249,11 +253,17 @@ class inline_markdown_paser(object):
         code  = pyp.QuotedString("`")
         code  = code.setParseAction(lambda x:"<code>{}</code>".format(x[0]))
 
+        font_awesome = pyp.QuotedString("::")
+        label = ('<svg class="fa-{x}"><use xlink:href="#fa-{x}">'
+                 '</use></svg>')
+        font_awesome = font_awesome.setParseAction(lambda x:
+                                                   label.format(x=x[0]))
+
         emoji = pyp.QuotedString(":")
         func = lambda x: emojize(":{}:".format(x[0]), use_aliases=True)
         emoji = emoji.setParseAction(func)
         
-        self.grammar = strong|strong2|italic|code|emoji
+        self.grammar = strong|strong2|italic|code|font_awesome|emoji
 
 
     def __call__(self, text):

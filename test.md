@@ -3,7 +3,7 @@
 
 @h1 Create **beautiful stories**.
 @strong like really beautiful
-so _super_ beautiful, :smile: :coffee: :beer:
+so _super_ beautiful
 
 @p .text-intro 
   WebSlides makes HTML presentations easy.
@@ -16,11 +16,16 @@ so _super_ beautiful, :smile: :coffee: :beer:
 // @button(href="https://github.com/jlantunez/webslides/archive/master.zip", svg="fa-cloud-download") .zoomIn final_text?
 
 ---- .aligncenter .bg-apple
-@h1 Slide 2
-so cool?
+.text-data Slide 2
+@h3 .alignleft
+  This is **bold**, `**text**` <br>
+  This is _emph_, `_text_`
 
 ---- .aligncenter
 @h1 Slide 3
+@h3
+  Font-awesome ::plug:: `::plug::` <br>
+  Emoji :battery: `:battery:` 
 
 ---- .bg-apple .aligncenter
 @h1 Slide 4

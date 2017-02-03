@@ -20,8 +20,9 @@ so _super_ beautiful
 @h2 _simple markdown support_
 @line
 @h3
-  This is **bold**, `**text**` <br>
-  This is _emph_, `_text_`
+  **bold** text -> `**text**` <br>
+  _emph_ text -> `_text_` <br>
+  `code` text -> `\`code\`` 
 
 ---- .align-left
 .text-data Slide 3
@@ -37,6 +38,8 @@ so _super_ beautiful
 @line
 @h3
   $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
+<br>
+`$$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$`
 
 ---- .aligncenter
 @h1 Slide 5

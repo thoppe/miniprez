@@ -247,7 +247,7 @@ class inline_markdown_paser(object):
         italic  = pyp.QuotedString("_")
         italic  = italic.setParseAction(lambda x:"<em>{}</em>".format(x[0]))
 
-        code  = pyp.QuotedString("`")
+        code  = pyp.QuotedString("`", escChar='\\',convertWhitespaceEscapes=False)
         code  = code.setParseAction(lambda x:"<code>{}</code>".format(x[0]))
 
         font_awesome = pyp.QuotedString("::")

@@ -3,7 +3,7 @@
 
 @h1 Create **beautiful stories**.
 @strong like really beautiful
-so _super_ beautiful
+so _super_ beautiful, :smile: :coffee: :beer:
 
 @p .text-intro 
   WebSlides makes HTML presentations easy.

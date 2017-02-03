@@ -3,6 +3,7 @@ import bs4
 import string
 import pyparsing as pyp
 import custom_tags
+from emoji import emojize
 
 _registered_custom_tags = {
     "background" : custom_tags.background
@@ -38,29 +39,7 @@ def file_iterator(f_md):
                 continue
             yield line.rstrip()
 
-class inline_markdown_paser(object):
-
-    def __init__(self):
-        strong  = pyp.QuotedString("**")
-        strong.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
-
-        strong2  = pyp.QuotedString("*")
-        strong2.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
-
-        italic  = pyp.QuotedString("_")
-        italic  = italic.setParseAction(lambda x:"<em>{}</em>".format(x[0]))
-
-        code  = pyp.QuotedString("`")
-        code  = code.setParseAction(lambda x:"<code>{}</code>".format(x[0]))
-        
-        self.grammar = strong|strong2|italic|code
-
-
-    def __call__(self, text):
-        return self.grammar.transformString(text)
-
-_INLINE_MARKDOWN_PARSER = inline_markdown_paser()
-            
+########################################################################
     
 class tagline(object):
     '''
@@ -251,7 +230,38 @@ class section(object):
 
     def __repr__(self):
         return self.soup.prettify()
+    
+########################################################################
 
+
+class inline_markdown_paser(object):
+
+    def __init__(self):
+        strong  = pyp.QuotedString("**")
+        strong.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
+
+        strong2  = pyp.QuotedString("*")
+        strong2.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
+
+        italic  = pyp.QuotedString("_")
+        italic  = italic.setParseAction(lambda x:"<em>{}</em>".format(x[0]))
+
+        code  = pyp.QuotedString("`")
+        code  = code.setParseAction(lambda x:"<code>{}</code>".format(x[0]))
+
+        emoji = pyp.QuotedString(":")
+        func = lambda x: emojize(":{}:".format(x[0]), use_aliases=True)
+        emoji = emoji.setParseAction(func)
+        
+        self.grammar = strong|strong2|italic|code|emoji
+
+
+    def __call__(self, text):
+        return self.grammar.transformString(text)
+
+_INLINE_MARKDOWN_PARSER = inline_markdown_paser()
+            
+########################################################################
 
 if __name__ == "__main__":
     T = tagline("This is **bold** _text_ with `code`.")

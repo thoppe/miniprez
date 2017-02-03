@@ -179,7 +179,7 @@ class section(object):
         # Section should start with a header
         assert(self.lines[0].is_section_header)
 
-        soup  = bs4.BeautifulSoup("",'lxml')
+        soup  = bs4.BeautifulSoup("",'html.parser')
         lines = iter(self)
         
         # Parse the header

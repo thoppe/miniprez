@@ -1,9 +1,8 @@
 ---- .aligncenter   
 @background(url="https://webslides.tv/static/images/nature.jpg")
 
-@h1 Create **beautiful stories**.
-@strong like really beautiful
-so _super_ beautiful
+.text-data miniprez
+.text-into Beautiful presentations in minimalist format
 
 @p .text-intro 
   WebSlides makes HTML presentations easy.

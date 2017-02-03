@@ -7,9 +7,7 @@ def background(tagline, soup):
     
     tag = soup.new_tag("span")
     tag["class"] = "background-"
-    tag["style"] = '''
-    background-image:url('{url}')
-    '''. format(**info[1])
+    tag["style"] = '''background-image:url('{url}')'''. format(**info[1])
 
     del info[1]["url"]
     

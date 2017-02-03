@@ -37,6 +37,30 @@ def file_iterator(f_md):
             if len(line)>=2 and line.lstrip()[:2] == _comment_marker_token:
                 continue
             yield line.rstrip()
+
+class inline_markdown_paser(object):
+
+    def __init__(self):
+        strong  = pyp.QuotedString("**")
+        strong.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
+
+        strong2  = pyp.QuotedString("*")
+        strong2.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
+
+        italic  = pyp.QuotedString("_")
+        italic  = italic.setParseAction(lambda x:"<em>{}</em>".format(x[0]))
+
+        code  = pyp.QuotedString("`")
+        code  = code.setParseAction(lambda x:"<code>{}</code>".format(x[0]))
+        
+        self.grammar = strong|strong2|italic|code
+
+
+    def __call__(self, text):
+        return self.grammar.transformString(text)
+
+_INLINE_MARKDOWN_PARSER = inline_markdown_paser()
+            
     
 class tagline(object):
     '''
@@ -140,8 +164,6 @@ class tagline(object):
             
         else:
             tag = soup.new_tag(name)
-
-        tag.string = self.text
         
         if self.classnames:
             tag['class'] = self.classnames
@@ -152,6 +174,14 @@ class tagline(object):
 
         for key,val in kwargs.items():
             tag[key] = val
+
+        if self.text:
+            # Make any markdown modifications
+            text = _INLINE_MARKDOWN_PARSER(self.text)
+            html_text = bs4.BeautifulSoup(text,'lxml').p
+            html_text["id"] = "_remove"
+            tag.append(html_text)
+            tag.find('p',{"id":"_remove"}).unwrap()
 
         return tag
 
@@ -221,3 +251,10 @@ class section(object):
 
     def __repr__(self):
         return self.soup.prettify()
+
+
+if __name__ == "__main__":
+    T = tagline("This is **bold** _text_ with `code`.")
+    P = inline_markdown_paser()
+    
+    print P(T.text)

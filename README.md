@@ -4,7 +4,8 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 
 ### (upcoming) features!
 
-+ [ ] Basic inline markdown support (#, *, _, ![])
++ [x] Basic inline markdown support (*, _, **, backticks)
++ [ ] More advanced markdown support (links, images)
 + [ ] MathJax the equations!
 + [ ] Direct SVG Font awesome usage
 + [ ] Embedding tools (convert project to monolith html)

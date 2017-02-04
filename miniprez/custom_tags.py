@@ -10,9 +10,13 @@ def _get_src(tagline):
 def background(tagline, soup):
     name,info = tagline.tag
     assert(name == 'background')
-    
+
     tag = soup.new_tag("span")
-    tag["class"] = ["background",]
+
+    if tag.classnames:
+        tag["class"]  = ["background",] + tag.classnames
+    else:
+        tag["class"] = ["background",]
 
     url = _get_src(tagline)   
     tag["style"] = '''background-image:url('{}')'''. format(url)

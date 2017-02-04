@@ -1,6 +1,6 @@
 ---- .aligncenter
 @background(url="https://webslides.tv/static/images/nature.jpg")
-
+  
 .text-data  @h4 **miniprez**
 @h4 Beautiful presentations in minimalist format <br>
 
@@ -11,11 +11,13 @@
 @p .text-intro 
   miniprez is a static mobile friendly version of [webslides](https://github.com/jlantunez/webslides)
 
----- .align-left .bg-apple
+---- .align-left .bg-white
+@background(url="https://source.unsplash.com/aJTiW00qqtI/") .dark
+
 .text-landing _Slide 2_
 @h2 _simple markdown support_
 @line
-.wrap
+.wrap .bg-trans-dark
  .grid .wrap
   .column
     @h2 :fire: **bold**

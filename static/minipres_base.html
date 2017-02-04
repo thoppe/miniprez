@@ -4,20 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <!-- CLEAN MARKUP = GOOD KARMA.
-      Hi source code lover,
+    <!-- 
+      Hi you.
+
+      Feel free to edit the html here, but minislides was
+      designed to be run on the command line by compiling a .md file.
+
+      Got an issue or something to say? 
+      Contribute on Github: https://github.com/thoppe/miniprez
       
-      you're a curious person and a fast learner ;)
-      Let's make something beautiful together. Contribute on Github:
-      https://github.com/jlantunez/webslides
-      
-      Thanks,
-      @jlantunez.
+      Thanks, you.
+      @metasemantic
     -->
       
     <!-- SEO --> 
     <title>miniprez: Simple, beautiful web presentations</title>
-    <meta name="description" content="miniprez...">
+    <meta name="description" content="<Miniprez: Simple, beautiful web presentations">
     
     <!-- URL CANONICAL -->
     <!-- <link rel="canonical" href="http://your-url.com/"> -->
@@ -33,16 +35,16 @@
     
     <!-- CSS Colors -->
     <link rel="stylesheet" type='text/css' media='all' href="static/css/webslides_colors.css">
+
+    <!-- JavaScript code prettifier from Google -->
+    <script src="static/js/run_prettify.js"></script>
+
+    <!-- Optional - CSS SVG Icons (Font Awesome) -->
+    <link rel="stylesheet" type='text/css' media='all' href="webslides/static/css/svg-icons.css">
     
     <!-- miniprez style adjustments -->
     <link rel="stylesheet" href="static/css/style_adjustments.css">
 
-    <!-- JavaScript code prettifier from Google -->
-    <script src="static/js/run_prettify.js"></script>
-    
-    <!-- Optional - CSS SVG Icons (Font Awesome) -->
-    <link rel="stylesheet" type='text/css' media='all' href="webslides/static/css/svg-icons.css">
-    
     <!-- SOCIAL CARDS (ADD YOUR INFO) -->
     
     <!-- FACEBOOK -->
@@ -77,16 +79,12 @@
   </head>
   <body>
 
-  <main role="main">
-    <article id="minislides">
-    </article>
-    <!-- end article -->
-  </main>
+    <main role="main">          
+      <article id="minislides">
+        <!-- Content will be auto filled here -->
+      </article>
+    </main>
   <!-- end main --> 
-    
-  <!-- Original webslide code (now removed)
-  <script src="webslides/static/js/webslides.js"></script>
-  -->
   
   <!-- jQuery (required for slides to work) -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -100,6 +98,7 @@
   <!-- KaTeX imports -->
   <script src="static/katex/katex.min.js"></script>
 
+  <!-- Render the equations -->
   <script type="text/javascript">
 
     // grab all elements in DOM with the class 'equation'
@@ -109,7 +108,6 @@
     Array.prototype.forEach.call(tex, function(el) {
         katex.render(el.getAttribute("data-expr"), el);
     });
-
   </script>
   
   </body>

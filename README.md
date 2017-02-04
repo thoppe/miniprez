@@ -19,6 +19,7 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 
 ### known bugs
 
++ [ ] animation bug on mobile
 + [x] support for page down and up
 + [x] `<hr>` on `.bgapple` is the wrong color
 + [x] Using inline markdown on first slide

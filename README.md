@@ -15,9 +15,11 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 + [ ] Fix meta info to this project
 + [ ] Selectively load libraries (eg. font-awesome & katex) on use
 + [x] Code blocks (with code highlight?)
++ [ ] Slide number url
 
 ### known bugs
 
 + [x] support for page down and up
 + [x] `<hr>` on `.bgapple` is the wrong color
 + [x] Using inline markdown on first slide
++ [x] `home` and `end` work properly

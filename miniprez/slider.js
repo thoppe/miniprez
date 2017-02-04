@@ -37,9 +37,8 @@ function checkVisible(elm) {
 }
 
 function onmove() {
-    //console.log("ONMOVE");
-
-    // Find and mark the least most visible slide
+    
+    // Find and mark visible slides start with the smallest
     _slides_visible = [];
     
     $('section').each( function( index, element ){
@@ -119,7 +118,21 @@ $(document).keydown(function(e) {
         moveDOWN();
         break;
 
-        default: return; // exit this handler for other keys
+    case 36: // home
+        var first_slide = $('section').first();
+        _slides_visible = [first_slide,]
+        moveTO(first_slide);
+        break;
+  		  
+    case 35: // end
+        var last_slide = $('section').last();
+        _slides_visible = [last_slide,]
+        moveTO(last_slide);
+        break;
+ 
+    default: return; // exit this handler for other keys
     }
+    
     e.preventDefault(); // prevent the default action (scroll / move caret)
+    
 });

@@ -57,12 +57,12 @@ _registered_custom_tags = {
 and more normal things with a test triple quote ''' here
 
 '''
-secondardy code block!
+secondary code block!
 '''
-
-and **final** section
 
 ----- .wrap
 
 @h2 .content-left We make interfaces and content strategy.
 @p .content-left We are digital people by nature. When we develop a vision, it is based on knowledge, research and experience. Those images are for demo purposes only.
+
+This should be one line: the **final** section _section_.

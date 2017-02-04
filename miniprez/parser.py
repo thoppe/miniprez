@@ -238,15 +238,17 @@ class section(object):
                 z.parent.append(tag)
                 
             z = tag
-            
-                
+
+        # We need to resoup the pot
+        soup = bs4.BeautifulSoup(unicode(soup),'html.parser')
+    
         # Remove all the indent tags
-        for tag in soup.findAll(True, {"indent":True}):
-            del tag["indent"]
+        for tag in soup.find_all(True, indent=True):
+            del tag.attrs["indent"]
 
         # Remove all the text tags and replace with a string
-        for tag in soup.findAll("text"):
-            tag.unwrap()
+        #for tag in soup.find_all("text"):
+        #    tag.unwrap()
 
         self.soup = soup
 

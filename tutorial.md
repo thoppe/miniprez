@@ -34,7 +34,7 @@ Standard emoji and [font-awesome](http://fontawesome.io/)
 @line
   
 @h3
-  emoji  `:battery:` -> :battery: <br>
+  `:battery:` -> :battery: <br>
   `::plug::` -> ::plug:: 
 
 
@@ -77,7 +77,7 @@ main() {
   
   .flex-content
     @h2 Side content!
-    @p Travis is the most popular travel app in the world. It collects reviews from travellers about hotels, restaurants and attractions. We partnered with various divisions to create a campaign for Travis Pro.
+    @p We live in a society exquisitely dependent on science and technology, in which hardly anyone knows anything about science and technology.
 
 ----- .bg-apple
 

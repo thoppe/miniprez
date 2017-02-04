@@ -18,7 +18,7 @@
 @p
   **bold** text -> `**text**` <br>
   _emph_ text -> `_text_` <br>
-  `code` text -> `\`code\`` 
+  `code` text -> `&&&`code&&&`` 
 
 ---- .align-left
 .text-landing Slide 3

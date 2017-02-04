@@ -12,6 +12,14 @@ hr{
 				rgba(0, 20, 80, 0) 75%);
 }
 
+code {
+    /* WIP to improve long code blocks
+    display: inline-block;
+    text-align: left;
+    padding: 0;
+   */
+}
+
 
 /* desert scheme ported from vim to google prettify */
 pre.prettyprint {

@@ -34,11 +34,19 @@
 @h2 _emoji_
 Standard emoji and [font-awesome](http://fontawesome.io/)  
 @line
-  
-@h3
-  `:battery:` -> :battery: <br>
-  `::plug::` -> ::plug:: 
 
+.wrap .bg-trans-dark
+ .grid .wrap
+  .column `:battery:`
+    @h1 :battery:
+  .column `:heart_eyes:`
+    @h1 :heart_eyes:
+  .column `::plug::`
+    @h1 ::plug:: 
+  .column `::meetup::`
+    @h1 ::meetup::
+  .column `::ra::`
+    @h1 ::ra:: 
 
 ---- .bg-apple .align-left
 .text-landing Slide 4

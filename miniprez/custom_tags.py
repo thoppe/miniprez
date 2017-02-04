@@ -31,7 +31,14 @@ def button(tagline, soup):
             del info[1][key]
 
     return tag
-    #p = soup.new_tag('p', {})
-    #p.append(tag)
-    #return p
 
+def codeblock(tagline, soup):
+    info = tagline.tag
+    assert(info[0] == 'codeblock')
+
+    tag = soup.new_tag("pre")
+    tag["class"] = ["prettyprint",]
+    tag.string = tagline.text.replace('__CODE_BLOCK_SPACE','\n').strip()
+    tagline.text = ''
+    
+    return tag

@@ -25,7 +25,8 @@ if __name__ == "__main__":
         soup.section["slide-number"] = k+1
         slides.append(soup)
 
-    with codecs.open('test.html','w','utf-8') as FOUT:
+    f_html = '.'.join(os.path.basename(f_md).split('.')[:-1]) + '.html'
+    with codecs.open(f_html,'w','utf-8') as FOUT:
         output = unicode(base)#.prettify())
         FOUT.write(output)
 

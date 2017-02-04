@@ -10,10 +10,12 @@ _registered_custom_tags = {
     "background" : custom_tags.background,
     "line" : custom_tags.line,
     "button" : custom_tags.button,
+    "codeblock" : custom_tags.codeblock,
 }
 
 _section_header_token = '----'
 _comment_marker_token = '//'
+_code_block_marker = "'''"
 
 def is_section_header(line):
     if len(line)<4:
@@ -28,6 +30,7 @@ def section_iterator(lines):
             section = [line,]
         else:
             section.append(line)
+
     yield section  
             
 def file_iterator(f_md):
@@ -114,7 +117,6 @@ class tagline(object):
 
         self.primary_name = self.tag[0]
 
-
     @property
     def indent(self):
         is_space = lambda x:x in ['\t',' ']
@@ -168,9 +170,33 @@ class tagline(object):
 class section(object):
 
     def __init__(self, lines):
-        
+
+        self.lines = []
+
+        # Custom work for a code block
+        is_inside_code_block = False
+        code_buffer = []
+        for line in lines:
+
+            is_code_block = _code_block_marker == line.lstrip()[:3]
+
+            if is_code_block:
+                is_inside_code_block = not is_inside_code_block
+
+            if is_code_block or is_inside_code_block:
+                code_buffer.append( line.rstrip() )
+    
+            if is_code_block and not is_inside_code_block:
+                # Empty out the contents of the buffer
+                code_block = '__CODE_BLOCK_SPACE'.join(code_buffer).strip("'").strip()
+                self.lines.append('@codeblock ' + code_block)
+                code_buffer = []
+            elif  not is_inside_code_block:
+                self.lines.append(line)
+
+    
         # Parse and filter for blank lines
-        self.lines = [x for x in map(tagline,lines) if not x.is_empty]
+        self.lines = [x for x in map(tagline,self.lines) if not x.is_empty]
 
         # Section shouldn't be empty
         assert(self.lines)

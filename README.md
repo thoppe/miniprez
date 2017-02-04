@@ -14,7 +14,7 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 + [ ] Global options (font?)
 + [ ] Fix meta info to this project
 + [ ] Selectively load libraries (eg. font-awesome & katex) on use
-+ [ ] Code blocks (with code highlight?)
++ [x] Code blocks (with code highlight?)
 
 ### known bugs
 

@@ -25,13 +25,13 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet"/>
   <!-- CSS Base -->
-  <link href="webslides/static/css/base.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="static/css/webslides_base.css" media="all" rel="stylesheet" type="text/css"/>
   <!-- CSS Colors -->
-  <link href="webslides/static/css/colors.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="static/css/webslides_colors.css" media="all" rel="stylesheet" type="text/css"/>
   <!-- miniprez style adjustments -->
   <link href="static/css/style_adjustments.css" rel="stylesheet"/>
-  <!-- JavaScript code prettifier -->
-  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js">
+  <!-- JavaScript code prettifier from Google -->
+  <script src="static/js/run_prettify.js">
   </script>
   <!-- Optional - CSS SVG Icons (Font Awesome) -->
   <link href="webslides/static/css/svg-icons.css" media="all" rel="stylesheet" type="text/css"/>
@@ -40,7 +40,7 @@
   <meta content="http://your-url.com/" property="og:url"/>
   <!-- YOUR URL -->
   <meta content="article" property="og:type"/>
-  <meta content="WebSlides — Making HTML Presentations Easy" property="og:title"/>
+  <meta content="WebSlides - Making HTML Presentations Easy" property="og:title"/>
   <!-- EDIT -->
   <meta content="WebSlides is about telling stories beautifully. Just the essential features. Good karma." property="og:description"/>
   <!-- EDIT -->
@@ -268,15 +268,13 @@ sort (x:xs) = sort lower ++ [x] ++ sort higher
    <!-- end article -->
   </main>
   <!-- end main -->
-  <!-- Remove #webslides element :)
-
-
+  <!-- Original webslide code (now removed)
+  <script src="webslides/static/js/webslides.js"></script>
+  -->
   <!-- jQuery (required for slides to work) -->
-  <!--
-    <script src="webslides/static/js/webslides.js"></script>
-    -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js">
   </script>
+  <!-- Custom slide control -->
   <script src="miniprez/slider.js">
   </script>
   <!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->

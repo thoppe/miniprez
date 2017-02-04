@@ -1,33 +1,27 @@
 ---- .aligncenter   
 @background(url="https://webslides.tv/static/images/nature.jpg")
 
-.text-data miniprez <br>
-<br>
-@h3 Beautiful presentations in minimalist format <br>
+.text-data  @h4 **miniprez**
+@h4 Beautiful presentations in minimalist format <br>
 
 @p 
  @button(href="https://github.com/thoppe/miniprez") .ghost ::github:: Project repo
  @button(href="https://twitter.com/metasemantic") .ghost ::twitter:: @metasemantic
 
 @p .text-intro 
-  WebSlides makes HTML presentations easy.
-  .centered
-    Just the essentials and using lovely CSS.
-    and back again!
+  miniprez turns text into mobile friendly presentations.
 
-// @img(src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Sirani%2C_Elisabetta_-_Timoclea_uccide_il_capitano_di_Alessandro_Magno_-_1659.jpg" width=100)
-  
 ---- .align-left .bg-apple
-.text-data Slide 2
+.text-landing _Slide 2_
 @h2 _simple markdown support_
 @line
-@h3
+@p
   **bold** text -> `**text**` <br>
   _emph_ text -> `_text_` <br>
   `code` text -> `\`code\`` 
 
 ---- .align-left
-.text-data Slide 3
+.text-landing Slide 3
 @h2 _emoji_
 @line
 @h3
@@ -35,7 +29,7 @@
   Emoji  `:battery:` -> :battery:
 
 ---- .bg-apple .align-left
-.text-data Slide 4
+.text-landing Slide 4
 @h2 _math support_
 @line
 @h3
@@ -44,7 +38,7 @@
 `$$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$`
 
 ---- .align-left
-.text-data Slide 5
+.text-landing Slide 5
 @h2 _pretty code blocks_
 '''
 _registered_custom_tags = {

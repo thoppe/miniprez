@@ -8,13 +8,13 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 + [x] Basic emoji markdown usage (:smile:)
 + [x] Direct SVG Font awesome usage through emoji syntax
 + [x] Buttons
-+ [ ] More advanced markdown support (links, images)
++ [x] More advanced markdown support (links, images)
 + [x] [KaTeX](https://github.com/Khan/KaTeX) equations!
++ [x] Code blocks
 + [ ] Embedding tools (convert project to monolith html)
 + [ ] Global options (font?)
 + [ ] Fix meta info to this project
 + [ ] Selectively load libraries (eg. font-awesome & katex) on use
-+ [x] Code blocks (with code highlight?)
 + [ ] Slide number url
 
 ### known bugs

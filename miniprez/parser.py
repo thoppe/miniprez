@@ -279,7 +279,8 @@ class inline_markdown_paser(object):
         italic  = pyp.QuotedString("_")
         italic  = italic.setParseAction(lambda x:"<em>{}</em>".format(x[0]))
 
-        code  = pyp.QuotedString("`", escChar='&&&',convertWhitespaceEscapes=False)
+        code  = pyp.QuotedString("`", escChar='&&&',
+                                 convertWhitespaceEscapes=False)
         code  = code.setParseAction(lambda x:"<code>{}</code>".format(x[0]))
 
         font_awesome = pyp.QuotedString("::")
@@ -291,10 +292,19 @@ class inline_markdown_paser(object):
         math = pyp.QuotedString(quoteChar="$$",convertWhitespaceEscapes=False)
         math = math.setParseAction(self._math)
 
-        transforms = math|strong|italic|code|font_awesome|emoji
+        text = pyp.QuotedString(quoteChar="[",endQuoteChar="]")
+        href = pyp.QuotedString(quoteChar="(",endQuoteChar=")")
+        link = (text + href).setParseAction(self._link)
+
+        transforms = math|strong|italic|code|font_awesome|emoji|link
         plain_text = pyp.Word(pyp.printables)
         whitespace = pyp.White(' ') | pyp.White('\t')
         self.grammar = pyp.OneOrMore(transforms|plain_text|whitespace)
+
+
+    def _link(self, x):
+        html  ='<a href="{}">{}</a>'.format(x[1],x[0])
+        return html
 
     def _font_awesome(self, x):
         html  ='<svg class="fa-{x}"><use xlink:href="#fa-{x}"></use></svg>'
@@ -320,6 +330,9 @@ _INLINE_MARKDOWN_PARSER = inline_markdown_paser()
 if __name__ == "__main__":
 
     P = inline_markdown_paser()
+
+    T = tagline("This is a [link](https://www.google.com)")    
+    print P(T.text)
     
     T = tagline("This is **bold** _text_ with `code`.")    
     print P(T.text)

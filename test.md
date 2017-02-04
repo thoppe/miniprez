@@ -9,7 +9,7 @@
  @button(href="https://twitter.com/metasemantic") .ghost ::twitter:: @metasemantic
 
 @p .text-intro 
-  miniprez turns text into mobile friendly presentations.
+  miniprez is a static mobile friendly version of [webslides](https://github.com/jlantunez/webslides)
 
 ---- .align-left .bg-apple
 .text-landing _Slide 2_
@@ -18,11 +18,14 @@
 .wrap
  .grid .wrap
   .column
-    @h2 :fire: **bold** - `**text**`
+    @h2 :fire: **bold**
+    @p `**text**`
   .column
-    @h2 :cloud: _emph_ - `_text_`
+    @h2 :cloud: _emph_
+    @p `_text_`
   .column
-    @h2 :computer: `code` - `&&&`code&&&`` 
+    @h2 :computer: `code`
+    @p `&&&`code&&&`` 
 
 ---- .align-left
 .text-landing Slide 3

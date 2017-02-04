@@ -18,7 +18,7 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 + [ ] Slide number url
 
 ### known bugs and problems
-+ [ ] remove webkit animations from webslides
++ [x] remove webkit animations from webslides
 + [ ] animation bug on mobile
 + [x] support for page down and up
 + [x] `<hr>` on `.bgapple` is the wrong color

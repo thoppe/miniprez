@@ -477,7 +477,11 @@ pre code {
 /*=== 1.2 Animations ================ 
 Just 3 basic animations: 
 .fadeIn, .fadeInUp, .zoomIn.
-https://github.com/daneden/animate.css*/
+https://github.com/daneden/animate.css
+SECTION HAS BEEN REMOVED, NOT NEEDED FOR minislides
+*/
+
+/*
 
 @-webkit-keyframes fadeIn {
   from {
@@ -573,8 +577,13 @@ https://github.com/daneden/animate.css*/
   -webkit-animation: zoomIn 1s;
   animation: zoomIn 1s;
 }
+*/
 
-/* Animated Background (Matrix) */
+/*
+SECTION HAS BEEN REMOVED, NOT NEEDED FOR minislides
+Animated Background (Matrix) 
+*/
+/*
 @-webkit-keyframes anim {
   0% {
     -webkit-transform: translateY(0);
@@ -596,7 +605,14 @@ https://github.com/daneden/animate.css*/
     transform: translateY(-1200px);
   }
 }
-/* Duration */
+*/
+
+/* 
+SECTION HAS BEEN REMOVED, NOT NEEDED FOR minislides
+Duration 
+*/
+
+/*
 .slow {
   -webkit-animation-duration: 4s;
   animation-duration: 4s;
@@ -605,16 +621,21 @@ https://github.com/daneden/animate.css*/
   -webkit-animation-duration: 5s;
   animation-duration: 5s;
 }
+*/
 
+/* 
+Transitions 
+SECTION HAS BEEN REMOVED, NOT NEEDED FOR minislides
+*/
 
-/* Transitions */
-
+/*
 header,
 footer,
 #navigation {
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
 }
+*/
 
 /*=== 1.3 Responsive Media (videos, iframe...) === */
 
@@ -1372,11 +1393,13 @@ ul.tabs li.current {
 }
 
 .tab-content.current {
-  display: inherit;
-  -webkit-animation: fadeIn ease-in 1;
-  animation: fadeIn ease-in 1;
-  -webkit-animation-duration: .3s;
-  animation-duration: .3s;
+    display: inherit;
+    /*
+    -webkit-animation: fadeIn ease-in 1;
+    animation: fadeIn ease-in 1;
+    -webkit-animation-duration: .3s;
+    animation-duration: .3s;
+   */
 }
 
 @media (max-width: 400px) {
@@ -1391,8 +1414,12 @@ Vertically and horizontally centered
 ============================================== */
 
 /* Fade transition to all slides. 
-* = All HTML elements will have those styles.*/
+* = All HTML elements will have those styles.
 
+SECTION HAS BEEN REMOVED, NOT NEEDED FOR minislides
+*/
+
+/*
 section * { 
 -webkit-animation: fadeIn 0.3s ease-in-out;
 animation: fadeIn 0.3s ease-in-out;
@@ -1402,6 +1429,7 @@ section .background,section .background-video,
 -webkit-animation-duration:0s;
 animation-duration:0s;
 }
+*/
 
 /*=== Section = Slide === */
 
@@ -1668,9 +1696,11 @@ background-size: cover;
 }
 @media (max-width:1023px) {
 [class*="background-"] {
-  opacity: 0.20;
-  -webkit-animation: fadeIn ease-in 0.20;
-  animation: fadeIn ease-in 0.20;
+    opacity: 0.20;
+    /*
+    -webkit-animation: fadeIn ease-in 0.20;
+    animation: fadeIn ease-in 0.20;
+   */
  }
  .background-video {
   opacity: 0.80;

@@ -2,6 +2,8 @@
 
 Dead simple markup to web-friendly presentations that look great on mobile and on the big screen. Adapted from [webslides](https://github.com/jlantunez/webslides) by jlantunez.
 
+For a live tutorial see the [input](tutorial.md) and the [slides](https://thoppe.github.io/miniprez/tutorial.html).
+
 ### (upcoming) features!
 
 + [x] Basic inline markdown support (*, _, **, backticks)

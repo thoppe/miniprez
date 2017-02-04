@@ -1,4 +1,4 @@
-target = test
+target = tutorial
 
 all:
 	python miniprez/miniprez.py $(target).md

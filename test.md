@@ -15,10 +15,14 @@
 .text-landing _Slide 2_
 @h2 _simple markdown support_
 @line
-@p
-  **bold** text -> `**text**` <br>
-  _emph_ text -> `_text_` <br>
-  `code` text -> `&&&`code&&&`` 
+.wrap
+ .grid .wrap
+  .column
+    @h2 :fire: **bold** - `**text**`
+  .column
+    @h2 :cloud: _emph_ - `_text_`
+  .column
+    @h2 :computer: `code` - `&&&`code&&&`` 
 
 ---- .align-left
 .text-landing Slide 3

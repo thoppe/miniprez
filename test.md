@@ -30,14 +30,18 @@
 ---- .align-left
 .text-landing Slide 3
 @h2 _emoji_
+Standard emoji and [font-awesome](http://fontawesome.io/)  
 @line
+  
 @h3
-  Font-awesome  `::plug::` -> ::plug:: <br>
-  Emoji  `:battery:` -> :battery:
+  emoji  `:battery:` -> :battery: <br>
+  `::plug::` -> ::plug:: 
+
 
 ---- .bg-apple .align-left
 .text-landing Slide 4
 @h2 _math support_
+LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)  
 @line
 @h3
   $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
@@ -47,6 +51,8 @@
 ---- .align-left 
 .text-landing Slide 5
 @h2 _pretty code blocks_
+Syntax highlighting Google's [code prettify](https://github.com/google/code-prettify)  
+@line
 '''
 sort [] = []
 sort (x:xs) = sort lower ++ [x] ++ sort higher

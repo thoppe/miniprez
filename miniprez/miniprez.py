@@ -22,7 +22,8 @@ if __name__ == "__main__":
 
     for k,x in enumerate(section_iterator(F)):
         soup = section(x).soup
-        soup.section["slide-number"] = k+1
+        soup.section["id"] = "slide-number-{}".format(k+1)
+        soup.section["class"] = soup.section.get('class',[]) + ["slide",]
         slides.append(soup)
 
     f_html = '.'.join(os.path.basename(f_md).split('.')[:-1]) + '.html'

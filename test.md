@@ -1,4 +1,4 @@
----- .aligncenter   
+---- .align-center .wrap  
 @background(url="https://webslides.tv/static/images/nature.jpg")
 
 .text-data  @h4 **miniprez**
@@ -37,26 +37,35 @@
 <br>
 `$$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$`
 
----- .align-left
+---- .align-left 
 .text-landing Slide 5
 @h2 _pretty code blocks_
 '''
-_registered_custom_tags = {
-    "background" : custom_tags.background,
-    "line" : custom_tags.line,
-    "button" : custom_tags.button,
-}
+sort [] = []
+sort (x:xs) = sort lower ++ [x] ++ sort higher
+    where
+        lower = filter (< x) xs
+        higher = filter (>= x) xs
+'''
+Code blocks are context-aware
+'''
+// to convert prefix to postfix
+main() {
+  char c = getchar();
+  (c == '+' || c == '-' || c == '*' || c == '/') ? main(), main() : 0;
+  putchar(c);
+} 
 '''
 
-and more normal things with a test triple quote ''' here
+----- 
 
-'''
-secondary code block!
-'''
+.card-50 .bg-white
+  @figure(src="https://source.unsplash.com/BoBmrZ8epMA/800x600")
+  
+  .flex-content
+    @h2 Side content!
+    @p Travis is the most popular travel app in the world. It collects reviews from travellers about hotels, restaurants and attractions. We partnered with various divisions to create a campaign for Travis Pro.
 
------ .wrap
+----- .bg-apple
 
-@h2 .content-left We make interfaces and content strategy.
-@p .content-left We are digital people by nature. When we develop a vision, it is based on knowledge, research and experience. Those images are for demo purposes only.
-
-This should be one line: the **final** section _section_.
+@h1 FIN.

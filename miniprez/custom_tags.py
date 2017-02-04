@@ -1,40 +1,56 @@
 import bs4
 
+def _get_src(tagline):
+    for key in ["url","href","src"]:
+        if key in tagline.tag[1]:
+            link = tagline.tag[1][key]
+            del tagline.tag[1][key]
+    return link
+
 def background(tagline, soup):
-    info = tagline.tag
-    assert(info[0] == 'background')
+    name,info = tagline.tag
+    assert(name == 'background')
     
     tag = soup.new_tag("span")
     tag["class"] = ["background",]
-    tag["style"] = '''background-image:url('{url}')'''. format(**info[1])
 
-    del info[1]["url"]
+    url = _get_src(tagline)   
+    tag["style"] = '''background-image:url('{}')'''. format(url)
     
     return tag
 
-def line(tagline, soup):
-    info = tagline.tag
-    assert(info[0] == 'line')
+def figure(tagline, soup):
+    name,info = tagline.tag
+    assert(name == 'figure')
+
+    tag = soup.new_tag("figure")
+    img = soup.new_tag("img")
+    img['src'] = _get_src(tagline)
+
+    # Potential to add figure caption here!
+    tag.append(img)
+    return tag
     
+
+def line(tagline, soup):
+    name,info = tagline.tag
+    assert(name == 'line')
+   
     return soup.new_tag("hr")
 
 def button(tagline, soup):
-    info = tagline.tag
-    assert(info[0] == 'button')
+    name,info = tagline.tag
+    assert(name == 'button')
 
     tag = soup.new_tag("a")
     tag["class"] = ["button",]
-
-    for key in ["url", "href"]:
-        if key in info[1]:
-            tag["href"] = info[1][key]
-            del info[1][key]
+    tag["href"] = _get_src(tagline)
 
     return tag
 
 def codeblock(tagline, soup):
-    info = tagline.tag
-    assert(info[0] == 'codeblock')
+    name,info = tagline.tag
+    assert(name == 'codeblock')
 
     tag = soup.new_tag("pre")
     tag["class"] = ["prettyprint",]

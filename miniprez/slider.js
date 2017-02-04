@@ -95,6 +95,7 @@ function moveUP() {
 $(document).keydown(function(e) {
     switch(e.which) {
 
+    /*
     case 37: break;
     case 39: break;
 
@@ -102,15 +103,21 @@ $(document).keydown(function(e) {
         e.preventDefault();
         moveUP();
         break;
-
-    case 33: // up
-        e.preventDefault();
-        moveUP();
-        break;
-
+        
     case 40: // down
         e.preventDefault();
         moveDOWN();
+        break;
+    */
+    case 32: // down
+        e.preventDefault();
+        moveDOWN();
+        break;
+
+        
+    case 33: // pageup
+        e.preventDefault();
+        moveUP();
         break;
 
     case 34: // pagedown

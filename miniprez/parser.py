@@ -11,6 +11,7 @@ _registered_custom_tags = {
     "line" : custom_tags.line,
     "button" : custom_tags.button,
     "codeblock" : custom_tags.codeblock,
+    "figure" : custom_tags.figure,
 }
 
 _section_header_token = '----'

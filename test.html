@@ -75,7 +75,7 @@
  <body>
   <main role="main">
    <article id="minislides">
-<section class="aligncenter" slide-number="1">
+<section class="align-center wrap slide" id="slide-number-1">
  <span class="background" style="background-image:url('https://webslides.tv/static/images/nature.jpg')">
  </span>
  <div class="wrap">
@@ -110,7 +110,7 @@
    </text>
   </p>
  </div>
-</section><section class="align-left bg-apple" slide-number="2">
+</section><section class="align-left bg-apple slide" id="slide-number-2">
  <div class="text-landing">
   <em>
    Slide 2
@@ -153,7 +153,7 @@
    </code>
   </text>
  </p>
-</section><section class="align-left" slide-number="3">
+</section><section class="align-left slide" id="slide-number-3">
  <div class="text-landing">
   Slide 3
  </div>
@@ -184,7 +184,7 @@
    -&gt; 🔋
   </text>
  </h3>
-</section><section class="bg-apple align-left" slide-number="4">
+</section><section class="bg-apple align-left slide" id="slide-number-4">
  <div class="text-landing">
   Slide 4
  </div>
@@ -208,7 +208,7 @@
    $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
   </code>
  </text>
-</section><section class="align-left" slide-number="5">
+</section><section class="align-left slide" id="slide-number-5">
  <div class="text-landing">
   Slide 5
  </div>
@@ -217,33 +217,37 @@
    pretty code blocks
   </em>
  </h2>
- <pre class="prettyprint">_registered_custom_tags = {
-    "background" : custom_tags.background,
-    "line" : custom_tags.line,
-    "button" : custom_tags.button,
+ <pre class="prettyprint">sort [] = []
+sort (x:xs) = sort lower ++ [x] ++ sort higher
+    where
+        lower = filter (&lt; x) xs
+        higher = filter (&gt;= x) xs</pre>
+ <text>
+  Code blocks are context-aware
+ </text>
+ <pre class="prettyprint">main() {
+  char c = getchar();
+  (c == '+' || c == '-' || c == '*' || c == '/') ? main(), main() : 0;
+  putchar(c);
 }</pre>
- <text>
-  and more normal things with a test triple quote ''' here
- </text>
- <pre class="prettyprint">secondary code block!</pre>
-</section><section class="wrap" slide-number="6">
- <h2 class="content-left">
-  We make interfaces and content strategy.
- </h2>
- <p class="content-left">
-  We are digital people by nature. When we develop a vision, it is based on knowledge, research and experience. Those images are for demo purposes only.
- </p>
- <text>
-  This should be one line: the
-  <strong>
-   final
-  </strong>
-  section
-  <em>
-   section
-  </em>
-  .
- </text>
+</section><section class="slide" id="slide-number-6">
+ <div class="card-50 bg-white">
+  <figure>
+   <img src="https://source.unsplash.com/BoBmrZ8epMA/800x600"/>
+  </figure>
+  <div class="flex-content">
+   <h2>
+    Side content!
+   </h2>
+   <p>
+    Travis is the most popular travel app in the world. It collects reviews from travellers about hotels, restaurants and attractions. We partnered with various divisions to create a campaign for Travis Pro.
+   </p>
+  </div>
+ </div>
+</section><section class="bg-apple slide" id="slide-number-7">
+ <h1>
+  FIN.
+ </h1>
 </section>
    </article>
    <!-- end article -->

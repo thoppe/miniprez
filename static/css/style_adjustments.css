@@ -18,8 +18,10 @@ pre.prettyprint {
     background-color: #333;
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
-    min-width:600px;
-    max-width:800px;
+    
+    width:800px;
+    max-width:100%; 
+
 }
 pre .nocode { background-color: none; color: #000 }
 pre .str { color: #ffa0a0 } /* string  - pink */

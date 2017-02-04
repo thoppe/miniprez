@@ -1,4 +1,4 @@
----- .align-center .wrap  
+---- .aligncenter
 @background(url="https://webslides.tv/static/images/nature.jpg")
 
 .text-data  @h4 **miniprez**

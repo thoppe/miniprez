@@ -33,8 +33,11 @@
   <!-- JavaScript code prettifier from Google -->
   <script src="static/js/run_prettify.js">
   </script>
-  <!-- Optional - CSS SVG Icons (Font Awesome) -->
-  <link href="webslides/static/css/svg-icons.css" media="all" rel="stylesheet" type="text/css"/>
+  <!-- Font-awesome CSS -->
+  <link href="static/css/font-awesome.min.css " rel="stylesheet"/>
+  <!-- Optional - CSS SVG Icons (Font Awesome) 
+    <link rel="stylesheet" type='text/css' media='all' href="webslides/static/css/svg-icons.css">
+    -->
   <!-- miniprez style adjustments -->
   <link href="static/css/style_adjustments.css" rel="stylesheet"/>
   <!-- SOCIAL CARDS (ADD YOUR INFO) -->
@@ -77,6 +80,7 @@
  <body>
   <main role="main">
    <article id="minislides">
+    <!-- Content will be auto filled here -->
 <section class="aligncenter slide" id="slide-number-1">
  <span class="background" style="background-image:url('https://webslides.tv/static/images/nature.jpg')">
  </span>
@@ -92,17 +96,13 @@
   </h4>
   <p>
    <a class="button ghost" href="https://github.com/thoppe/miniprez">
-    <svg class="fa-github">
-     <use xlink:href="#fa-github">
-     </use>
-    </svg>
+    <i aria-hidden="true" class="fa fa-github">
+    </i>
     Project repo
    </a>
    <a class="button ghost" href="https://twitter.com/metasemantic">
-    <svg class="fa-twitter">
-     <use xlink:href="#fa-twitter">
-     </use>
-    </svg>
+    <i aria-hidden="true" class="fa fa-twitter">
+    </i>
     @metasemantic
    </a>
   </p>
@@ -199,10 +199,8 @@
     ::plug::
    </code>
    -&gt;
-   <svg class="fa-plug">
-    <use xlink:href="#fa-plug">
-    </use>
-   </svg>
+   <i aria-hidden="true" class="fa fa-plug">
+   </i>
   </text>
  </h3>
 </section><section class="bg-apple align-left slide" id="slide-number-4">
@@ -284,12 +282,8 @@ sort (x:xs) = sort lower ++ [x] ++ sort higher
  </h1>
 </section>
    </article>
-   <!-- end article -->
   </main>
   <!-- end main -->
-  <!-- Original webslide code (now removed)
-  <script src="webslides/static/js/webslides.js"></script>
-  -->
   <!-- jQuery (required for slides to work) -->
   <script src="https://code.jquery.com/jquery-3.1.1.min.js">
   </script>
@@ -302,6 +296,7 @@ sort (x:xs) = sort lower ++ [x] ++ sort higher
   <!-- KaTeX imports -->
   <script src="static/katex/katex.min.js">
   </script>
+  <!-- Render the equations -->
   <script type="text/javascript">
    // grab all elements in DOM with the class 'equation'
     var tex = document.getElementsByClassName("equation");

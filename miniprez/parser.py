@@ -307,7 +307,8 @@ class inline_markdown_paser(object):
         return html
 
     def _font_awesome(self, x):
-        html  ='<svg class="fa-{x}"><use xlink:href="#fa-{x}"></use></svg>'
+        #html  ='<svg class="fa-{x}"><use xlink:href="#fa-{x}"></use></svg>'
+        html = '<i class="fa fa-{x}" aria-hidden="true"></i>'
         self.used['font_awesome'] = True
         return html.format(x=x[0])        
 

@@ -51,9 +51,6 @@ class tagline(object):
     '''
 
     def __init__(self, line):
-
-        #line = '''@p(foo="bar back" poo='goodfs ' dog=3) @h1 @p @h1 .text-intro Good karma and productivity.'''
-        #line = '''@background(url="https://webslides.tv/static/images/nature.jpg")'''
   
         self.classnames = []
         self.line = line
@@ -71,9 +68,10 @@ class tagline(object):
                    g_name.setResultsName('name') +
                    pyp.Optional(g_option).setResultsName('options'))
                            
-        g_classname = pyp.Literal(".").suppress() + g_name.setResultsName('name')
+        g_classname = (pyp.Literal(".").suppress() +
+                       g_name.setResultsName('name'))
 
-        g_format_text = pyp.ZeroOrMore(pyp.Group(g_tag | g_classname | g_header))
+        g_format_text = pyp.ZeroOrMore(pyp.Group(g_tag|g_classname|g_header))
         grammar = g_format_text + pyp.restOfLine.setResultsName('text')
 
         tags = []
@@ -239,11 +237,15 @@ class section(object):
 class inline_markdown_paser(object):
 
     def __init__(self):
+        # Keep track of the tags that were used
+        self.used = {
+            "emoji": False,
+            "font_awesome": False,
+            "math": False,
+        }
+        
         strong  = pyp.QuotedString("**")
         strong.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
-
-        strong2  = pyp.QuotedString("*")
-        strong2.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
 
         italic  = pyp.QuotedString("_")
         italic  = italic.setParseAction(lambda x:"<em>{}</em>".format(x[0]))
@@ -252,24 +254,32 @@ class inline_markdown_paser(object):
         code  = code.setParseAction(lambda x:"<code>{}</code>".format(x[0]))
 
         font_awesome = pyp.QuotedString("::")
-        label = ('<svg class="fa-{x}"><use xlink:href="#fa-{x}">'
-                 '</use></svg>')
-        font_awesome = font_awesome.setParseAction(lambda x:
-                                                   label.format(x=x[0]))
-
+        font_awesome = font_awesome.setParseAction(self._font_awesome)
+        
         emoji = pyp.QuotedString(":")
-        func = lambda x: emojize(":{}:".format(x[0]), use_aliases=True)
-        emoji = emoji.setParseAction(func)
+        emoji = emoji.setParseAction(self._emoji)
 
         math = pyp.QuotedString(quoteChar="$$",convertWhitespaceEscapes=False)
-        html = r'''<div class="equation" data-expr="{eq}"></div>'''
-        func = lambda x:html.format(eq=x[0])
-        math = math.setParseAction(func)
+        math = math.setParseAction(self._math)
 
-        transforms = math|strong|strong2|italic|code|font_awesome|emoji
+        transforms = math|strong|italic|code|font_awesome|emoji
         plain_text = pyp.Word(pyp.printables)
         whitespace = pyp.White(' ') | pyp.White('\t')
         self.grammar = pyp.OneOrMore(transforms|plain_text|whitespace)
+
+    def _font_awesome(self, x):
+        html  ='<svg class="fa-{x}"><use xlink:href="#fa-{x}"></use></svg>'
+        self.used['font_awesome'] = True
+        return html.format(x=x[0])        
+
+    def _emoji(self, x):
+        self.used['emoji'] = True
+        return emojize(":{}:".format(x[0]), use_aliases=True)
+
+    def _math(self, x):
+        html = r'''<div class="equation" data-expr="{eq}"></div>'''
+        self.used['math'] = True
+        return html.format(eq=x[0])
 
     def __call__(self, text):
         return ' '.join(self.grammar.parseString(text))
@@ -287,3 +297,8 @@ if __name__ == "__main__":
 
     T = tagline(r"This is $$\int_a^b a*b*c x^2 \frac{x}{y}$$ math.")
     print P(T.text)
+
+    T = tagline(r"This is :coffee: and ::coffee:: emoji.")
+    print P(T.text)
+
+    print P.used

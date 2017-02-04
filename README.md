@@ -19,7 +19,7 @@ Dead simple markup to web-friendly presentations that look great on mobile and o
 
 ### known bugs and problems
 + [x] remove webkit animations from webslides
-+ [ ] animation bug on mobile
++ [x] animation bug on mobile
 + [x] support for page down and up
 + [x] `<hr>` on `.bgapple` is the wrong color
 + [x] Using inline markdown on first slide

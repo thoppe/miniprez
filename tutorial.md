@@ -1,7 +1,8 @@
----- .aligncenter
-@background(url="https://webslides.tv/static/images/nature.jpg")
+---- .aligncenter .bg-white
+//@background(url="https://webslides.tv/static/images/nature.jpg"
+@background(url="https://source.unsplash.com/4mta-DkJUAg") .dark
   
-.text-data  @h4 **miniprez**
+.text-data  @h4 **miniprez** 
 @h4 Beautiful presentations in minimalist format <br>
 
 @p 
@@ -9,7 +10,7 @@
  @button(href="https://twitter.com/metasemantic") .ghost ::twitter:: @metasemantic
 
 @p .text-intro 
-  miniprez is a static mobile friendly version of [webslides](https://github.com/jlantunez/webslides)
+  miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
 
 ---- .align-left .bg-white
 @background(url="https://source.unsplash.com/aJTiW00qqtI/") .dark
@@ -17,7 +18,6 @@
 .text-landing _Slide 2_
 @h2 _simple markdown support_
 @line
-.wrap .bg-trans-dark
  .grid .wrap
   .column
     @h2 :fire: **bold**
@@ -35,14 +35,11 @@
 Standard emoji and [font-awesome](http://fontawesome.io/)  
 @line
 
-.wrap .bg-trans-dark
  .grid .wrap
   .column `:battery:`
     @h1 :battery:
   .column `:heart_eyes:`
     @h1 :heart_eyes:
-  .column `::plug::`
-    @h1 ::plug:: 
   .column `::meetup::`
     @h1 ::meetup::
   .column `::ra::`
@@ -63,32 +60,41 @@ LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)
 @h2 _pretty code blocks_
 Syntax highlighting Google's [code prettify](https://github.com/google/code-prettify)  
 @line
-'''
+```
 sort [] = []
 sort (x:xs) = sort lower ++ [x] ++ sort higher
     where
         lower = filter (< x) xs
         higher = filter (>= x) xs
-'''
+```
 Code blocks are context-aware
-'''
+```
 // to convert prefix to postfix
 main() {
   char c = getchar();
   (c == '+' || c == '-' || c == '*' || c == '/') ? main(), main() : 0;
   putchar(c);
 } 
-'''
+```
 
------ 
+----- .bg-white .slide-top
+@background(url="https://source.unsplash.com/IEe2c3kyERo") 
 
-.card-50 .bg-white
-  @figure(src="https://source.unsplash.com/BoBmrZ8epMA/800x600")
-  
-  .flex-content
-    @h2 Side content!
-    @p We live in a society exquisitely dependent on science and technology, in which hardly anyone knows anything about science and technology.
+  .grid .vertical-align 
+   .column .bg-white
+    ```
+- - - -
+@background(url="https://source.unsplash.com/IEe2c3kyERo") 
+@h1 It's easy to make a slide with :heart_eyes:
+A slide that is **bold** and _exciting_ with
+@p $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
+    ```
+   .column
+   .column .bg-white
+    @h1 It's easy to make a slide with :heart_eyes:
+    A slide that is **bold** and _exciting_ with
+    @p $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
 
 ----- .bg-apple
 
-@h1 FIN.
+@h1 Thanks, you!

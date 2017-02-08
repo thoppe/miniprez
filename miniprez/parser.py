@@ -16,7 +16,7 @@ _registered_custom_tags = {
 
 _section_header_token = '----'
 _comment_marker_token = '//'
-_code_block_marker = "'''"
+_code_block_marker = "```"
 
 def is_section_header(line):
     if len(line)<4:
@@ -101,9 +101,9 @@ class tagline(object):
 
         self.text = res['text'].strip()
         
-        if len(tags)>1:
-            msg = 'Only one tag allowed per line, "{}"'.format(line)
-            raise SyntaxError(msg)
+        #if len(tags)>1:
+        #    msg = 'Only one tag allowed per line, "{}"'.format(line)
+        #    raise SyntaxError(msg)
 
         # Select only the first tag
         self.tag = tags[0] if tags else None
@@ -177,6 +177,7 @@ class section(object):
         # Custom work for a code block
         is_inside_code_block = False
         code_buffer = []
+        code_block_indent = None
         for line in lines:
 
             is_code_block = _code_block_marker == line.lstrip()[:3]
@@ -188,11 +189,20 @@ class section(object):
                 code_buffer.append( line.rstrip() )
     
             if is_code_block and not is_inside_code_block:
+                space_ITR = itertools.takewhile(lambda x:x==' ',line)
+                code_block_indent = len(list(space_ITR))
+
+                # Remove the code buffer lines
+                code_buffer = code_buffer[1:-1]
+                
                 # Empty out the contents of the buffer
-                code_block = '__CODE_BLOCK_SPACE'.join(code_buffer).strip("'").strip()
-                self.lines.append('@codeblock ' + code_block)
+                code_block = '__CODE_BLOCK_SPACE'.join(code_buffer)
+                header = code_block_indent*' ' + '@codeblock '
+                block = header + code_block
+                self.lines.append(block)
+                
                 code_buffer = []
-            elif  not is_inside_code_block:
+            elif not is_inside_code_block:
                 self.lines.append(line)
 
     

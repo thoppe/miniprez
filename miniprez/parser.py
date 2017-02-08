@@ -227,15 +227,17 @@ class section(object):
             assert(x.has_tag)
             tag = x.build_tag(soup, indent=x.indent)
 
-            if x.primary_name == "footer":
-                z["indent"] = -3
-
             if x.primary_name == "background":
                 assert(z.name == "section")
                 z.append(tag)
-                #tag = soup.new_tag("div",indent=-2)
-                #tag["class"] = ["wrap",]
-                #z.append(tag)
+                tag = soup.new_tag("div",indent=-2)
+                tag["class"] = ["wrap",]
+                z.append(tag)
+
+            elif x.primary_name == "footer":
+                print z.findParent('section')
+                z.findParent('section').append(tag)
+                print z.findParent('section')
             
             elif x.indent > z["indent"]:
                 z.append(tag)
@@ -285,6 +287,10 @@ class inline_markdown_paser(object):
             "font_awesome": False,
             "math": False,
         }
+
+        strongred  = pyp.QuotedString("*")
+        html = "<strong>{}</strong>"
+        strongred.setParseAction(lambda x:html.format(x[0]))
         
         strong  = pyp.QuotedString("**")
         strong.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
@@ -309,7 +315,8 @@ class inline_markdown_paser(object):
         href = pyp.QuotedString(quoteChar="(",endQuoteChar=")")
         link = (text + href).setParseAction(self._link)
 
-        transforms = math|strong|italic|code|font_awesome|emoji|link
+        text_transforms = strong|strongred|italic
+        transforms = math|text_transforms|code|font_awesome|emoji|link
         plain_text = pyp.Word(pyp.printables)
         whitespace = pyp.White(' ') | pyp.White('\t')
         self.grammar = pyp.OneOrMore(transforms|plain_text|whitespace)

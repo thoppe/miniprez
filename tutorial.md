@@ -1,22 +1,26 @@
 ---- .aligncenter .bg-white
-//@background(url="https://webslides.tv/static/images/nature.jpg"
 @background(url="https://source.unsplash.com/4mta-DkJUAg") .dark
   
 .text-data  @h4 **miniprez** 
 @h4 Beautiful presentations in minimalist format <br>
 
-@p 
- @button(href="https://github.com/thoppe/miniprez") .ghost ::github:: Project repo
- @button(href="https://twitter.com/metasemantic") .ghost ::twitter:: @metasemantic
-
 @p .text-intro 
   miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
 
----- .align-left .bg-white
+@footer
+ .wrap
+  .span
+   .alignleft
+     @button(href="https://github.com/thoppe/miniprez") .ghost ::github:: Project repo
+   .alignright
+     @button(href="https://twitter.com/metasemantic") .ghost ::twitter:: @metasemantic
+
+---- .align-left .bg-black
 @background(url="https://source.unsplash.com/aJTiW00qqtI/") .dark
 
-.text-landing _Slide 2_
+.text-landing .text-content _Slide 2_
 @h2 _simple markdown support_
+Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) support
 @line
  .grid .wrap
   .column
@@ -77,10 +81,10 @@ main() {
 } 
 ```
 
------ .bg-white .slide-top
+----- .bg-white .aligncenter
 @background(url="https://source.unsplash.com/IEe2c3kyERo") 
 
-  .grid .vertical-align 
+  .grid 
    .column .bg-white
     ```
 - - - -
@@ -97,4 +101,8 @@ A slide that is **bold** and _exciting_ with
 
 ----- .bg-apple
 
-@h1 Thanks, you!
+@h1 .text-data Thanks, you!
+
+@footer
+  @h4 Contribute at
+  @h2 [https://github.com/thoppe/miniprez](https://github.com/thoppe/miniprez)

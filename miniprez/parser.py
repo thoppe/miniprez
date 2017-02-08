@@ -219,7 +219,7 @@ class section(object):
         lines = iter(self)
         
         # Parse the header
-        z = lines.next().build_tag(soup, indent=-2)
+        z = lines.next().build_tag(soup, indent=-5)
         soup.append(z)
         
         for x in lines:
@@ -227,12 +227,15 @@ class section(object):
             assert(x.has_tag)
             tag = x.build_tag(soup, indent=x.indent)
 
+            if x.primary_name == "footer":
+                z["indent"] = -3
+
             if x.primary_name == "background":
                 assert(z.name == "section")
                 z.append(tag)
-                tag = soup.new_tag("div",indent=-1)
-                tag["class"] = ["wrap",]
-                z.append(tag)
+                #tag = soup.new_tag("div",indent=-2)
+                #tag["class"] = ["wrap",]
+                #z.append(tag)
             
             elif x.indent > z["indent"]:
                 z.append(tag)

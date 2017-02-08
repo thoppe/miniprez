@@ -18,11 +18,12 @@ For a tutorial see the [input](https://raw.githubusercontent.com/thoppe/miniprez
 + [ ] support for command line compilation
 + [ ] Embedding tools (convert project to monolith html)
 + [ ] Global options (font?)
-+ [ ] Fix meta info to this project
++ [~] Fix meta info to this project
 + [ ] Selectively load libraries (eg. font-awesome & katex) on use
 + [ ] Slide number url
 
 ### known bugs and problems
++ [ ] Extra space after markdown, ex. `*BOLD*!` becomes `BOLD !`
 + [x] remove webkit animations from webslides
 + [x] animation bug on mobile
 + [x] support for page down and up

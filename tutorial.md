@@ -19,12 +19,16 @@
 
 .text-landing .text-content _Slide 2_
 @h2 _simple markdown support_
-Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) support
+Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweaks!
+
 @line
  .grid .wrap
   .column
-    @h2 :fire: **bold**
+    @h2 :muscle: **bold**
     @p `**text**`
+  .column
+    @h2 :fire: *fire*
+    @p `*text*`
   .column
     @h2 :cloud: _emph_
     @p `_text_`

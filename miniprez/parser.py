@@ -235,9 +235,7 @@ class section(object):
                 z.append(tag)
 
             elif x.primary_name == "footer":
-                print z.findParent('section')
                 z.findParent('section').append(tag)
-                print z.findParent('section')
             
             elif x.indent > z["indent"]:
                 z.append(tag)
@@ -289,8 +287,7 @@ class inline_markdown_paser(object):
         }
 
         strongred  = pyp.QuotedString("*")
-        html = "<strong>{}</strong>"
-        strongred.setParseAction(lambda x:html.format(x[0]))
+        strongred.setParseAction(self._strongred)        
         
         strong  = pyp.QuotedString("**")
         strong.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
@@ -321,6 +318,9 @@ class inline_markdown_paser(object):
         whitespace = pyp.White(' ') | pyp.White('\t')
         self.grammar = pyp.OneOrMore(transforms|plain_text|whitespace)
 
+    def _strongred(self, x):
+        html = '<strong style="color:#c23">{}</strong>'
+        return html.format(x[0])
 
     def _link(self, x):
         html  ='<a href="{}">{}</a>'.format(x[1],x[0])

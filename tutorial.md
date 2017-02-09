@@ -15,7 +15,7 @@
      @button(href="https://twitter.com/metasemantic") .ghost ::twitter:: @metasemantic
 
 ---- .align-left .bg-black
-@background(url="https://source.unsplash.com/aJTiW00qqtI/") .dark
+@background(url="https://source.unsplash.com/F1dSr7I4AmY/") .dark
 
 .text-landing .text-content _Slide 2_
 @h2 _simple markdown support_
@@ -94,23 +94,14 @@ main() {
  Embed any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 
 
------ .bg-white .aligncenter
-@background(url="https://source.unsplash.com/IEe2c3kyERo") 
+----- .slide-bottom .bg-black
+@background(url="https://source.unsplash.com/U5rMrSI7Pn4") .light
 
-  .grid 
-   .column .bg-white
-    ```
-- - - -
-@background(url="https://source.unsplash.com/IEe2c3kyERo") 
-@h1 It's easy to make a slide with :heart_eyes:
-A slide that is **bold** and _exciting_ with
-@p $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
-    ```
-   .column
-   .column .bg-white
-    @h1 It's easy to make a slide with :heart_eyes:
-    A slide that is **bold** and _exciting_ with
-    @p $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
+.content-center .text-shadow 
+  @h1 .text-landing **A pug and an Equation**
+  @h3 $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
+@footer
+  this slide looks important right? It's not!
 
 ----- .bg-apple
 

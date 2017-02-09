@@ -8,11 +8,9 @@ For a tutorial see the [input](https://raw.githubusercontent.com/thoppe/miniprez
 
 ### (upcoming) features!
 
-+ [x] Basic inline markdown support (*, _, **, backticks)
-+ [x] Basic emoji markdown usage (:smile:)
-+ [x] Direct SVG Font awesome usage through emoji syntax
-+ [x] Buttons
-+ [x] More advanced markdown support (links, images)
++ [x] Basic inline markdown support (*, _, **, backticks, links)
++ [x] Emojis and font awesome  (:smile:)
++ [x] Custom tags (background, background_video, line, button, figure)
 + [x] [KaTeX](https://github.com/Khan/KaTeX) equations!
 + [x] Code blocks
 + [x] BG videos examples!

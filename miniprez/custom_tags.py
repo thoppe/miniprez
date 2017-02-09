@@ -11,6 +11,16 @@ def _get_src(tagline):
             del tagline.tag[1][key]
     return link
 
+def background_video(tagline, soup):
+    tag = soup.new_tag("video")
+    tag["autoplay"] = None
+    tag["loop"] = None
+    tag["class"] = ["background-video"]
+    source = soup.new_tag("source")
+    source['src'] = _get_src(tagline)
+    tag.append(source)
+    return tag
+
 def background(tagline, soup):
     name,info = tagline.tag
     assert(name == 'background')
@@ -73,6 +83,7 @@ def codeblock(tagline, soup):
 
 _registered_custom_tags = {
     "background" : background,
+    "background_video" : background_video,
     "line" : line,
     "button" : button,
     "codeblock" : codeblock,

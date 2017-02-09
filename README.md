@@ -15,7 +15,8 @@ For a tutorial see the [input](https://raw.githubusercontent.com/thoppe/miniprez
 + [x] More advanced markdown support (links, images)
 + [x] [KaTeX](https://github.com/Khan/KaTeX) equations!
 + [x] Code blocks
-+ [ ] proper bg video support...
++ [x] BG videos examples!
++ [ ] nesting divs
 + [ ] Lists support
 + [ ] support for command line compilation
 + [ ] Embedding tools (convert project to monolith html)

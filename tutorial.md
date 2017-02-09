@@ -85,14 +85,11 @@ main() {
 ```
 
 -----
-@video(autoplay="" loop="") .background-video 
-  @source(src="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4")
+@background_video(src="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4")
 
-.wrap
- .text-landing Slide 6
- @h2 _looping background animations_
- Embed any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
-
+.text-landing Slide 6
+@h2 _looping background animations_
+Embed any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 
 ----- .slide-bottom .bg-black
 @background(url="https://source.unsplash.com/U5rMrSI7Pn4") .light
@@ -100,8 +97,8 @@ main() {
 .content-center .text-shadow 
   @h1 .text-landing **A pug and an Equation**
   @h3 $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
-@footer
-  this slide looks important right? It's not!
+  
+@footer this slide looks important right? It's not!
 
 ----- .bg-apple
 

@@ -109,7 +109,9 @@ class tagline(object):
         elif self.tag is None:
             self.tag = ('text',{})
 
-        self.primary_name = self.tag[0]
+    @property
+    def primary_name(self):
+        return self.tag[0]
 
     @property
     def indent(self):
@@ -220,7 +222,7 @@ class section(object):
             assert(x.has_tag)
             tag = x.build_tag(soup, indent=x.indent)
 
-            if x.primary_name == "background":
+            if x.primary_name in ["background", "background_video"]:
                 assert(z.name == "section")
                 z.append(tag)
                 tag = soup.new_tag("div",indent=-2)

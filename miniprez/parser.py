@@ -5,14 +5,7 @@ import string
 import pyparsing as pyp
 import custom_tags
 from emoji import emojize
-
-_registered_custom_tags = {
-    "background" : custom_tags.background,
-    "line" : custom_tags.line,
-    "button" : custom_tags.button,
-    "codeblock" : custom_tags.codeblock,
-    "figure" : custom_tags.figure,
-}
+from custom_tags import _registered_custom_tags
 
 _section_header_token = '----'
 _comment_marker_token = '//'

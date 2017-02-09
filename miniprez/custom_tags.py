@@ -1,3 +1,7 @@
+'''
+Custom tags. Make sure you register new custom tags at the bottom.
+'''
+
 import bs4
 
 def _get_src(tagline):
@@ -62,3 +66,17 @@ def codeblock(tagline, soup):
     tagline.text = ''
     
     return tag
+
+#########################################################################
+
+## Register new custom tags here
+
+_registered_custom_tags = {
+    "background" : background,
+    "line" : line,
+    "button" : button,
+    "codeblock" : codeblock,
+    "figure" : figure,
+}
+
+

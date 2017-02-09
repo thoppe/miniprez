@@ -4,8 +4,9 @@ import re
 import string
 import pyparsing as pyp
 import custom_tags
-from emoji import emojize
+
 from custom_tags import _registered_custom_tags
+from inline_markdown import inline_markdown_parser
 
 _section_header_token = '----'
 _comment_marker_token = '//'
@@ -156,7 +157,7 @@ class tagline(object):
 
         if self.text:
             # Make any markdown modifications
-            text = _INLINE_MARKDOWN_PARSER(self.text)
+            text = inline_markdown_parser(self.text)
             html_text = bs4.BeautifulSoup(text,'html.parser')
             tag.append(html_text)
 
@@ -267,79 +268,7 @@ class section(object):
 
     def __repr__(self):
         return self.soup.prettify()
-    
-########################################################################
 
-
-class inline_markdown_paser(object):
-
-    def __init__(self):
-        # Keep track of the tags that were used
-        self.used = {
-            "emoji": False,
-            "font_awesome": False,
-            "math": False,
-        }
-
-        strongred  = pyp.QuotedString("*")
-        strongred.setParseAction(self._strongred)        
-        
-        strong  = pyp.QuotedString("**")
-        strong.setParseAction(lambda x:"<strong>{}</strong>".format(x[0]))
-
-        italic  = pyp.QuotedString("_")
-        italic  = italic.setParseAction(lambda x:"<em>{}</em>".format(x[0]))
-
-        code  = pyp.QuotedString("`", escChar='&&&',
-                                 convertWhitespaceEscapes=False)
-        code  = code.setParseAction(lambda x:"<code>{}</code>".format(x[0]))
-
-        font_awesome = pyp.QuotedString("::")
-        font_awesome = font_awesome.setParseAction(self._font_awesome)
-        
-        emoji = pyp.QuotedString(":")
-        emoji = emoji.setParseAction(self._emoji)
-
-        math = pyp.QuotedString(quoteChar="$$",convertWhitespaceEscapes=False)
-        math = math.setParseAction(self._math)
-
-        text = pyp.QuotedString(quoteChar="[",endQuoteChar="]")
-        href = pyp.QuotedString(quoteChar="(",endQuoteChar=")")
-        link = (text + href).setParseAction(self._link)
-
-        text_transforms = strong|strongred|italic
-        transforms = math|text_transforms|code|font_awesome|emoji|link
-        plain_text = pyp.Word(pyp.printables)
-        whitespace = pyp.White(' ') | pyp.White('\t')
-        self.grammar = pyp.OneOrMore(transforms|plain_text|whitespace)
-
-    def _strongred(self, x):
-        html = '<strong style="color:#c23">{}</strong>'
-        return html.format(x[0])
-
-    def _link(self, x):
-        html  ='<a href="{}">{}</a>'.format(x[1],x[0])
-        return html
-
-    def _font_awesome(self, x):
-        #html  ='<svg class="fa-{x}"><use xlink:href="#fa-{x}"></use></svg>'
-        html = '<i class="fa fa-{x}" aria-hidden="true"></i>'
-        self.used['font_awesome'] = True
-        return html.format(x=x[0])        
-
-    def _emoji(self, x):
-        self.used['emoji'] = True
-        return emojize(":{}:".format(x[0]), use_aliases=True)
-
-    def _math(self, x):
-        html = r'''<div class="equation" data-expr="{eq}"></div>'''
-        self.used['math'] = True
-        return html.format(eq=x[0])
-
-    def __call__(self, text):
-        return ' '.join(self.grammar.parseString(text))
-
-_INLINE_MARKDOWN_PARSER = inline_markdown_paser()
             
 ########################################################################
 

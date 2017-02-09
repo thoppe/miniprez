@@ -55,7 +55,7 @@ class tagline(object):
 
         g_name = pyp.Word(pyp.alphanums+'-_')
         g_quote = pyp.QuotedString('"')|pyp.QuotedString("'")
-        g_header = pyp.Literal('----')+pyp.ZeroOrMore('-')
+        g_header = pyp.Literal('----')+pyp.ZeroOrMore('-').suppress()
         
         g_option_token = (g_name.setResultsName("key") +
                           pyp.Literal("=").suppress() +
@@ -69,21 +69,32 @@ class tagline(object):
         g_classname = (pyp.Literal(".").suppress() +
                        g_name.setResultsName('name'))
 
-        g_format_text = pyp.ZeroOrMore(pyp.Group(g_tag|g_classname|g_header))
-        grammar = g_format_text + pyp.restOfLine.setResultsName('text')
+        g_format_header = g_header + pyp.ZeroOrMore(g_classname)
+        g_format_tag = g_tag + pyp.ZeroOrMore(g_classname)
+        g_format_div_tag = pyp.OneOrMore(g_classname)
+        g_format = g_format_header | g_format_tag | g_format_div_tag
+        
+        grammar = pyp.Optional(g_format) + pyp.restOfLine.setResultsName('text')
 
-        tags = []
+        self.tag_name = None
+        self.tag_options = {}
 
         def parse_tag(tag):
             options = {}
             if "options" in tag:
                 for item in tag["options"][0]:
                     options[item['key']] = item['value']
-            tags.append((tag["name"],options))
+
+            self.tag_name = tag["name"]
+            self.tag_options = options
+            
         def parse_classname(item):
             self.classnames.append(item['name'])
 
-        g_header.setParseAction(lambda _:tags.append(("section",{})))
+        def set_tagname_section(x):
+            self.tag_name = "section"
+
+        g_header.setParseAction(set_tagname_section)
         g_tag.setParseAction(parse_tag)
         g_classname.setParseAction(parse_classname)
 
@@ -94,25 +105,16 @@ class tagline(object):
             raise Ex
 
         self.text = res['text'].strip()
-        
-        #if len(tags)>1:
-        #    msg = 'Only one tag allowed per line, "{}"'.format(line)
-        #    raise SyntaxError(msg)
-
-        # Select only the first tag
-        self.tag = tags[0] if tags else None
 
         # If classnames are used but tag is None, default to a div
-        if self.tag is None and self.classnames:
-            self.tag = ('div',{})
+        if self.tag_name is None and self.classnames:
+            self.tag_name = 'div'
 
         # Otherwise set the tag to text
-        elif self.tag is None:
-            self.tag = ('text',{})
+        elif self.tag_name is None:
+            self.tag_name = 'text'
 
-    @property
-    def primary_name(self):
-        return self.tag[0]
+        assert(self.tag_name is not None)
 
     @property
     def indent(self):
@@ -120,25 +122,21 @@ class tagline(object):
         return len(list(itertools.takewhile(is_space,self.line)))
 
     @property
-    def is_section_header(self):
-        return self.primary_name == 'section'
-    
-    @property
     def is_empty(self):
-        return not (self.text or self.classnames or self.tag)
-
-    @property
-    def has_tag(self):
-        return (self.tag is not None)
+        if self.text or self.classnames:
+            return False
+        if self.tag_name != 'text':
+            return False
+        return True
 
     def __repr__(self):
-        keys = ("text","tag","classnames")
+        keys = ("text","tag_name","tag_options")
         vals = (getattr(self,x) for x in keys)
         return str(dict(zip(keys,vals)))
 
     def build_tag(self, soup, **kwargs):
 
-        name = self.primary_name
+        name = self.tag_name
         if name in _registered_custom_tags:
             tag = _registered_custom_tags[name](self, soup)
             
@@ -148,8 +146,7 @@ class tagline(object):
         if self.classnames:
             tag['class'] = tag.get('class',[]) + self.classnames
 
-        options = self.tag[1]
-        for key,val in options.items():
+        for key,val in self.tag_options.items():
             tag[key] = val
 
         for key,val in kwargs.items():
@@ -203,14 +200,14 @@ class section(object):
 
     
         # Parse and filter for blank lines
-        self.lines = [x for x in map(tagline,self.lines) if not x.is_empty]
+        self.lines = [x for x in map(tagline, self.lines) if not x.is_empty]
 
         # Section shouldn't be empty
         assert(self.lines)
 
         # Section should start with a header
-        assert(self.lines[0].is_section_header)
-
+        assert(self.lines[0].tag_name == "section")
+        
         soup  = bs4.BeautifulSoup("",'html.parser')
         lines = iter(self)
         
@@ -220,17 +217,16 @@ class section(object):
         
         for x in lines:
 
-            assert(x.has_tag)
             tag = x.build_tag(soup, indent=x.indent)
 
-            if x.primary_name in ["background", "background_video"]:
+            if x.tag_name in ["background", "background_video"]:
                 assert(z.name == "section")
                 z.append(tag)
                 tag = soup.new_tag("div",indent=-2)
                 tag["class"] = ["wrap",]
                 z.append(tag)
 
-            elif x.primary_name == "footer":
+            elif x.tag_name == "footer":
                 z.findParent('section').append(tag)
             
             elif x.indent > z["indent"]:

@@ -5,10 +5,11 @@ Custom tags. Make sure you register new custom tags at the bottom.
 import bs4
 
 def _get_src(tagline):
+    opts = tagline.tag_options
     for key in ["url","href","src"]:
-        if key in tagline.tag[1]:
-            link = tagline.tag[1][key]
-            del tagline.tag[1][key]
+        if key in opts:
+            link = opts[key]
+            del opts[key]
     return link
 
 def background_video(tagline, soup):
@@ -22,23 +23,17 @@ def background_video(tagline, soup):
     return tag
 
 def background(tagline, soup):
-    name,info = tagline.tag
+    name = tagline.tag_name
     assert(name == 'background')
 
     tag = soup.new_tag("span")
-
-    if tag.classnames:
-        tag["class"]  = ["background",] + tag.classnames
-    else:
-        tag["class"] = ["background",]
-
-    url = _get_src(tagline)   
+    tag["class"]  = ["background",]
+    url = _get_src(tagline)
     tag["style"] = '''background-image:url('{}')'''. format(url)
-    
     return tag
 
 def figure(tagline, soup):
-    name,info = tagline.tag
+    name = tagline.tag_name
     assert(name == 'figure')
 
     tag = soup.new_tag("figure")
@@ -51,13 +46,13 @@ def figure(tagline, soup):
     
 
 def line(tagline, soup):
-    name,info = tagline.tag
+    name = tagline.tag_name
     assert(name == 'line')
    
     return soup.new_tag("hr")
 
 def button(tagline, soup):
-    name,info = tagline.tag
+    name = tagline.tag_name
     assert(name == 'button')
 
     tag = soup.new_tag("a")
@@ -67,7 +62,7 @@ def button(tagline, soup):
     return tag
 
 def codeblock(tagline, soup):
-    name,info = tagline.tag
+    name = tagline.tag_name
     assert(name == 'codeblock')
 
     tag = soup.new_tag("pre")

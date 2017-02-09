@@ -1,6 +1,6 @@
 ---- .aligncenter .bg-white
 @background(url="https://source.unsplash.com/4mta-DkJUAg") .dark
-.text-data  @h3 **miniprez** 
+@h3 .text-data **miniprez** 
 @h4 Beautiful presentations in minimalist format <br>
 
 @p .text-intro 
@@ -84,14 +84,14 @@ main() {
 } 
 ```
 
------
+----- 
 @background_video(src="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4")
 
 .text-landing Slide 6
 @h2 _looping background animations_
 Embed any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 
------ .slide-bottom .bg-black
+---- .slide-bottom .bg-black
 @background(url="https://source.unsplash.com/U5rMrSI7Pn4") .light
 
 .content-center .text-shadow 

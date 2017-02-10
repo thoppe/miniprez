@@ -142,11 +142,13 @@ class tagline(object):
         if self.text:
             # Make any markdown modifications
             text = inline_markdown_parser(self.text)
-            html_text = bs4.BeautifulSoup(text,'html.parser')
+            tag = _soup.new_tag("text")
+            tag.append( bs4.BeautifulSoup(text,'html.parser') )
+            
             if blocks:
-                blocks[-1].append(html_text)
+                blocks[-1].append(tag)
             else:
-                blocks.append(html_text)
+                blocks.append(tag)
 
         # Only insert items into the outermost tag
         for key,val in kwargs.items():

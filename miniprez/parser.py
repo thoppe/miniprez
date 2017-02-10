@@ -98,10 +98,9 @@ class section(object):
         soup.append(z)
         
         for x in lines:
-
-            print x
+            
             tag = x.build(indent=x.indent)
-            name = tag.primary_name
+            name = x.primary_name
 
             if name in ["background", "background_video"]:
                 assert(z.name == "section")

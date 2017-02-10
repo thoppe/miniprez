@@ -1,4 +1,5 @@
 target = tutorial
+#target = test
 
 all:
 	python miniprez/miniprez.py $(target).md

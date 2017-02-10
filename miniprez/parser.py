@@ -270,18 +270,4 @@ class section(object):
 
 if __name__ == "__main__":
 
-    P = inline_markdown_paser()
-
-    T = tagline("This is a [link](https://www.google.com)")    
-    print P(T.text)
-    
-    T = tagline("This is **bold** _text_ with `code`.")    
-    print P(T.text)
-
-    T = tagline(r"This is $$\int_a^b a*b*c x^2 \frac{x}{y}$$ math.")
-    print P(T.text)
-
-    T = tagline(r"This is :coffee: and ::coffee:: emoji.")
-    print P(T.text)
-
-    print P.used
+    print "add unit tests here please :)"

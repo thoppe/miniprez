@@ -88,3 +88,24 @@ class Inline_Markdown_Paser(object):
 
 # Create one shared instance
 inline_markdown_parser = Inline_Markdown_Paser()
+
+
+if __name__ == "__main__":
+
+    print "add unit tests here please :)"
+
+    P = Inline_Markdown_Paser()
+
+    text = "This is a [link](https://www.google.com)"
+    print P(text)
+    
+    text = "This is **bold** _text_ with `code`."
+    print P(text)
+
+    text = "This is $$\int_a^b a*b*c x^2 \frac{x}{y}$$ math."
+    print P(text)
+
+    text = "This is :coffee: and ::coffee:: emoji."
+    print P(text)
+
+    print P.used

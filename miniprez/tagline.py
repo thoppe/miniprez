@@ -65,7 +65,6 @@ class tagline(object):
             print 'Failed parsing "{}"'.format(line)
             raise Ex
 
-        #### STOP HERE
         self.text = res['text'].strip()
         self.tags = []
 
@@ -104,6 +103,15 @@ class tagline(object):
     def empty(self):
         return not (self.text or self.tags)
 
+    @property
+    def primary_name(self):
+        if not self.tags:
+            return "text"
+        return self.tags[0]["name"]
+
+    def is_header(self):
+        return self.primary_name == "section"
+
     def __repr__(self):
         keys = ("tags", "text")
         vals = (getattr(self,x) for x in keys)
@@ -129,17 +137,20 @@ class tagline(object):
                 tag[key] = val
 
             blocks.append(tag)
-
-        # Only insert items into the outermost tag
-        for key,val in kwargs.items():
-            blocks[0][key] = val
-
+        
         # Insert text into the deepest tag
         if self.text:
             # Make any markdown modifications
             text = inline_markdown_parser(self.text)
             html_text = bs4.BeautifulSoup(text,'html.parser')
-            blocks[-1].append(html_text)
+            if blocks:
+                blocks[-1].append(html_text)
+            else:
+                blocks.append(html_text)
+
+        # Only insert items into the outermost tag
+        for key,val in kwargs.items():
+            blocks[0][key] = val
 
         # Nest the blocks
         while len(blocks)>1:
@@ -149,6 +160,7 @@ class tagline(object):
 
 if __name__ == "__main__":
 
+    '''
     print tagline("---- .blue .purple")
     print tagline("----")
     print tagline("@h1(sky='orange' sun='set') .red .blue @h2 .dragons @h3(moon='blue') hi")
@@ -164,9 +176,6 @@ if __name__ == "__main__":
 
     print tagline('@h2 @line').build()
     print tagline('@background(src="www") .blue @h2 text').build()
+    print tagline('cars').build()
+    '''
 
-    
-
-    
-    
-    

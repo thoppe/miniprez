@@ -82,33 +82,35 @@ class section(object):
 
     
         # Parse and filter for blank lines
-        self.lines = [x for x in map(tagline, self.lines) if not x.is_empty]
+        self.lines = [x for x in map(tagline, self.lines) if not x.empty]
 
         # Section shouldn't be empty
         assert(self.lines)
 
         # Section should start with a header
-        assert(self.lines[0].tag_name == "section")
+        assert(self.lines[0].is_header())
         
         soup  = bs4.BeautifulSoup("",'html.parser')
         lines = iter(self)
         
         # Parse the header
-        z = lines.next().build_tag(soup, indent=-5)
+        z = lines.next().build(indent=-5)
         soup.append(z)
         
         for x in lines:
 
-            tag = x.build_tag(soup, indent=x.indent)
+            print x
+            tag = x.build(indent=x.indent)
+            name = tag.primary_name
 
-            if x.tag_name in ["background", "background_video"]:
+            if name in ["background", "background_video"]:
                 assert(z.name == "section")
                 z.append(tag)
                 tag = soup.new_tag("div",indent=-2)
                 tag["class"] = ["wrap",]
                 z.append(tag)
 
-            elif x.tag_name == "footer":
+            elif name == "footer":
                 z.findParent('section').append(tag)
             
             elif x.indent > z["indent"]:
@@ -152,11 +154,11 @@ class section(object):
 
 if __name__ == "__main__":
     section_text = '''----
-@h1 @h2
-hello nurse!
-'''
+    @p @h2 hello nurse!
+      @h3 swarmy
+    something smaller
+    '''
 
     S = section(section_text.split('\n'))
-    
-    for line in S:
-        print line
+    print S.soup
+

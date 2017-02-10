@@ -5,6 +5,7 @@ import string
 import pyparsing as pyp
 import custom_tags
 
+from tagline import tagline
 from custom_tags import _registered_custom_tags
 from inline_markdown import inline_markdown_parser
 
@@ -41,128 +42,7 @@ def file_iterator(f_md):
             yield line.rstrip()
 
 ########################################################################
-    
-class tagline(object):
-    '''
-    Each line is parsed by tokens individually until no preprocessing 
-    tokens are left.
-    '''
-
-    def __init__(self, line):
   
-        self.classnames = []
-        self.line = line
-
-        token = lambda c: pyp.Literal(c).suppress()
-
-        g_name = pyp.Word(pyp.alphanums+'-_')
-        g_quote = pyp.QuotedString('"')|pyp.QuotedString("'")
-        g_header = token('----')+pyp.ZeroOrMore('-').suppress()
-        
-        g_option_token = (g_name("key") + token('=') +
-                          (g_name|g_quote)("value"))
-        
-        g_option = pyp.nestedExpr(content=pyp.Group(g_option_token))
-
-        g_tag   = (token('@') + g_name('name') +
-                   pyp.Optional(g_option)('options'))
-                           
-        g_classname = token('.') + g_name('name')
-
-        g_format_header = g_header + pyp.ZeroOrMore(g_classname)
-
-        g_format_named_tag = g_tag + pyp.ZeroOrMore(g_classname)
-        g_format_div_tag = pyp.OneOrMore(g_classname)
-        
-        
-        g_format = g_format_header | g_format_named_tag | g_format_div_tag
-        
-        grammar = pyp.Optional(g_format) + pyp.restOfLine('text')
-
-        self.tag_name = None
-        self.tag_options = {}
-
-        def parse_tag(tag):
-            options = {}
-            if "options" in tag:
-                for item in tag.options[0]:
-                    options[item.key] = item.value
-
-            self.tag_name = tag.name
-            self.tag_options = options
-            
-        def parse_classname(item):
-            self.classnames.append(item.name)
-
-        def set_tagname_section(x):
-            self.tag_name = "section"
-
-        g_header.setParseAction(set_tagname_section)
-        g_tag.setParseAction(parse_tag)
-        g_classname.setParseAction(parse_classname)
-
-        try:
-            res = grammar.parseString(line)
-        except pyp.ParseException as Ex:
-            print 'Failed parsing "{}"'.format(line)
-            raise Ex
-
-        self.text = res['text'].strip()
-
-        # If classnames are used but tag is None, default to a div
-        if self.tag_name is None and self.classnames:
-            self.tag_name = 'div'
-
-        # Otherwise set the tag to text
-        elif self.tag_name is None:
-            self.tag_name = 'text'
-
-        assert(self.tag_name is not None)
-
-    @property
-    def indent(self):
-        is_space = lambda x:x in ['\t',' ']
-        return len(list(itertools.takewhile(is_space,self.line)))
-
-    @property
-    def is_empty(self):
-        if self.text or self.classnames:
-            return False
-        if self.tag_name != 'text':
-            return False
-        return True
-
-    def __repr__(self):
-        keys = ("text","tag_name","tag_options")
-        vals = (getattr(self,x) for x in keys)
-        return str(dict(zip(keys,vals)))
-
-    def build_tag(self, soup, **kwargs):
-
-        name = self.tag_name
-        if name in _registered_custom_tags:
-            tag = _registered_custom_tags[name](self, soup)
-            
-        else:
-            tag = soup.new_tag(name)
-        
-        if self.classnames:
-            tag['class'] = tag.get('class',[]) + self.classnames
-
-        for key,val in self.tag_options.items():
-            tag[key] = val
-
-        for key,val in kwargs.items():
-            tag[key] = val
-
-        if self.text:
-            # Make any markdown modifications
-            text = inline_markdown_parser(self.text)
-            html_text = bs4.BeautifulSoup(text,'html.parser')
-            tag.append(html_text)
-
-        return tag
-
 
 class section(object):
 
@@ -272,16 +152,12 @@ class section(object):
 ########################################################################
 
 if __name__ == "__main__":
-
     section_text = '''----
-@h1 (src='money' cash='true') .text-data
-    @h2 .bg-red
-        work it girl
-
-@h1 .text-data / @h2 .bg-red
-    work it girl
-    '''.strip()
+@h1 @h2
+hello nurse!
+'''
 
     S = section(section_text.split('\n'))
+    
     for line in S:
         print line

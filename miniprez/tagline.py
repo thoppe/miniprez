@@ -1,7 +1,12 @@
 import itertools
+import bs4
 import pyparsing as pyp
 from pyparsing import Word, Group, QuotedString
 from pyparsing import ZeroOrMore, OneOrMore, Optional
+from custom_tags import _registered_custom_tags
+from inline_markdown import inline_markdown_parser
+
+_soup = bs4.BeautifulSoup("","html.parser")
 
 class tagline(object):
     '''
@@ -17,7 +22,6 @@ class tagline(object):
 
         g_name = Word(pyp.alphanums+'-_')
         g_quote = QuotedString('"')|QuotedString("'")
-        #g_header = Word('----')+ZeroOrMore('-')
         g_header = Word('----')("name")+ZeroOrMore('-')
         
         g_option_token = Group( g_name("key") +
@@ -105,34 +109,46 @@ class tagline(object):
         vals = (getattr(self,x) for x in keys)
         return str(dict(zip(keys,vals)))
 
-    def build_tag(self, soup, **kwargs):
+    def build(self, **kwargs):
 
-        name = self.tag_name
-        if name in _registered_custom_tags:
-            tag = _registered_custom_tags[name](self, soup)
-            
-        else:
-            tag = soup.new_tag(name)
+        # Build the nested tags
         
-        if self.classnames:
-            tag['class'] = tag.get('class',[]) + self.classnames
+        blocks = []
+        for item in self.tags:
+            name = item["name"]
+            
+            if name in _registered_custom_tags:
+                tag = _registered_custom_tags[name](item, _soup)
+            else:
+                tag = _soup.new_tag(name)
 
-        for key,val in self.tag_options.items():
-            tag[key] = val
+            if item["classes"]:
+                tag['class'] = tag.get('class',[]) + item["classes"]
 
+            for key,val in item["options"].items():
+                tag[key] = val
+
+            blocks.append(tag)
+
+        # Only insert items into the outermost tag
         for key,val in kwargs.items():
-            tag[key] = val
+            blocks[0][key] = val
 
+        # Insert text into the deepest tag
         if self.text:
             # Make any markdown modifications
             text = inline_markdown_parser(self.text)
             html_text = bs4.BeautifulSoup(text,'html.parser')
-            tag.append(html_text)
+            blocks[-1].append(html_text)
 
-        return tag
+        # Nest the blocks
+        while len(blocks)>1:
+            blocks[-2].append(blocks.pop(-1))
+
+        return blocks[0]
 
 if __name__ == "__main__":
-    '''
+
     print tagline("---- .blue .purple")
     print tagline("----")
     print tagline("@h1(sky='orange' sun='set') .red .blue @h2 .dragons @h3(moon='blue') hi")
@@ -141,9 +157,15 @@ if __name__ == "__main__":
     print tagline(".blue .red moon")
     print tagline("hi")
     print tagline("").empty, tagline("hi").empty, tagline(".blue").empty
-    '''
-
     print tagline("  .baby").indent, tagline("baby").indent
+
+    T = tagline('@h1(sky="orange") @h2 @h3 hi')
+    print T.build(indent=2)
+
+    print tagline('@h2 @line').build()
+    print tagline('@background(src="www") .blue @h2 text').build()
+
+    
 
     
     

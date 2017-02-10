@@ -6,7 +6,6 @@ import pyparsing as pyp
 import custom_tags
 
 from tagline import tagline
-from custom_tags import _registered_custom_tags
 from inline_markdown import inline_markdown_parser
 
 _section_header_token = '----'

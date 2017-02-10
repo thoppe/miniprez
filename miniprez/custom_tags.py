@@ -5,7 +5,7 @@ Custom tags. Make sure you register new custom tags at the bottom.
 import bs4
 
 def _get_src(tagline):
-    opts = tagline.tag_options
+    opts = tagline["options"]
     for key in ["url","href","src"]:
         if key in opts:
             link = opts[key]
@@ -23,9 +23,6 @@ def background_video(tagline, soup):
     return tag
 
 def background(tagline, soup):
-    name = tagline.tag_name
-    assert(name == 'background')
-
     tag = soup.new_tag("span")
     tag["class"]  = ["background",]
     url = _get_src(tagline)
@@ -33,9 +30,6 @@ def background(tagline, soup):
     return tag
 
 def figure(tagline, soup):
-    name = tagline.tag_name
-    assert(name == 'figure')
-
     tag = soup.new_tag("figure")
     img = soup.new_tag("img")
     img['src'] = _get_src(tagline)
@@ -46,15 +40,9 @@ def figure(tagline, soup):
     
 
 def line(tagline, soup):
-    name = tagline.tag_name
-    assert(name == 'line')
-   
     return soup.new_tag("hr")
 
 def button(tagline, soup):
-    name = tagline.tag_name
-    assert(name == 'button')
-
     tag = soup.new_tag("a")
     tag["class"] = ["button",]
     tag["href"] = _get_src(tagline)
@@ -62,9 +50,6 @@ def button(tagline, soup):
     return tag
 
 def codeblock(tagline, soup):
-    name = tagline.tag_name
-    assert(name == 'codeblock')
-
     tag = soup.new_tag("pre")
     tag["class"] = ["prettyprint",]
     tag.string = tagline.text.replace('__CODE_BLOCK_SPACE','\n').strip()

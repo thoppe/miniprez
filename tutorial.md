@@ -7,8 +7,7 @@
   miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
 
 @footer
- .wrap
-  .span
+ .wrap @div .span
    .alignleft
      @button(href="https://github.com/thoppe/miniprez") .ghost ::github:: Project repo
    .alignright

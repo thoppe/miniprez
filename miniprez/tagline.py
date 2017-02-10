@@ -15,7 +15,7 @@ class tagline(object):
     '''
 
     def __init__(self, line):
-  
+
         self.line = line
 
         token = lambda c: pyp.Literal(c).suppress()
@@ -47,17 +47,7 @@ class tagline(object):
         
         grammar = Optional(g_format)('format') + pyp.restOfLine('text')
 
-        #self.tag_name = ""
-        #self.classnames = []
-        #self.tag_options = {}
-
         self.tags = None
-
-        '''
-
-        '''
-        #g_format_header.setParseAction(set_tagname_section)        
-        #g_format_tag.setParseAction(parse_format)
 
         try:
             res = grammar.parseString(line)
@@ -75,7 +65,7 @@ class tagline(object):
         
         for tag in res:
             
-            if tag.name == '----':
+            if len(tag.name)>=4 and tag.name[:4] == '----':
                 tag.name = 'section'
 
             # If classnames are used but name is empty
@@ -122,11 +112,17 @@ class tagline(object):
         # Build the nested tags
         
         blocks = []
-        for item in self.tags:
+        for k,item in enumerate(self.tags):
             name = item["name"]
+            if k == len(self.tags)-1:
+                item["text"] = self.text
             
             if name in _registered_custom_tags:
                 tag = _registered_custom_tags[name](item, _soup)
+
+                # Text may have changed, reflect this
+                self.text = item["text"]
+                
             else:
                 tag = _soup.new_tag(name)
 
@@ -161,6 +157,8 @@ class tagline(object):
         return blocks[0]
 
 if __name__ == "__main__":
+
+    print tagline("-----")
 
     '''
     print tagline("---- .blue .purple")

@@ -52,8 +52,9 @@ def button(tagline, soup):
 def codeblock(tagline, soup):
     tag = soup.new_tag("pre")
     tag["class"] = ["prettyprint",]
-    tag.string = tagline.text.replace('__CODE_BLOCK_SPACE','\n').strip()
-    tagline.text = ''
+
+    tag.string = tagline["text"].replace('__CODE_BLOCK_SPACE','\n').strip()
+    tagline["text"] = None
     
     return tag
 

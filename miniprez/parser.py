@@ -53,28 +53,31 @@ class tagline(object):
         self.classnames = []
         self.line = line
 
+        token = lambda c: pyp.Literal(c).suppress()
+
         g_name = pyp.Word(pyp.alphanums+'-_')
         g_quote = pyp.QuotedString('"')|pyp.QuotedString("'")
-        g_header = pyp.Literal('----')+pyp.ZeroOrMore('-').suppress()
+        g_header = token('----')+pyp.ZeroOrMore('-').suppress()
         
-        g_option_token = (g_name.setResultsName("key") +
-                          pyp.Literal("=").suppress() +
-                          (g_name|g_quote).setResultsName("value"))
+        g_option_token = (g_name("key") + token('=') +
+                          (g_name|g_quote)("value"))
+        
         g_option = pyp.nestedExpr(content=pyp.Group(g_option_token))
 
-        g_tag   = (pyp.Literal("@").suppress() +
-                   g_name.setResultsName('name') +
-                   pyp.Optional(g_option).setResultsName('options'))
+        g_tag   = (token('@') + g_name('name') +
+                   pyp.Optional(g_option)('options'))
                            
-        g_classname = (pyp.Literal(".").suppress() +
-                       g_name.setResultsName('name'))
+        g_classname = token('.') + g_name('name')
 
         g_format_header = g_header + pyp.ZeroOrMore(g_classname)
-        g_format_tag = g_tag + pyp.ZeroOrMore(g_classname)
+
+        g_format_named_tag = g_tag + pyp.ZeroOrMore(g_classname)
         g_format_div_tag = pyp.OneOrMore(g_classname)
-        g_format = g_format_header | g_format_tag | g_format_div_tag
         
-        grammar = pyp.Optional(g_format) + pyp.restOfLine.setResultsName('text')
+        
+        g_format = g_format_header | g_format_named_tag | g_format_div_tag
+        
+        grammar = pyp.Optional(g_format) + pyp.restOfLine('text')
 
         self.tag_name = None
         self.tag_options = {}
@@ -82,14 +85,14 @@ class tagline(object):
         def parse_tag(tag):
             options = {}
             if "options" in tag:
-                for item in tag["options"][0]:
-                    options[item['key']] = item['value']
+                for item in tag.options[0]:
+                    options[item.key] = item.value
 
-            self.tag_name = tag["name"]
+            self.tag_name = tag.name
             self.tag_options = options
             
         def parse_classname(item):
-            self.classnames.append(item['name'])
+            self.classnames.append(item.name)
 
         def set_tagname_section(x):
             self.tag_name = "section"
@@ -270,4 +273,15 @@ class section(object):
 
 if __name__ == "__main__":
 
-    print "add unit tests here please :)"
+    section_text = '''----
+@h1 (src='money' cash='true') .text-data
+    @h2 .bg-red
+        work it girl
+
+@h1 .text-data / @h2 .bg-red
+    work it girl
+    '''.strip()
+
+    S = section(section_text.split('\n'))
+    for line in S:
+        print line

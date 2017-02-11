@@ -6,12 +6,32 @@
 @p .text-intro 
   miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
 
-@footer
- .wrap @div .span
-   .alignleft
-     @button(href="https://github.com/thoppe/miniprez") .ghost ::github:: Project repo
-   .alignright
-     @button(href="https://twitter.com/metasemantic") .ghost ::twitter:: @metasemantic
+@footer @div .wrap @div .span
+ @button(href="https://github.com/thoppe/miniprez") .alignleft .ghost
+   ::github:: Project repo
+ @button(href="https://twitter.com/metasemantic") .ghost .alignright
+   ::twitter:: @metasemantic 
+
+----  .bg-black
+
+@h1 .text-landing The problem 
+
+.text-intro
+ @p I want simple and beautiful presentations. <br> 
+ @p Presentations that compile from text to interactive webpages. <br>
+    Presentations that seperate content from style like Markdown. <br>
+    Presentations that render mathematics and highlight code. 
+ @p Oh, and they should work well* on mobile too.
+
+@footer @div .alignright *just show me the content!
+
+---- .align-left .bg-white
+
+@div .wrap .size-50 
+
+  @h3 **The solution** <br> miniprez
+  @line
+  @p A python library written using pyparsing and Beautiful Soup that compiles text into a single-page html presentation with extra goodies. Emoji, font-awesome, LaTeX, and code highlighting are built in. Full-screen backgrounds and video can render behind the each screen. Slides are controlled with page-up and page-down and scrolled easily on mobile.
 
 ---- .align-left .bg-black
 @background(url="https://source.unsplash.com/F1dSr7I4AmY/") .dark
@@ -35,7 +55,9 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
     @h2 :computer: `code`
     @p `&&&`code&&&`` 
 
----- .align-left
+---- .align-left .bg-apple
+@background(url="https://source.unsplash.com/pmX9BkDDr_A/") .dark
+
 .text-landing Slide 3
 @h2 _emoji_
 Standard emoji and [font-awesome](http://fontawesome.io/)  

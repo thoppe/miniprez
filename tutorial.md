@@ -63,7 +63,7 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
 Standard emoji and [font-awesome](http://fontawesome.io/)  
 @line
 
- .grid .wrap
+.grid
   .column `:battery:`
     @h1 :battery:
   .column `:heart_eyes:`

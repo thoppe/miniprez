@@ -41,7 +41,6 @@ def file_iterator(f_md):
             yield line.rstrip()
 
 ########################################################################
-  
 
 class section(object):
 
@@ -92,13 +91,12 @@ class section(object):
         
         soup  = bs4.BeautifulSoup("",'html.parser')
         lines = iter(self)
-        
+
         # Parse the header
         z = lines.next().build(indent=-5)
         soup.append(z)
         
         for x in lines:
-            
             tag = x.build(indent=x.indent)
             name = x.primary_name
 
@@ -113,14 +111,23 @@ class section(object):
                 z.findParent('section').append(tag)
             
             elif x.indent > z["indent"]:
-                z.append(tag)
+                # Append to the deepest child
+                children = z.find_all()
+                if not children:
+                    z.append(tag)
+                else:
+                    children[-1].append(tag)
             
             elif x.indent == z["indent"]:
                 z.parent.append(tag)
-
-            elif x.indent < z["indent"]:
                 
-                while x.indent < z["indent"]:
+            elif x.indent < z["indent"]:
+
+                #print "HERE"
+                #print x
+                #print z
+                
+                while "indent" not in z.attrs or x.indent < z["indent"]:
                     z = z.parent
 
                 # Take one more step so we are on the parent
@@ -153,11 +160,10 @@ class section(object):
 
 if __name__ == "__main__":
     section_text = '''----
-    @p @h2 hello nurse!
-      @h3 swarmy
-    something smaller
-    '''
+@h1 .text-data @h2 .bg-red
+    work it girl
+'''
 
     S = section(section_text.split('\n'))
-    print S.soup
+    print S.soup.prettify()
 

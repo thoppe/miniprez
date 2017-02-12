@@ -18,3 +18,7 @@ build:
 
 watch:
 	make build
+
+commit:
+	git commit -a
+	git push

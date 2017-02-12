@@ -103,7 +103,7 @@ class tagline(object):
         return self.primary_name == "section"
 
     def __repr__(self):
-        keys = ("tags", "text")
+        keys = ("tags", "text", "indent")
         vals = (getattr(self,x) for x in keys)
         return str(dict(zip(keys,vals)))
 
@@ -159,8 +159,7 @@ class tagline(object):
 if __name__ == "__main__":
 
     print tagline("-----")
-
-    '''
+    
     print tagline("---- .blue .purple")
     print tagline("----")
     print tagline("@h1(sky='orange' sun='set') .red .blue @h2 .dragons @h3(moon='blue') hi")
@@ -177,5 +176,5 @@ if __name__ == "__main__":
     print tagline('@h2 @line').build()
     print tagline('@background(src="www") .blue @h2 text').build()
     print tagline('cars').build()
-    '''
+    
 

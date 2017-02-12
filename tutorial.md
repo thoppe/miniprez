@@ -17,11 +17,11 @@
 @h1 .text-landing The problem 
 
 .text-intro
- @p I want simple and beautiful presentations. <br> 
- @p Presentations that compile from text to interactive webpages. <br>
-    Presentations that seperate content from style like Markdown. <br>
-    Presentations that render mathematics and highlight code. 
- @p Oh, and they should work well* on mobile too.
+ + I want simple and beautiful presentations.
+ + Presentations that compile from text to interactive webpages.
+ + Presentations that seperate content from style like Markdown. 
+ + Presentations that render mathematics and highlight code.
+ <br> Oh, and they should work well* on mobile too.
 
 @footer @div .alignright *just show me the content!
 
@@ -78,8 +78,7 @@ Standard emoji and [font-awesome](http://fontawesome.io/)
 @h2 _math support_
 LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)  
 @line
-@h3
-  $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
+@h3 $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
 <br>
 `$$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$`
 
@@ -123,7 +122,7 @@ Embed any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 
 ----- .bg-apple
 
-@h1 .text-data Thanks, you!
+# .text-data Thanks, you!
 
 @footer
   @h4 Contribute at

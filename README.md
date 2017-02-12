@@ -6,6 +6,10 @@ Note: This is a live work-in-progress!
 
 For a tutorial see the [input](https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md) and the [slides](https://thoppe.github.io/miniprez/tutorial.html).
 
+### Usage
+
+Write the doc here.
+
 ### (upcoming) features!
 
 + [x] Basic inline markdown support (*, _, **, backticks, links)
@@ -15,18 +19,9 @@ For a tutorial see the [input](https://raw.githubusercontent.com/thoppe/miniprez
 + [x] Code blocks
 + [x] BG videos examples!
 + [x] Nested divs
-+ [ ] List support
++ [x] List support
 + [ ] Support for command line compilation
 + [ ] Embedding tools (convert project to monolith html)
 + [ ] Global options (font?)
 + [ ] Selectively load libraries (eg. font-awesome & katex) on use
 + [ ] Slide number url
-
-### known bugs and problems
-+ [ ] Extra space after markdown, ex. `*BOLD*!` becomes `BOLD !`
-+ [x] remove webkit animations from webslides
-+ [x] animation bug on mobile
-+ [x] support for page down and up
-+ [x] `<hr>` on `.bgapple` is the wrong color
-+ [x] Using inline markdown on first slide
-+ [x] `home` and `end` work properly

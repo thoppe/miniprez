@@ -5,7 +5,9 @@ all:
 	python miniprez/miniprez.py $(target).md
 
 clean:
-	rm -vf *~ $(target).html *.pyc
+	rm -vf *~ $(target).html
+	find . -name "*.pyc" | xargs -I {} rm -v {}
+	find . -name "*~" | xargs -I {} rm -v {}
 
 edit:
 	emacs $(target).md &

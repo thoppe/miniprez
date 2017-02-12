@@ -8,7 +8,33 @@ For a tutorial see the [input](https://raw.githubusercontent.com/thoppe/miniprez
 
 ### Usage
 
-Write the doc here.
+Write the docs here.
+
+Miniprez is a command-line tool that turns special markup into slides. All slides are separated by `----`. Hello world in miniprez looks like:
+
+    ----
+    Hello world.
+
+Let's add some style to it!
+
+    ----- 
+    @h1 .text-landing Hello world.
+
+The syntax to miniprez is pretty simple simple, each line is mostly independent of the others.
+The `@` symbol creates a new html element and the `.` applies a class to that element, thus the first line becomes `<h1 class="text-landing">Hello world.</h1>`.
+
+If you want tags to nest into each other, whitespace matters
+
+    @h1
+       This is big text.
+       @strong This is big bold text.
+
+If all you want to do is create a div with a class you don't need to explictly say `@div`, for example:
+
+    .text-landing Hello.
+
+gives `<div class="text-landing">Hello.</div>`. 
+       
 
 ### (upcoming) features!
 

@@ -29,9 +29,9 @@
 
 @div .wrap .size-50 
 
-  @h3 **The solution** <br> miniprez
+  @h1 .text-landing The solution: <br> miniprez
   @line
-  @p A python library written using pyparsing and Beautiful Soup that compiles text into a single-page html presentation with extra goodies. Emoji, font-awesome, LaTeX, and code highlighting are built in. Full-screen backgrounds and video can render behind the each screen. Slides are controlled with page-up and page-down and scrolled easily on mobile.
+  @p A [python library](https://github.com/thoppe/miniprez) written using [pyparsing](http://pyparsing.wikispaces.com/) and [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/). Miniprez compiles [text](tutorial.md) into a single-page html presentation  (like this one) with extra goodies. Emoji, font-awesome, LaTeX, and code highlighting are built in. Full-screen backgrounds and video can render behind the each screen. Slides are controlled with page-up and page-down and scrolled easily on mobile.
 
 ---- .align-left .bg-black
 @background(url="https://source.unsplash.com/F1dSr7I4AmY/") .dark

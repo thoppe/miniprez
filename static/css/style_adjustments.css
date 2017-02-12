@@ -16,6 +16,12 @@ code {
     display: inline-table;
 }
 
+ul.markdownlist {
+    padding: 0;
+    margin-left: 0;
+    list-style: none;
+}
+
 /* desert scheme ported from vim to google prettify */
 pre.prettyprint {
     display: block;

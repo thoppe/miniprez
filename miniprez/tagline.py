@@ -1,8 +1,8 @@
 import itertools
 import bs4
 import pyparsing as pyp
-from pyparsing import Word, Group, QuotedString
-from pyparsing import ZeroOrMore, OneOrMore, Optional
+from pyparsing import Word, Group, QuotedString, Combine
+from pyparsing import ZeroOrMore, OneOrMore, Optional, Literal
 from custom_tags import _registered_custom_tags
 from inline_markdown import inline_markdown_parser
 
@@ -18,7 +18,7 @@ class tagline(object):
 
         self.line = line
 
-        token = lambda c: pyp.Literal(c).suppress()
+        token = lambda c: Literal(c).suppress()
 
         g_name = Word(pyp.alphanums+'-_')
         g_quote = QuotedString('"')|QuotedString("'")
@@ -32,6 +32,10 @@ class tagline(object):
 
         g_tag   = (token('@') + g_name('name') +
                    Optional(g_option('options')))
+
+        g_MD_tags  = Combine(OneOrMore('#')|Literal('+'))('name')
+        
+        g_MD_tags += Optional(g_option('options'))
                        
         g_class = token('.') + g_name('name')
 
@@ -39,10 +43,13 @@ class tagline(object):
 
         g_format_header = g_header + g_classlist
         g_format_named_tag = g_tag + g_classlist
+        g_format_MD_tag = g_MD_tags + g_classlist
         g_format_div_tag = Group(OneOrMore(g_class))('classes')
 
-        g_format_tag = Group(g_format_named_tag | g_format_div_tag)
-               
+        g_format_tag = Group(g_format_named_tag|
+                             g_format_div_tag|
+                             g_format_MD_tag)
+        
         g_format = Group(Group(g_format_header)|OneOrMore(g_format_tag))
         
         grammar = Optional(g_format)('format') + pyp.restOfLine('text')
@@ -67,6 +74,12 @@ class tagline(object):
             
             if len(tag.name)>=4 and tag.name[:4] == '----':
                 tag.name = 'section'
+
+            elif set(tag.name)==set('#'):
+                tag.name = 'h{}'.format(len(tag.name))
+
+            elif tag.name=='+':
+                tag.name = 'li'
 
             # If classnames are used but name is empty
             # default to a div
@@ -176,6 +189,12 @@ class tagline(object):
         return block
 
 if __name__ == "__main__":
+
+    print tagline("+ list item").build()
+
+    print tagline("@h1 big dog")
+    print tagline("# big dog").build()
+    print tagline("### little dog").build()
 
     print tagline("This is the **end**. People.").build()
     print tagline("-----")    

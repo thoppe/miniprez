@@ -122,11 +122,6 @@ class section(object):
                 z.parent.append(tag)
                 
             elif x.indent < z["indent"]:
-
-                #print "HERE"
-                #print x
-                #print z
-                
                 while "indent" not in z.attrs or x.indent < z["indent"]:
                     z = z.parent
 

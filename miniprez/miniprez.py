@@ -28,8 +28,10 @@ if __name__ == "__main__":
 
     f_html = '.'.join(os.path.basename(f_md).split('.')[:-1]) + '.html'
     with codecs.open(f_html,'w','utf-8') as FOUT:
-        output = unicode(base.prettify())
+        #output = unicode(base.prettify())
+        output = unicode(base)
+
         FOUT.write(output)
 
-    print slides.prettify().encode('utf-8')
+    #print slides.prettify().encode('utf-8')
 

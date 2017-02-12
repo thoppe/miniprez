@@ -154,12 +154,31 @@ class tagline(object):
         while len(blocks)>1:
             blocks[-2].append(blocks.pop(-1))
 
-        return blocks[0]
+
+        block = blocks[0]
+
+        # If there aren't any inner sections, we are done
+        if block.find() == None:
+            return block
+
+        # Othwerwise, fix punctuation errors
+        punctuation = ".,!/%;:'\""
+        
+        for x in block.find():
+            if type(x) is not bs4.element.NavigableString:
+                continue
+            if len(x)<=1:
+                continue
+            if x[0] == ' ' and x[1] in punctuation:
+                xs = bs4.element.NavigableString(x.string[1:])
+                x.replace_with(xs)
+        
+        return block
 
 if __name__ == "__main__":
 
-    print tagline("-----")
-    
+    print tagline("This is the **end**. People.").build()
+    print tagline("-----")    
     print tagline("---- .blue .purple")
     print tagline("----")
     print tagline("@h1(sky='orange' sun='set') .red .blue @h2 .dragons @h3(moon='blue') hi")
@@ -174,7 +193,10 @@ if __name__ == "__main__":
     print T.build(indent=2)
 
     print tagline('@h2 @line').build()
-    print tagline('@background(src="www") .blue @h2 text').build()
     print tagline('cars').build()
-    
+
+    # This fails!
+    #print tagline('@background(src="www") .blue @h2 dogs').build()
+
+
 

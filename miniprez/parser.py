@@ -145,7 +145,7 @@ class section(object):
             
             if parent.name not in ['ol','ul']:
                 ul = soup.new_tag('ul')
-                ul['class'] = ['flexbox',]
+                ul['class'] = ['markdownlist',]
                 
                 tags = []
                 for x in tag.find_next_siblings('li'):

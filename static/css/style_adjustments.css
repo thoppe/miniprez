@@ -22,6 +22,12 @@ ul.markdownlist {
     list-style: none;
 }
 
+ul.markdownlist>li {
+    margin-left: 0;
+}
+
+
+
 /* desert scheme ported from vim to google prettify */
 pre.prettyprint {
     display: block;

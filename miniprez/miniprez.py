@@ -2,6 +2,7 @@ import sys
 import bs4
 import os
 import codecs
+import argparse
 from parser import file_iterator, section_iterator, section
 
 __location__ = os.path.realpath(os.path.join(
@@ -12,7 +13,22 @@ f_base_html = os.path.join(os.path.dirname(__location__),
 
 if __name__ == "__main__":
 
-    f_md = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input",  type=str, help="Input miniprez file")
+    parser.add_argument("--output", type=str,
+                            help="Output html file, defaults to [input].html")
+    parser.add_argument("f_input", type=str, help=argparse.SUPPRESS)
+    
+    
+    args = parser.parse_args()
+    f_md = args.input if args.input else args.f_input
+
+    if args.output is None:
+        args.output = '.'.join(os.path.basename(f_md).split('.')[:-1])+'.html'
+
+    if not os.path.exists(f_md):
+        raise SyntaxError("{} not found".format(f_md))
+    
     F = file_iterator(f_md)
 
     with open(f_base_html) as FIN:
@@ -26,8 +42,7 @@ if __name__ == "__main__":
         soup.section["class"] = soup.section.get('class',[]) + ["slide",]
         slides.append(soup)
 
-    f_html = '.'.join(os.path.basename(f_md).split('.')[:-1]) + '.html'
-    with codecs.open(f_html,'w','utf-8') as FOUT:
+    with codecs.open(args.output,'w','utf-8') as FOUT:
         #output = unicode(base.prettify())
         output = unicode(base)
 

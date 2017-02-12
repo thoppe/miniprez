@@ -1,5 +1,6 @@
 import itertools
 import bs4
+import copy
 import re
 import string
 import pyparsing as pyp
@@ -136,6 +137,23 @@ class section(object):
         # Remove all the indent tags
         for tag in soup.find_all(True, indent=True):
             del tag.attrs["indent"]
+
+        # If there are any li elements without a proper parent ul,ol
+        # wrap them in one
+        for tag in soup.find_all('li'):
+            parent = tag.parent
+            
+            if parent.name not in ['ol','ul']:
+                ul = soup.new_tag('ul')
+                ul['class'] = ['flexbox',]
+                
+                tags = []
+                for x in tag.find_next_siblings('li'):
+                    ul.append(x.extract())
+                ul.insert(0, copy.copy(tag) ) 
+             
+                tag.replaceWith(ul)
+
 
         # Remove all the text tags and replace with a string
         #for tag in soup.find_all("text"):

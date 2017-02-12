@@ -33,19 +33,34 @@ If all you want to do is create a div with a class you don't need to explictly s
 
     .text-landing Hello.
 
-gives `<div class="text-landing">Hello.</div>`. 
-       
+gives `<div class="text-landing">Hello.</div>`.
+
+Inline markdown shortcuts that work too,
+
+    This is **bold**, this is _italic_, this is `code`, this is a [link](www.github.com/thoppe).
+
+The markdown is enchanced with [emoji](http://www.webpagefx.com/tools/emoji-cheat-sheet/), [font-awesome](http://fontawesome.io/icons/) and [math](https://en.wikibooks.org/wiki/LaTeX/Mathematics),
+
+    This is a :smile: and this is ::twitter:: and and equation $$(a+b)^2$$.
+
+
+### Libraries used:
+
++ [webslides](https://github.com/jlantunez/webslides): Custom CSS 
++ [KaTeX](https://github.com/Khan/KaTeX): Javascript math rendering
++ [code prettify](https://github.com/google/code-prettify): Syntax highlighting 
+
++ [pyparsing](http://pyparsing.wikispaces.com/)
++ [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 
 ### (upcoming) features!
 
-+ [x] Basic inline markdown support (*, _, **, backticks, links)
-+ [x] Emojis and font awesome  (:smile:)
 + [x] Custom tags (background, background_video, line, button, figure)
-+ [x] [KaTeX](https://github.com/Khan/KaTeX) equations!
 + [x] Code blocks
 + [x] BG videos examples!
 + [x] Nested divs
 + [x] List support
++ [ ] README documentation.
 + [ ] Support for command line compilation
 + [ ] Embedding tools (convert project to monolith html)
 + [ ] Global options (font?)

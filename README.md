@@ -58,14 +58,13 @@ Element arguments can be added with like this
 
 With this syntax there are some additional elements miniprez has added
 
-| function name  | description  | example  |
+| function name  | example | options
 |---|---|---|
-| `@background`        | background image | ...  |
-| `@background_video`  | full screen background video  | ...  |
-| `@line`  | Horzontial  | Shortcut for hr  |
+| `@background`  | @background(url="https://source.unsplash.com/4mta-DkJUAg") | `.light` `.dark` |
+| `@background_video`  | @background_video(url="https://cdn.shutterstock.com/...") | |
+| `@button`  |  @button(href="https://github.com/thoppe/miniprez") | `.ghost` text after  |
 | `@figure`  | Image  | ...  |
-| `@button`  | Pretty button  | ...  |
-
+| `@line`  | Horzontial  | Shortcut for hr  |
 
 
 ### Libraries used:

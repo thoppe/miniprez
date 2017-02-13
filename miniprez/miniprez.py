@@ -1,8 +1,19 @@
+"""
+Usage: miniprez.py INPUT [-h] [-o OUTPUT|-t] [--pretty]
+
+-h --help     show this help
+-o, --output  FILE specify output file [default: INPUT.html]
+-t, --term    Output just the slides to stdout 
+--pretty      Pretty-print the html output with Beautiful Soup [default: True]
+--quiet       print less text
+--verbose     print more text
+"""
+
 import sys
 import bs4
 import os
 import codecs
-import argparse
+from docopt import docopt
 from parser import file_iterator, section_iterator, section
 
 __location__ = os.path.realpath(os.path.join(
@@ -13,22 +24,16 @@ f_base_html = os.path.join(os.path.dirname(__location__),
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--input",  type=str, help="Input miniprez file")
-    parser.add_argument("--output", type=str,
-                            help="Output html file, defaults to [input].html")
-    parser.add_argument("f_input", type=str, help=argparse.SUPPRESS)
-    
-    
-    args = parser.parse_args()
-    f_md = args.input if args.input else args.f_input
-
-    if args.output is None:
-        args.output = '.'.join(os.path.basename(f_md).split('.')[:-1])+'.html'
+    args = docopt(__doc__)
+    f_md = args["INPUT"]
 
     if not os.path.exists(f_md):
-        raise SyntaxError("{} not found".format(f_md))
-    
+        raise IOError("{} not found".format(f_md))
+        
+    if args["OUTPUT"] is None:
+        f_base = os.path.basename(f_md)
+        args["OUTPUT"] = '.'.join(f_base.split('.')[:-1])+'.html'
+
     F = file_iterator(f_md)
 
     with open(f_base_html) as FIN:
@@ -42,11 +47,18 @@ if __name__ == "__main__":
         soup.section["class"] = soup.section.get('class',[]) + ["slide",]
         slides.append(soup)
 
-    with codecs.open(args.output,'w','utf-8') as FOUT:
-        #output = unicode(base.prettify())
+
+    if args["--pretty"]:
+        output = unicode(base.prettify())
+    else:
         output = unicode(base)
 
-        FOUT.write(output)
+    if args["--term"]:
+        print (slides.prettify().encode('utf-8'))
+        
+    else:
+        with codecs.open(args["OUTPUT"],'w','utf-8') as FOUT:
+            FOUT.write(output)
+        print ("Output written to {OUTPUT}.".format(**args))
 
-    #print slides.prettify().encode('utf-8')
 

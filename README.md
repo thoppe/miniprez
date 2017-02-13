@@ -3,9 +3,13 @@
 Dead simple markup to web-friendly presentations that look great on mobile and on the big screen.
 For a live demo see the tutorial [input](https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md) and the [slides](https://thoppe.github.io/miniprez/tutorial.html).
 
-### Usage
-
 Miniprez is a command-line tool that turns special markup into slides.
+Create a file called `hello.md` with the following examples to follow along.
+Run `miniprez hello.md` to create a file named `hello.html`.
+View `hello.html` in your web-browser and make sure to refresh each time you re-compile your slides!
+
+### Tutorial
+
 All slides are separated by `----`. Hello world in miniprez looks like:
 
     ----
@@ -83,7 +87,6 @@ With this syntax there are some additional elements miniprez has added
 + [x] BG videos examples!
 + [x] Nested divs
 + [x] List support
-+ [ ] README documentation.
 + [ ] Support for command line compilation
 + [ ] Embedding tools (convert project to monolith html)
 + [ ] Global options (font?)

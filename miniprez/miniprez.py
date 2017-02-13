@@ -1,13 +1,13 @@
 #! /usr/bin/env python
 """
-Usage: miniprez.py INPUT [-h] [-o OUTPUT|-t] [--condense]
+Usage: miniprez.py INPUT [-o OUTPUT|-t] [--condense] [--nocopy] [--verbose]
 
--h --help     show this help
+-h --help     Show this help
 -o, --output  FILE specify output file [default: INPUT.html]
 -t, --term    Output just the slides to stdout 
 --condense    Don't pretty-print the output [default: False]
---quiet       print less text
---verbose     print more text
+--nocopy      Don't copy the static files: css, js, etc [default: False]
+--verbose     Print more text [default: False]
 """
 
 import sys
@@ -16,6 +16,7 @@ import os
 import codecs
 from docopt import docopt
 from parser import file_iterator, section_iterator, section
+from build_env import build_environment
 
 __location__ = os.path.realpath(os.path.join(
     os.getcwd(), os.path.dirname(__file__)))
@@ -36,6 +37,10 @@ if __name__ == "__main__":
         args["OUTPUT"] = '.'.join(f_base.split('.')[:-1])+'.html'
 
     F = file_iterator(f_md)
+
+    if not args["--nocopy"]:
+        if build_environment(**args):
+            print("Created environment in ./static")
 
     with open(f_base_html) as FIN:
         raw = FIN.read()
@@ -62,6 +67,6 @@ if __name__ == "__main__":
             output = base.prettify()
         
         FOUT.write(output)
-        print ("Output written to {OUTPUT}.".format(**args))
+        print ("Output written to {OUTPUT}".format(**args))
 
 

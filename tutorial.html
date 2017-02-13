@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns#">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<!-- 
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <!-- 
       Hi you.
 
       Feel free to edit the html here, but minislides was
@@ -15,77 +15,518 @@
       Thanks, you.
       @metasemantic
     -->
-<!-- SEO -->
-<title>miniprez: Simple, beautiful web presentations</title>
-<meta content="&lt;Miniprez: Simple, beautiful web presentations" name="description"/>
-<!-- URL CANONICAL -->
-<!-- <link rel="canonical" href="http://your-url.com/"> -->
-<!-- KaTeX imports -->
-<link href="static/katex/katex.min.css" rel="stylesheet"/>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet"/>
-<!-- CSS Base -->
-<link href="static/css/webslides_base.css" media="all" rel="stylesheet" type="text/css"/>
-<!-- CSS Colors -->
-<link href="static/css/webslides_colors.css" media="all" rel="stylesheet" type="text/css"/>
-<!-- JavaScript code prettifier from Google -->
-<script src="static/js/run_prettify.js"></script>
-<!-- Font-awesome CSS -->
-<link href="static/css/font-awesome.min.css " rel="stylesheet"/>
-<!-- miniprez style adjustments -->
-<link href="static/css/style_adjustments.css" rel="stylesheet"/>
-<!-- SOCIAL CARDS (ADD YOUR INFO) -->
-<!-- FACEBOOK -->
-<meta content="http://your-url.com/" property="og:url"/> <!-- YOUR URL -->
-<meta content="article" property="og:type"/>
-<meta content="WebSlides - Making HTML Presentations Easy" property="og:title"/> <!-- EDIT -->
-<meta content="WebSlides is about telling stories beautifully. Just the essential features. Good karma." property="og:description"/> <!-- EDIT -->
-<meta content="2017-01-04T17:20:50" property="og:updated_time"/> <!-- EDIT -->
-<meta content="static/images/share-webslides.jpg" property="og:image"/> <!-- EDIT -->
-<!-- TWITTER -->
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="@metasemantic" name="twitter:site"/> <!-- EDIT -->
-<meta content="@metasemantic" name="twitter:creator"/> <!-- EDIT -->
-<meta content="minipres - ..." name="twitter:title"/> <!-- EDIT -->
-<meta content="..." name="twitter:description"/> <!-- EDIT -->
-<meta content="static/images/share-webslides.jpg" name="twitter:image"/> <!-- EDIT -->
-<!-- FAVICONS -->
-<link href="static/images/favicons/favicon.png" rel="shortcut icon" sizes="16x16"/>
-<link href="static/images/favicons/favicon-32.png" rel="shortcut icon" sizes="32x32"/>
-<link href="static/images/favicons/favicon-76.png" rel="apple-touch-icon icon" sizes="76x76"/>
-<link href="static/images/favicons/favicon-120.png" rel="apple-touch-icon icon" sizes="120x120"/>
-<link href="static/images/favicons/favicon-152.png" rel="apple-touch-icon icon" sizes="152x152"/>
-<link href="static/images/favicons/favicon-180.png" rel="apple-touch-icon icon" sizes="180x180"/>
-<link href="static/images/favicons/favicon-192.png" rel="apple-touch-icon icon" sizes="192x192"/>
-<!-- Android -->
-<meta content="yes" name="mobile-web-app-capable"/>
-<meta content="#333333" name="theme-color"/>
-</head>
-<body>
-<main role="main">
-<article id="minislides">
-<!-- Content will be auto filled here -->
-<section class="aligncenter bg-white slide" id="slide-number-1"><span class="background dark" style="background-image:url('https://source.unsplash.com/4mta-DkJUAg')"></span><div class="wrap"><h3 class="text-data"><text><strong>miniprez</strong></text></h3><h4><text>Beautiful presentations in minimalist format <br/></text></h4><p class="text-intro"><text>miniprez is a static, mobile-friendly version of <a href="https://github.com/jlantunez/webslides">webslides</a></text></p></div><footer><div class="wrap"><div class="span"><a class="button alignleft ghost" href="https://github.com/thoppe/miniprez"><text><i aria-hidden="true" class="fa fa-github"></i> Project repo</text></a><a class="button ghost alignright" href="https://twitter.com/metasemantic"><text><i aria-hidden="true" class="fa fa-twitter"></i> @metasemantic</text></a></div></div></footer></section><section class="bg-black slide" id="slide-number-2"><h1 class="text-landing"><text>The problem</text></h1><div class="text-intro"><ul class="markdownlist"><li><text>I want simple and beautiful presentations.</text></li><li><text>Presentations that compile from text to interactive webpages.</text></li><li><text>Presentations that seperate content from style like Markdown.</text></li><li><text>Presentations that render mathematics and highlight code.</text></li></ul><text><br> Oh, and they should work well* on mobile too.</br></text></div><footer><div class="alignright"><text>*just show me the content!</text></div></footer></section><section class="align-left bg-white slide" id="slide-number-3"><div class="wrap size-50"><h1 class="text-landing"><text>The solution: <br> miniprez</br></text></h1><hr/><p><text>A <a href="https://github.com/thoppe/miniprez">python library</a> written using <a href="http://pyparsing.wikispaces.com/">pyparsing</a> and <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful Soup</a> . Miniprez compiles <a href="tutorial.md">text</a> into a single-page html presentation (like this one) with extra goodies. Emoji, font-awesome, LaTeX, and code highlighting are built in. Full-screen backgrounds and video can render behind the each screen. Slides are controlled with page-up and page-down and scrolled easily on mobile.</text></p></div></section><section class="align-left bg-black slide" id="slide-number-4"><span class="background dark" style="background-image:url('https://source.unsplash.com/F1dSr7I4AmY/')"></span><div class="wrap"><div class="text-landing text-content"><text><em>Slide 2</em></text></div><h2><text><em>simple markdown support</em></text></h2><text>Basic <a href="https://daringfireball.net/projects/markdown/syntax">Markdown</a> with tweaks!</text><hr><div class="grid wrap"><div class="column"><h2><text>💪 <strong>bold</strong></text></h2><p><text><code>**text**</code></text></p></div><div class="column"><h2><text>🔥 <strong style="color:#c23">fire</strong></text></h2><p><text><code>*text*</code></text></p></div><div class="column"><h2><text>☁ <em>emph</em></text></h2><p><text><code>_text_</code></text></p></div><div class="column"><h2><text>💻 <code>code</code></text></h2><p><text><code>`code`</code></text></p></div></div></hr></div></section><section class="align-left bg-apple slide" id="slide-number-5"><span class="background dark" style="background-image:url('https://source.unsplash.com/pmX9BkDDr_A/')"></span><div class="wrap"><div class="text-landing"><text>Slide 3</text></div><h2><text><em>emoji</em></text></h2><text>Standard emoji and <a href="http://fontawesome.io/">font-awesome</a></text><hr/><div class="grid"><div class="column"><text><code>:battery:</code><h1><text>🔋</text></h1></text></div><div class="column"><text><code>:heart_eyes:</code><h1><text>😍</text></h1></text></div><div class="column"><text><code>::meetup::</code><h1><text><i aria-hidden="true" class="fa fa-meetup"></i></text></h1></text></div><div class="column"><text><code>::ra::</code><h1><text><i aria-hidden="true" class="fa fa-ra"></i></text></h1></text></div></div></div></section><section class="bg-apple align-left slide" id="slide-number-6"><div class="text-landing"><text>Slide 4</text></div><h2><text><em>math support</em></text></h2><text>LaTeX rendered inline with <a href="https://github.com/Khan/KaTeX">KaTex</a></text><hr/><h3><text><div class="equation" data-expr="P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}"></div></text></h3><text><br/></text><text><code>$$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$</code></text></section><section class="align-left slide" id="slide-number-7"><div class="text-landing"><text>Slide 5</text></div><h2><text><em>pretty code blocks</em></text></h2><text>Syntax highlighting Google's <a href="https://github.com/google/code-prettify">code prettify</a></text><hr/><pre class="prettyprint">sort [] = []
+  <!-- SEO -->
+  <title>
+   miniprez: Simple, beautiful web presentations
+  </title>
+  <meta content="&lt;Miniprez: Simple, beautiful web presentations" name="description"/>
+  <!-- URL CANONICAL -->
+  <!-- <link rel="canonical" href="http://your-url.com/"> -->
+  <!-- KaTeX imports -->
+  <link href="static/katex/katex.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet"/>
+  <!-- CSS Base -->
+  <link href="static/css/webslides_base.css" media="all" rel="stylesheet" type="text/css"/>
+  <!-- CSS Colors -->
+  <link href="static/css/webslides_colors.css" media="all" rel="stylesheet" type="text/css"/>
+  <!-- JavaScript code prettifier from Google -->
+  <script src="static/js/run_prettify.js">
+  </script>
+  <!-- Font-awesome CSS -->
+  <link href="static/css/font-awesome.min.css " rel="stylesheet"/>
+  <!-- miniprez style adjustments -->
+  <link href="static/css/style_adjustments.css" rel="stylesheet"/>
+  <!-- SOCIAL CARDS (ADD YOUR INFO) -->
+  <!-- FACEBOOK -->
+  <meta content="http://your-url.com/" property="og:url"/>
+  <!-- YOUR URL -->
+  <meta content="article" property="og:type"/>
+  <meta content="WebSlides - Making HTML Presentations Easy" property="og:title"/>
+  <!-- EDIT -->
+  <meta content="WebSlides is about telling stories beautifully. Just the essential features. Good karma." property="og:description"/>
+  <!-- EDIT -->
+  <meta content="2017-01-04T17:20:50" property="og:updated_time"/>
+  <!-- EDIT -->
+  <meta content="static/images/share-webslides.jpg" property="og:image"/>
+  <!-- EDIT -->
+  <!-- TWITTER -->
+  <meta content="summary_large_image" name="twitter:card"/>
+  <meta content="@metasemantic" name="twitter:site"/>
+  <!-- EDIT -->
+  <meta content="@metasemantic" name="twitter:creator"/>
+  <!-- EDIT -->
+  <meta content="minipres - ..." name="twitter:title"/>
+  <!-- EDIT -->
+  <meta content="..." name="twitter:description"/>
+  <!-- EDIT -->
+  <meta content="static/images/share-webslides.jpg" name="twitter:image"/>
+  <!-- EDIT -->
+  <!-- FAVICONS -->
+  <link href="static/images/favicons/favicon.png" rel="shortcut icon" sizes="16x16"/>
+  <link href="static/images/favicons/favicon-32.png" rel="shortcut icon" sizes="32x32"/>
+  <link href="static/images/favicons/favicon-76.png" rel="apple-touch-icon icon" sizes="76x76"/>
+  <link href="static/images/favicons/favicon-120.png" rel="apple-touch-icon icon" sizes="120x120"/>
+  <link href="static/images/favicons/favicon-152.png" rel="apple-touch-icon icon" sizes="152x152"/>
+  <link href="static/images/favicons/favicon-180.png" rel="apple-touch-icon icon" sizes="180x180"/>
+  <link href="static/images/favicons/favicon-192.png" rel="apple-touch-icon icon" sizes="192x192"/>
+  <!-- Android -->
+  <meta content="yes" name="mobile-web-app-capable"/>
+  <meta content="#333333" name="theme-color"/>
+ </head>
+ <body>
+  <main role="main">
+   <article id="minislides">
+    <!-- Content will be auto filled here -->
+<section class="aligncenter bg-white slide" id="slide-number-1">
+ <span class="background dark" style="background-image:url('https://source.unsplash.com/4mta-DkJUAg')">
+ </span>
+ <div class="wrap">
+  <h3 class="text-data">
+   <text>
+    <strong>
+     miniprez
+    </strong>
+   </text>
+  </h3>
+  <h4>
+   <text>
+    Beautiful presentations in minimalist format
+    <br/>
+   </text>
+  </h4>
+  <p class="text-intro">
+   <text>
+    miniprez is a static, mobile-friendly version of
+    <a href="https://github.com/jlantunez/webslides">
+     webslides
+    </a>
+   </text>
+  </p>
+ </div>
+ <footer>
+  <div class="wrap">
+   <div class="span">
+    <a class="button alignleft ghost" href="https://github.com/thoppe/miniprez">
+     <text>
+      <i aria-hidden="true" class="fa fa-github">
+      </i>
+      Project repo
+     </text>
+    </a>
+    <a class="button ghost alignright" href="https://twitter.com/metasemantic">
+     <text>
+      <i aria-hidden="true" class="fa fa-twitter">
+      </i>
+      @metasemantic
+     </text>
+    </a>
+   </div>
+  </div>
+ </footer>
+</section><section class="bg-black slide" id="slide-number-2">
+ <h1 class="text-landing">
+  <text>
+   The problem
+  </text>
+ </h1>
+ <div class="text-intro">
+  <ul class="markdownlist">
+   <li>
+    <text>
+     I want simple and beautiful presentations.
+    </text>
+   </li>
+   <li>
+    <text>
+     Presentations that compile from text to interactive webpages.
+    </text>
+   </li>
+   <li>
+    <text>
+     Presentations that seperate content from style like Markdown.
+    </text>
+   </li>
+   <li>
+    <text>
+     Presentations that render mathematics and highlight code.
+    </text>
+   </li>
+  </ul>
+  <text>
+   <br>
+    Oh, and they should work well* on mobile too.
+   </br>
+  </text>
+ </div>
+ <footer>
+  <div class="alignright">
+   <text>
+    *just show me the content!
+   </text>
+  </div>
+ </footer>
+</section><section class="align-left bg-white slide" id="slide-number-3">
+ <div class="wrap size-50">
+  <h1 class="text-landing">
+   <text>
+    The solution:
+    <br>
+     miniprez
+    </br>
+   </text>
+  </h1>
+  <hr/>
+  <p>
+   <text>
+    A
+    <a href="https://github.com/thoppe/miniprez">
+     python library
+    </a>
+    written using
+    <a href="http://pyparsing.wikispaces.com/">
+     pyparsing
+    </a>
+    and
+    <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">
+     Beautiful Soup
+    </a>
+    . Miniprez compiles
+    <a href="tutorial.md">
+     text
+    </a>
+    into a single-page html presentation (like this one) with extra goodies. Emoji, font-awesome, LaTeX, and code highlighting are built in. Full-screen backgrounds and video can render behind the each screen. Slides are controlled with page-up and page-down and scrolled easily on mobile.
+   </text>
+  </p>
+ </div>
+</section><section class="align-left bg-black slide" id="slide-number-4">
+ <span class="background dark" style="background-image:url('https://source.unsplash.com/F1dSr7I4AmY/')">
+ </span>
+ <div class="wrap">
+  <div class="text-landing text-content">
+   <text>
+    <em>
+     Slide 2
+    </em>
+   </text>
+  </div>
+  <h2>
+   <text>
+    <em>
+     simple markdown support
+    </em>
+   </text>
+  </h2>
+  <text>
+   Basic
+   <a href="https://daringfireball.net/projects/markdown/syntax">
+    Markdown
+   </a>
+   with tweaks!
+  </text>
+  <hr>
+   <div class="grid wrap">
+    <div class="column">
+     <h2>
+      <text>
+       💪
+       <strong>
+        bold
+       </strong>
+      </text>
+     </h2>
+     <p>
+      <text>
+       <code>
+        **text**
+       </code>
+      </text>
+     </p>
+    </div>
+    <div class="column">
+     <h2>
+      <text>
+       🔥
+       <strong style="color:#c23">
+        fire
+       </strong>
+      </text>
+     </h2>
+     <p>
+      <text>
+       <code>
+        *text*
+       </code>
+      </text>
+     </p>
+    </div>
+    <div class="column">
+     <h2>
+      <text>
+       ☁
+       <em>
+        emph
+       </em>
+      </text>
+     </h2>
+     <p>
+      <text>
+       <code>
+        _text_
+       </code>
+      </text>
+     </p>
+    </div>
+    <div class="column">
+     <h2>
+      <text>
+       💻
+       <code>
+        code
+       </code>
+      </text>
+     </h2>
+     <p>
+      <text>
+       <code>
+        `code`
+       </code>
+      </text>
+     </p>
+    </div>
+   </div>
+  </hr>
+ </div>
+</section><section class="align-left bg-apple slide" id="slide-number-5">
+ <span class="background dark" style="background-image:url('https://source.unsplash.com/pmX9BkDDr_A/')">
+ </span>
+ <div class="wrap">
+  <div class="text-landing">
+   <text>
+    Slide 3
+   </text>
+  </div>
+  <h2>
+   <text>
+    <em>
+     emoji
+    </em>
+   </text>
+  </h2>
+  <text>
+   Standard emoji and
+   <a href="http://fontawesome.io/">
+    font-awesome
+   </a>
+  </text>
+  <hr/>
+  <div class="grid">
+   <div class="column">
+    <text>
+     <code>
+      :battery:
+     </code>
+     <h1>
+      <text>
+       🔋
+      </text>
+     </h1>
+    </text>
+   </div>
+   <div class="column">
+    <text>
+     <code>
+      :heart_eyes:
+     </code>
+     <h1>
+      <text>
+       😍
+      </text>
+     </h1>
+    </text>
+   </div>
+   <div class="column">
+    <text>
+     <code>
+      ::meetup::
+     </code>
+     <h1>
+      <text>
+       <i aria-hidden="true" class="fa fa-meetup">
+       </i>
+      </text>
+     </h1>
+    </text>
+   </div>
+   <div class="column">
+    <text>
+     <code>
+      ::ra::
+     </code>
+     <h1>
+      <text>
+       <i aria-hidden="true" class="fa fa-ra">
+       </i>
+      </text>
+     </h1>
+    </text>
+   </div>
+  </div>
+ </div>
+</section><section class="bg-apple align-left slide" id="slide-number-6">
+ <div class="text-landing">
+  <text>
+   Slide 4
+  </text>
+ </div>
+ <h2>
+  <text>
+   <em>
+    math support
+   </em>
+  </text>
+ </h2>
+ <text>
+  LaTeX rendered inline with
+  <a href="https://github.com/Khan/KaTeX">
+   KaTex
+  </a>
+ </text>
+ <hr/>
+ <h3>
+  <text>
+   <div class="equation" data-expr="P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}">
+   </div>
+  </text>
+ </h3>
+ <text>
+  <br/>
+ </text>
+ <text>
+  <code>
+   $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
+  </code>
+ </text>
+</section><section class="align-left slide" id="slide-number-7">
+ <div class="text-landing">
+  <text>
+   Slide 5
+  </text>
+ </div>
+ <h2>
+  <text>
+   <em>
+    pretty code blocks
+   </em>
+  </text>
+ </h2>
+ <text>
+  Syntax highlighting Google's
+  <a href="https://github.com/google/code-prettify">
+   code prettify
+  </a>
+ </text>
+ <hr/>
+ <pre class="prettyprint">sort [] = []
 sort (x:xs) = sort lower ++ [x] ++ sort higher
     where
         lower = filter (&lt; x) xs
-        higher = filter (&gt;= x) xs</pre><text>Code blocks are context-aware</text><pre class="prettyprint">main() {
+        higher = filter (&gt;= x) xs</pre>
+ <text>
+  Code blocks are context-aware
+ </text>
+ <pre class="prettyprint">main() {
   char c = getchar();
   (c == '+' || c == '-' || c == '*' || c == '/') ? main(), main() : 0;
   putchar(c);
-}</pre></section><section class="slide-top slide" id="slide-number-8"><video autoplay="" class="background-video" loop=""><source src="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4"></source></video><div class="wrap"><div class="text-landing"><text>Slide 6</text></div><h2><text><em>looping background animations</em></text></h2><text>Embed any video file (thanks <a href="https://www.shutterstock.com/">Shutterstock</a>!)</text></div></section><section class="slide-bottom bg-black slide" id="slide-number-9"><span class="background light" style="background-image:url('https://source.unsplash.com/U5rMrSI7Pn4')"></span><div class="wrap"><div class="content-center text-shadow"><h1 class="text-landing"><text><strong>A pug and an Equation</strong></text></h1><h3><text><div class="equation" data-expr="i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)"></div></text></h3></div></div><footer><text>this slide looks important right? It's not!</text></footer></section><section class="bg-apple slide" id="slide-number-10"><h1 class="text-data"><text>Thanks, you!</text></h1><footer><h4><text>Contribute at</text></h4><h2><text><a href="https://github.com/thoppe/miniprez">https://github.com/thoppe/miniprez</a></text></h2></footer></section></article>
-</main>
-<!-- end main -->
-<!-- jQuery (required for slides to work) -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<!-- Custom slide control -->
-<script src="static/js/slider.js"></script>
-<!-- KaTeX imports -->
-<script src="static/katex/katex.min.js"></script>
-<!-- Render the equations -->
-<script type="text/javascript">
-
-    // grab all elements in DOM with the class 'equation'
+}</pre>
+</section><section class="slide-top slide" id="slide-number-8">
+ <video autoplay="" class="background-video" loop="">
+  <source src="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4">
+  </source>
+ </video>
+ <div class="wrap">
+  <div class="text-landing">
+   <text>
+    Slide 6
+   </text>
+  </div>
+  <h2>
+   <text>
+    <em>
+     looping background animations
+    </em>
+   </text>
+  </h2>
+  <text>
+   Embed any video file (thanks
+   <a href="https://www.shutterstock.com/">
+    Shutterstock
+   </a>
+   !)
+  </text>
+ </div>
+</section><section class="slide-bottom bg-black slide" id="slide-number-9">
+ <span class="background light" style="background-image:url('https://source.unsplash.com/U5rMrSI7Pn4')">
+ </span>
+ <div class="wrap">
+  <div class="content-center text-shadow">
+   <h1 class="text-landing">
+    <text>
+     <strong>
+      A pug and an Equation
+     </strong>
+    </text>
+   </h1>
+   <h3>
+    <text>
+     <div class="equation" data-expr="i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)">
+     </div>
+    </text>
+   </h3>
+  </div>
+ </div>
+ <footer>
+  <text>
+   this slide looks important right? It's not!
+  </text>
+ </footer>
+</section><section class="bg-apple slide" id="slide-number-10">
+ <h1 class="text-data">
+  <text>
+   Thanks, you!
+  </text>
+ </h1>
+ <footer>
+  <h4>
+   <text>
+    Contribute at
+   </text>
+  </h4>
+  <h2>
+   <text>
+    <a href="https://github.com/thoppe/miniprez">
+     https://github.com/thoppe/miniprez
+    </a>
+   </text>
+  </h2>
+ </footer>
+</section>
+   </article>
+  </main>
+  <!-- end main -->
+  <!-- jQuery (required for slides to work) -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+  </script>
+  <!-- Custom slide control -->
+  <script src="static/js/slider.js">
+  </script>
+  <!-- KaTeX imports -->
+  <script src="static/katex/katex.min.js">
+  </script>
+  <!-- Render the equations -->
+  <script type="text/javascript">
+   // grab all elements in DOM with the class 'equation'
     var tex = document.getElementsByClassName("equation");
 
     // for each element, render the expression attribute
@@ -93,6 +534,6 @@ sort (x:xs) = sort lower ++ [x] ++ sort higher
         katex.render(el.getAttribute("data-expr"), el);
     });
   </script>
-<!-- End of imports -->
-</body>
+  <!-- End of imports -->
+ </body>
 </html>

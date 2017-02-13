@@ -1,16 +1,12 @@
 # miniprez
 
-Dead simple markup to web-friendly presentations that look great on mobile and on the big screen. Adapted from [webslides](https://github.com/jlantunez/webslides) by jlantunez.
-
-Note: This is a live work-in-progress!
-
-For a tutorial see the [input](https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md) and the [slides](https://thoppe.github.io/miniprez/tutorial.html).
+Dead simple markup to web-friendly presentations that look great on mobile and on the big screen.
+For a live demo see the tutorial [input](https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md) and the [slides](https://thoppe.github.io/miniprez/tutorial.html).
 
 ### Usage
 
-Write the docs here.
-
-Miniprez is a command-line tool that turns special markup into slides. All slides are separated by `----`. Hello world in miniprez looks like:
+Miniprez is a command-line tool that turns special markup into slides.
+All slides are separated by `----`. Hello world in miniprez looks like:
 
     ----
     Hello world.
@@ -42,6 +38,34 @@ Inline markdown shortcuts that work too,
 The markdown is enchanced with [emoji](http://www.webpagefx.com/tools/emoji-cheat-sheet/), [font-awesome](http://fontawesome.io/icons/) and [math](https://en.wikibooks.org/wiki/LaTeX/Mathematics),
 
     This is a :smile: and this is ::twitter:: and and equation $$(a+b)^2$$.
+
+Lists can be made from either a combination of `@ul` and `@li` elements or simply
+
+    + list item one
+    + list item two
+    + list item three
+    
+Large code blocks are made from fences of '```' and will be automatically highlighted.
+
+    ```
+    for x in A:
+        print (x**2)
+    ```
+
+Element arguments can be added with like this
+
+    @a(href="www.google.com" id="foo")
+
+With this syntax there are some additional elements miniprez has added
+
+| function name  | description  | example  |
+|---|---|---|
+| `@background`        | background image | ...  |
+| `@background_video`  | full screen background video  | ...  |
+| `@line`  | Horzontial  | Shortcut for hr  |
+| `@figure`  | Image  | ...  |
+| `@button`  | Pretty button  | ...  |
+
 
 
 ### Libraries used:

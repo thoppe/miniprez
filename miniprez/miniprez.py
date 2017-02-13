@@ -1,10 +1,11 @@
+#! /usr/bin/env python
 """
-Usage: miniprez.py INPUT [-h] [-o OUTPUT|-t] [--pretty]
+Usage: miniprez.py INPUT [-h] [-o OUTPUT|-t] [--condense]
 
 -h --help     show this help
 -o, --output  FILE specify output file [default: INPUT.html]
 -t, --term    Output just the slides to stdout 
---pretty      Pretty-print the html output with Beautiful Soup [default: True]
+--condense    Don't pretty-print the output [default: False]
 --quiet       print less text
 --verbose     print more text
 """
@@ -46,19 +47,21 @@ if __name__ == "__main__":
         soup.section["id"] = "slide-number-{}".format(k+1)
         soup.section["class"] = soup.section.get('class',[]) + ["slide",]
         slides.append(soup)
-
-
-    if args["--pretty"]:
-        output = unicode(base.prettify())
-    else:
-        output = unicode(base)
-
+    
     if args["--term"]:
-        print (slides.prettify().encode('utf-8'))
+        if args["--condense"]:
+            print (slides.encode('utf-8'))
+        else:
+            print (slides.prettify().encode('utf-8'))
+        exit()
         
-    else:
-        with codecs.open(args["OUTPUT"],'w','utf-8') as FOUT:
-            FOUT.write(output)
+    with codecs.open(args["OUTPUT"],'w','utf-8') as FOUT:
+        if args["--condense"]:
+            output = unicode(base)
+        else:
+            output = base.prettify()
+        
+        FOUT.write(output)
         print ("Output written to {OUTPUT}.".format(**args))
 
 

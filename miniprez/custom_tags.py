@@ -3,6 +3,7 @@ Custom tags. Make sure you register new custom tags at the bottom.
 '''
 
 import bs4
+from inline_markdown import inline_markdown_parser
 
 def _get_src(tagline):
     opts = tagline["options"]
@@ -34,8 +35,26 @@ def figure(tagline, soup):
     img = soup.new_tag("img")
     img['src'] = _get_src(tagline)
 
-    # Potential to add figure caption here!
+    img['style'] = []
+
+    if 'height' in tagline["options"]:
+        opt = "height:{}".format(tagline["options"].pop('height'))
+        img['style'].append(opt)
+
+    if 'width' in tagline["options"]:
+        opt = "width:{}".format(tagline["options"].pop('width'))
+        img['style'].append(opt)
+
     tag.append(img)
+    
+    # Potential to add figure caption here!
+    if tagline["text"]:
+        caption = soup.new_tag("figcaption")
+        text = inline_markdown_parser(tagline["text"])
+        caption.append(bs4.BeautifulSoup(text,'lxml'))
+        tagline["text"] = ""
+        tag.append(caption)
+        
     return tag
     
 

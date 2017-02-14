@@ -14,7 +14,7 @@
 
 ----  .bg-black
 
-@h1 .text-landing The problem 
+@p @h1 .text-landing The problem 
 
 .text-intro
  + I want simple and beautiful presentations.
@@ -41,7 +41,7 @@
 Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweaks!
 
 @line
- .grid .wrap
+ .grid 
   .column
     @h2 :muscle: **bold**
     @p `**text**`

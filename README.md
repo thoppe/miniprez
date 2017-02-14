@@ -71,9 +71,10 @@ With this syntax there are some additional elements miniprez has added
 | function name  | example | options
 |---|---|---|
 | `@background`  | @background(url="https://source.unsplash.com/4mta-DkJUAg") | `.light` `.dark` |
+| `@unsplash`  | @unsplash(url=4mta-DkJUAg) | `.light` `.dark` |
 | `@background_video`  | @background_video(url="https://cdn.shutterstock.com/...") | |
 | `@button`  |  @button(href="https://github.com/thoppe/miniprez") | `.ghost` text after  |
-| `@figure`  | Image  | ...  |
+| `@figure`  | @figure(src="images/1/image18.png" height=200px) | `height` caption text after  |
 | `@line`  | Horzontial  | Shortcut for hr  |
 
 

@@ -4,7 +4,8 @@
 @h4 Beautiful presentations in minimalist format <br>
 
 @p .text-intro 
-  miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
+  miniprez is a static, mobile-friendly version of
+  [webslides](https://github.com/jlantunez/webslides)
 
 @footer @div .wrap @div .span
  @button(href="https://github.com/thoppe/miniprez") .alignleft .ghost
@@ -31,7 +32,14 @@
 
   @h1 .text-landing The solution: <br> miniprez
   @line
-  @p A [python library](https://github.com/thoppe/miniprez) written using [pyparsing](http://pyparsing.wikispaces.com/) and [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/). Miniprez compiles [text](tutorial.md) into a single-page html presentation  (like this one) with extra goodies. Emoji, font-awesome, LaTeX, and code highlighting are built in. Full-screen backgrounds and video can render behind the each screen. Slides are controlled with page-up and page-down and scrolled easily on mobile.
+  @p A [python library](https://github.com/thoppe/miniprez) written using
+     [pyparsing](http://pyparsing.wikispaces.com/) and
+     [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/).
+     Miniprez compiles [text](tutorial.md) into a single-page html presentation
+     (like this one) with extra goodies. Emoji, font-awesome, LaTeX, and code
+     highlighting are built in. Full-screen backgrounds and video can render behind
+     the each screen. Slides are controlled with page-up and page-down and scrolled
+     easily on mobile.
 
 ---- .align-left .bg-black
 @background(url="https://source.unsplash.com/F1dSr7I4AmY/") .dark
@@ -41,19 +49,12 @@
 Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweaks!
 
 @line
- .grid 
-  .column
-    @h2 :muscle: **bold**
-    @p `**text**`
-  .column
-    @h2 :fire: *fire*
-    @p `*text*`
-  .column
-    @h2 :cloud: _emph_
-    @p `_text_`
-  .column
-    @h2 :computer: `code`
-    @p `&&&`code&&&`` 
+
+@h2 
+ + :muscle: **bold** `**text**`
+ + :fire: *fire* `*text*`
+ + :cloud: _emph_ `_text_`
+ + :computer: `code` `&&&`code&&&`` 
 
 ---- .align-left .bg-apple
 @background(url="https://source.unsplash.com/pmX9BkDDr_A/") .dark
@@ -63,15 +64,11 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
 Standard emoji and [font-awesome](http://fontawesome.io/)  
 @line
 
-.grid
-  .column `:battery:`
-    @h1 :battery:
-  .column `:heart_eyes:`
-    @h1 :heart_eyes:
-  .column `::meetup::`
-    @h1 ::meetup::
-  .column `::ra::`
-    @h1 ::ra:: 
+.grid @h3
+  | `:battery:` :battery:
+  | `:heart_eyes:` :heart_eyes:
+  | `::meetup::` ::meetup::
+  | `::ra::` ::ra:: 
 
 ---- .bg-apple .align-left
 .text-landing Slide 4
@@ -109,7 +106,7 @@ main() {
 
 .text-landing Slide 6
 @h2 _looping background animations_
-Embed any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
+Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 
 ---- .slide-bottom .bg-black
 @background(url="https://source.unsplash.com/U5rMrSI7Pn4") .light

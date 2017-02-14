@@ -33,10 +33,8 @@ class tagline(object):
         tag   = (token('@') + name('name') +
                    Optional(option('options')))
 
-        MD_tags = OneOrMore('#')|Literal('+')
-        MD_tags = Combine(MD_tags)('name')
-        
-        MD_tags += Optional(option('options'))
+        MD_tags = OneOrMore('#')|Literal('+')|Literal('|')
+        MD_tags = Combine(MD_tags)('name') + Optional(option('options'))
                        
         cls = token('.') + name('name')
 
@@ -81,6 +79,9 @@ class tagline(object):
 
             elif tag.name=='+':
                 tag.name = 'li'
+
+            elif tag.name=='|':
+                tag.name = 'column'
 
             # If classnames are used but name is empty
             # default to a div

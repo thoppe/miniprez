@@ -20,37 +20,38 @@ class tagline(object):
 
         token = lambda c: Literal(c).suppress()
 
-        g_name = Word(pyp.alphanums+'-_')
-        g_quote = QuotedString('"')|QuotedString("'")
-        g_header = Word('----')("name")+ZeroOrMore('-')
+        name = Word(pyp.alphanums+'-_')
+        quote = QuotedString('"')|QuotedString("'")
+        header = Word('----')("name")+ZeroOrMore('-')
         
-        g_option_token = Group( g_name("key") +
+        option_token = Group( name("key") +
                                     token('=') +
-                                    (g_name|g_quote)("value") )
+                                    (name|quote)("value") )
         
-        g_option = pyp.nestedExpr(content=g_option_token)
+        option = pyp.nestedExpr(content=option_token)
 
-        g_tag   = (token('@') + g_name('name') +
-                   Optional(g_option('options')))
+        tag   = (token('@') + name('name') +
+                   Optional(option('options')))
 
-        g_MD_tags  = Combine(OneOrMore('#')|Literal('+'))('name')
+        MD_tags = OneOrMore('#')|Literal('+')
+        MD_tags = Combine(MD_tags)('name')
         
-        g_MD_tags += Optional(g_option('options'))
+        MD_tags += Optional(option('options'))
                        
-        g_class = token('.') + g_name('name')
+        cls = token('.') + name('name')
 
-        g_classlist = Group(ZeroOrMore(g_class))('classes')
+        classlist = Group(ZeroOrMore(cls))('classes')
 
-        g_format_header = g_header + g_classlist
-        g_format_named_tag = g_tag + g_classlist
-        g_format_MD_tag = g_MD_tags + g_classlist
-        g_format_div_tag = Group(OneOrMore(g_class))('classes')
+        format_header = header + classlist
+        format_named_tag = tag + classlist
+        format_MD_tag = MD_tags + classlist
+        format_div_tag = Group(OneOrMore(cls))('classes')
 
-        g_format_tag = Group(g_format_named_tag|
-                             g_format_div_tag|
-                             g_format_MD_tag)
+        format_tag = Group(format_named_tag|
+                             format_div_tag|
+                             format_MD_tag)
         
-        g_format = Group(Group(g_format_header)|OneOrMore(g_format_tag))
+        g_format = Group(Group(format_header)|OneOrMore(format_tag))
         
         grammar = Optional(g_format)('format') + pyp.restOfLine('text')
 

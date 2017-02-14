@@ -1,5 +1,6 @@
 ---- .aligncenter .bg-white
-@background(url="https://source.unsplash.com/4mta-DkJUAg") .dark
+@unsplash(url=4mta-DkJUAg) .dark
+
 @h3 .text-data **miniprez** 
 @h4 Beautiful presentations in minimalist format <br>
 
@@ -42,7 +43,7 @@
      easily on mobile.
 
 ---- .align-left .bg-black
-@background(url="https://source.unsplash.com/F1dSr7I4AmY/") .dark
+@unsplash(url=F1dSr7I4AmY) .dark
 
 .text-landing .text-content _Slide 2_
 @h2 _simple markdown support_
@@ -50,14 +51,14 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
 
 @line
 
-@h2 
+@h3 
  + :muscle: **bold** `**text**`
  + :fire: *fire* `*text*`
  + :cloud: _emph_ `_text_`
  + :computer: `code` `&&&`code&&&`` 
 
 ---- .align-left .bg-apple
-@background(url="https://source.unsplash.com/pmX9BkDDr_A/") .dark
+@unsplash(url=pmX9BkDDr_A) .dark
 
 .text-landing Slide 3
 @h2 _emoji_
@@ -71,6 +72,8 @@ Standard emoji and [font-awesome](http://fontawesome.io/)
   | `::ra::` ::ra:: 
 
 ---- .bg-apple .align-left
+@unsplash(url=5mZ_M06Fc9g) .dark
+
 .text-landing Slide 4
 @h2 _math support_
 LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)  
@@ -79,11 +82,13 @@ LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)
 <br>
 `$$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$`
 
----- .align-left 
+---- .align-left .bg-black					
+@unsplash(url=7BiMECHFgFY) .dark
+
 .text-landing Slide 5
 @h2 _pretty code blocks_
 Syntax highlighting Google's [code prettify](https://github.com/google/code-prettify)  
-@line
+
 ```
 sort [] = []
 sort (x:xs) = sort lower ++ [x] ++ sort higher
@@ -109,7 +114,7 @@ main() {
 Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 
 ---- .slide-bottom .bg-black
-@background(url="https://source.unsplash.com/U5rMrSI7Pn4") .light
+@unsplash(url=U5rMrSI7Pn4) .light
 
 .content-center .text-shadow 
   @h1 .text-landing **A pug and an Equation**

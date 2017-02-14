@@ -30,6 +30,12 @@ def background(tagline):
     tag["style"] = '''background-image:url('{}')'''. format(url)
     return tag
 
+def unsplash(tagline):
+    key = _get_src(tagline)
+    tagline['options']["url"] = "https://source.unsplash.com/{}".format(key)
+    return background(tagline)
+
+
 def figure(tagline):
     tag = soup.new_tag("figure")
     img = soup.new_tag("img")
@@ -83,6 +89,7 @@ def codeblock(tagline):
 
 _registered_custom_tags = {
     "background" : background,
+    "unsplash" : unsplash,
     "background_video" : background_video,
     "line" : line,
     "button" : button,

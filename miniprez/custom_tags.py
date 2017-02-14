@@ -3,7 +3,7 @@ Custom tags. Make sure you register new custom tags at the bottom.
 '''
 
 import bs4
-from inline_markdown import inline_markdown_parser
+from inline_markdown import inline_markdown_parser, soup
 
 def _get_src(tagline):
     opts = tagline["options"]
@@ -13,7 +13,7 @@ def _get_src(tagline):
             del opts[key]
     return link
 
-def background_video(tagline, soup):
+def background_video(tagline):
     tag = soup.new_tag("video")
     tag["autoplay"] = None
     tag["loop"] = None
@@ -23,14 +23,14 @@ def background_video(tagline, soup):
     tag.append(source)
     return tag
 
-def background(tagline, soup):
+def background(tagline):
     tag = soup.new_tag("span")
     tag["class"]  = ["background",]
     url = _get_src(tagline)
     tag["style"] = '''background-image:url('{}')'''. format(url)
     return tag
 
-def figure(tagline, soup):
+def figure(tagline):
     tag = soup.new_tag("figure")
     img = soup.new_tag("img")
     img['src'] = _get_src(tagline)
@@ -58,17 +58,17 @@ def figure(tagline, soup):
     return tag
     
 
-def line(tagline, soup):
+def line(tagline):
     return soup.new_tag("hr")
 
-def button(tagline, soup):
+def button(tagline):
     tag = soup.new_tag("a")
     tag["class"] = ["button",]
     tag["href"] = _get_src(tagline)
 
     return tag
 
-def codeblock(tagline, soup):
+def codeblock(tagline):
     tag = soup.new_tag("pre")
     tag["class"] = ["prettyprint",]
 

@@ -3,7 +3,6 @@ import bs4
 from emoji import emojize
 
 QS = pyp.QuotedString
-soup = bs4.BeautifulSoup("<div></div>",'html.parser')
 
 class Inline_Markdown_Paser(object):
 
@@ -88,7 +87,7 @@ class Inline_Markdown_Paser(object):
 
 # Create one shared instance
 inline_markdown_parser = Inline_Markdown_Paser()
-
+soup = bs4.BeautifulSoup("<div></div>",'html.parser')
 
 if __name__ == "__main__":
 

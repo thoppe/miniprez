@@ -131,7 +131,7 @@ class tagline(object):
                 item["text"] = self.text
             
             if name in _registered_custom_tags:
-                tag = _registered_custom_tags[name](item, _soup)
+                tag = _registered_custom_tags[name](item)
 
                 # Text may have changed, reflect this
                 self.text = item["text"]

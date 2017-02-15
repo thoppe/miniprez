@@ -23,7 +23,7 @@ class Inline_Markdown_Paser(object):
         code  = QS("`", escChar='&&&', convertWhitespaceEscapes=False)
         code.setParseAction(self._code)
 
-        math = QS(quoteChar="$$", convertWhitespaceEscapes=False)
+        math = QS(quoteChar="$", convertWhitespaceEscapes=False)
         math.setParseAction(self._math)
 
         text = QS(quoteChar="[",endQuoteChar="]")

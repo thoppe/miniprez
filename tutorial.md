@@ -78,9 +78,9 @@ Standard emoji and [font-awesome](http://fontawesome.io/)
 @h2 _math support_
 LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)  
 @line
-@h3 $$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$
+@h3 $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
 <br>
-`$$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$$`
+`$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$`
 
 ---- .align-left .bg-black					
 @unsplash(url=7BiMECHFgFY) .dark

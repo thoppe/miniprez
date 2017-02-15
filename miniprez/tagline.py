@@ -30,8 +30,7 @@ class tagline(object):
         
         option = pyp.nestedExpr(content=option_token)
 
-        tag   = (token('@') + name('name') +
-                   Optional(option('options')))
+        tag = token('@') + name('name') + Optional(option('options'))
 
         MD_tags = OneOrMore('#')|Literal('+')|Literal('|')
         MD_tags = Combine(MD_tags)('name') + Optional(option('options'))

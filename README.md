@@ -41,7 +41,7 @@ Inline markdown shortcuts that work too,
 
 The markdown is enchanced with [emoji](http://www.webpagefx.com/tools/emoji-cheat-sheet/), [font-awesome](http://fontawesome.io/icons/) and [math](https://en.wikibooks.org/wiki/LaTeX/Mathematics),
 
-    This is a :smile: and this is ::twitter:: and and equation $$(a+b)^2$$.
+    This is a :smile: and this is ::twitter:: and and equation $(a+b)^2$.
 
 Lists can be made from either a combination of `@ul` and `@li` elements or simply
 

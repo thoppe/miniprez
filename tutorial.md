@@ -118,7 +118,7 @@ Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com
 
 .content-center .text-shadow 
   @h1 .text-landing **A pug and an Equation**
-  @h3 $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
+  @h3 $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
   
 @footer this slide looks important right? It's not!
 

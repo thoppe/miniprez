@@ -15,11 +15,8 @@ edit:
 view:
 	xdg-open $(target).html &
 
-build:
-	watch -n 1 make
-
 watch:
-	make build
+	python miniprez/miniprez.py $(target).md --watch=1
 
 commit:
 	git commit -a

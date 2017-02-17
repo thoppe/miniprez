@@ -126,6 +126,384 @@
    </div>
   </div>
  </footer>
+</section><section class="bg-black slide" id="slide-number-2">
+ <p>
+  <h1 class="text-landing">
+   <text>
+    The problem
+   </text>
+  </h1>
+ </p>
+ <div class="text-intro">
+  <ul class="markdownlist">
+   <li>
+    <text>
+     I want simple and beautiful presentations.
+    </text>
+   </li>
+   <li>
+    <text>
+     Presentations that compile from text to interactive webpages.
+    </text>
+   </li>
+   <li>
+    <text>
+     Presentations that seperate content from style like Markdown.
+    </text>
+   </li>
+   <li>
+    <text>
+     Presentations that render mathematics and highlight code.
+    </text>
+   </li>
+  </ul>
+  <text>
+   <br>
+    Oh, and they should work well* on mobile too.
+   </br>
+  </text>
+ </div>
+ <footer>
+  <div class="alignright">
+   <text>
+    *just show me the content!
+   </text>
+  </div>
+ </footer>
+</section><section class="align-left bg-white slide" id="slide-number-3">
+ <div class="wrap size-50">
+  <h1 class="text-landing">
+   <text>
+    The solution:
+    <br>
+     miniprez
+    </br>
+   </text>
+  </h1>
+  <hr/>
+  <p>
+   <text>
+    A
+    <a href="https://github.com/thoppe/miniprez">
+     python library
+    </a>
+    written using
+    <text>
+     <a href="http://pyparsing.wikispaces.com/">
+      pyparsing
+     </a>
+     and
+    </text>
+    <text>
+     <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">
+      Beautiful Soup
+     </a>
+     .
+    </text>
+    <text>
+     Miniprez compiles
+     <a href="tutorial.md">
+      text
+     </a>
+     into a single-page html presentation
+    </text>
+    <text>
+     (like this one) with extra goodies. Emoji, font-awesome, LaTeX, and code
+    </text>
+    <text>
+     highlighting are built in. Full-screen backgrounds and video can render behind
+    </text>
+    <text>
+     the each screen. Slides are controlled with page-up and page-down and scrolled
+    </text>
+    <text>
+     easily on mobile.
+    </text>
+   </text>
+  </p>
+ </div>
+</section><section class="align-left bg-black slide" id="slide-number-4">
+ <span class="background dark" style="background-image:url('https://source.unsplash.com/F1dSr7I4AmY')">
+ </span>
+ <div class="wrap">
+  <div class="text-landing text-content">
+   <text>
+    <em>
+     Slide 2
+    </em>
+   </text>
+  </div>
+  <h2>
+   <text>
+    <em>
+     simple markdown support
+    </em>
+   </text>
+  </h2>
+  <text>
+   Basic
+   <a href="https://daringfireball.net/projects/markdown/syntax">
+    Markdown
+   </a>
+   with tweaks!
+  </text>
+  <hr/>
+  <h3>
+   <ul class="markdownlist">
+    <li>
+     <text>
+      💪
+      <strong>
+       bold
+      </strong>
+      <code>
+       **text**
+      </code>
+     </text>
+    </li>
+    <li>
+     <text>
+      🔥
+      <strong style="color:#c23">
+       fire
+      </strong>
+      <code>
+       *text*
+      </code>
+     </text>
+    </li>
+    <li>
+     <text>
+      ☁
+      <em>
+       emph
+      </em>
+      <code>
+       _text_
+      </code>
+     </text>
+    </li>
+    <li>
+     <text>
+      💻
+      <code>
+       code
+      </code>
+      <code>
+       `code`
+      </code>
+     </text>
+    </li>
+   </ul>
+  </h3>
+ </div>
+</section><section class="align-left bg-apple slide" id="slide-number-5">
+ <span class="background light" style="background-image:url('https://source.unsplash.com/pmX9BkDDr_A')">
+ </span>
+ <div class="wrap">
+  <div class="text-landing">
+   <text>
+    Slide 3
+   </text>
+  </div>
+  <h2>
+   <text>
+    <em>
+     emoji
+    </em>
+   </text>
+  </h2>
+  <text>
+   Standard emoji and
+   <a href="http://fontawesome.io/">
+    font-awesome
+   </a>
+  </text>
+  <hr/>
+  <div class="grid">
+   <h3>
+    <div class="column">
+     <text>
+      <code>
+       :battery:
+      </code>
+      🔋
+     </text>
+    </div>
+    <div class="column">
+     <text>
+      <code>
+       :heart_eyes:
+      </code>
+      😍
+     </text>
+    </div>
+    <div class="column">
+     <text>
+      <code>
+       ::meetup::
+      </code>
+      <i aria-hidden="true" class="fa fa-meetup">
+      </i>
+     </text>
+    </div>
+    <div class="column">
+     <text>
+      <code>
+       ::ra::
+      </code>
+      <i aria-hidden="true" class="fa fa-ra">
+      </i>
+     </text>
+    </div>
+   </h3>
+  </div>
+ </div>
+</section><section class="bg-apple align-left slide" id="slide-number-6">
+ <span class="background dark" style="background-image:url('https://source.unsplash.com/5mZ_M06Fc9g')">
+ </span>
+ <div class="wrap">
+  <div class="text-landing">
+   <text>
+    Slide 4
+   </text>
+  </div>
+  <h2>
+   <text>
+    <em>
+     math support
+    </em>
+   </text>
+  </h2>
+  <text>
+   LaTeX rendered inline with
+   <a href="https://github.com/Khan/KaTeX">
+    KaTex
+   </a>
+  </text>
+  <hr/>
+  <h3>
+   <text>
+    <div class="equation" data-expr="P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}">
+    </div>
+   </text>
+  </h3>
+  <text>
+   <br/>
+  </text>
+  <text>
+   <code>
+    $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
+   </code>
+  </text>
+ </div>
+</section><section class="align-left bg-black slide" id="slide-number-7">
+ <span class="background" style="background-image:url('https://source.unsplash.com/7BiMECHFgFY')">
+ </span>
+ <div class="wrap">
+  <div class="text-landing">
+   <text>
+    Slide 5
+   </text>
+  </div>
+  <h2>
+   <text>
+    <em>
+     pretty code blocks
+    </em>
+   </text>
+  </h2>
+  <text>
+   Syntax highlighting Google's
+   <a href="https://github.com/google/code-prettify">
+    code prettify
+   </a>
+  </text>
+  <pre class="prettyprint">sort [] = []
+sort (x:xs) = sort lower ++ [x] ++ sort higher
+    where
+        lower = filter (&lt; x) xs
+        higher = filter (&gt;= x) xs</pre>
+  <text>
+   Code blocks are context-aware
+  </text>
+  <pre class="prettyprint">main() {
+  char c = getchar();
+  (c == '+' || c == '-' || c == '*' || c == '/') ? main(), main() : 0;
+  putchar(c);
+}</pre>
+ </div>
+</section><section class="slide-top slide" id="slide-number-8">
+ <video autoplay="" class="background-video" loop="">
+  <source src="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4">
+  </source>
+ </video>
+ <div class="wrap">
+  <div class="text-landing">
+   <text>
+    Slide 6
+   </text>
+  </div>
+  <h2>
+   <text>
+    <em>
+     looping background animations
+    </em>
+   </text>
+  </h2>
+  <text>
+   Embed/hotlink any video file (thanks
+   <a href="https://www.shutterstock.com/">
+    Shutterstock
+   </a>
+   !)
+  </text>
+ </div>
+</section><section class="slide-bottom bg-black slide" id="slide-number-9">
+ <span class="background light" style="background-image:url('https://source.unsplash.com/U5rMrSI7Pn4')">
+ </span>
+ <div class="wrap">
+  <div class="content-center text-shadow">
+   <h1 class="text-landing">
+    <text>
+     <strong>
+      A pug and an Equation
+     </strong>
+    </text>
+   </h1>
+   <h3>
+    <text>
+     <div class="equation" data-expr="i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)">
+     </div>
+    </text>
+   </h3>
+  </div>
+ </div>
+ <footer>
+  <text>
+   this slide looks important right? It's not!
+  </text>
+ </footer>
+</section><section class="bg-apple slide" id="slide-number-10">
+ <h1 class="text-data">
+  <text>
+   Thanks, you!
+  </text>
+ </h1>
+ <footer>
+  <h4>
+   <text>
+    Contribute at
+   </text>
+  </h4>
+  <h2>
+   <text>
+    <a href="https://github.com/thoppe/miniprez">
+     https://github.com/thoppe/miniprez
+    </a>
+   </text>
+  </h2>
+ </footer>
 </section>
    </article>
   </main>

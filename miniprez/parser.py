@@ -100,7 +100,6 @@ class section(object):
         for x in lines:
             tag = x.build(indent=x.indent)
             name = x.primary_name
-            print name
             if name in ["background", "background_video", "unsplash"]:
                 assert(z.name == "section")
                 z.append(tag)

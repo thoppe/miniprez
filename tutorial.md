@@ -58,7 +58,7 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
  + :computer: `code` `&&&`code&&&`` 
 
 ---- .align-left .bg-apple
-@unsplash(url=pmX9BkDDr_A) .dark
+@unsplash(url=pmX9BkDDr_A) .light
 
 .text-landing Slide 3
 @h2 _emoji_
@@ -83,7 +83,7 @@ LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)
 `$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$`
 
 ---- .align-left .bg-black					
-@unsplash(url=7BiMECHFgFY) .dark
+@unsplash(url=7BiMECHFgFY)
 
 .text-landing Slide 5
 @h2 _pretty code blocks_

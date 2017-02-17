@@ -69,6 +69,7 @@ class tagline(object):
     def parse_format(self, res):
         
         for tag in res:
+            extra_classes = []
             
             if len(tag.name)>=4 and tag.name[:4] == '----':
                 tag.name = 'section'
@@ -80,7 +81,8 @@ class tagline(object):
                 tag.name = 'li'
 
             elif tag.name=='|':
-                tag.name = 'column'
+                tag.name = 'div'
+                extra_classes += ['column']
 
             # If classnames are used but name is empty
             # default to a div
@@ -89,7 +91,7 @@ class tagline(object):
 
             item = {}
             item = {"name":tag.name,
-                    "classes":tag.classes.asList(),
+                    "classes":tag.classes.asList()+extra_classes,
                     "options":{}}
 
             if len(tag.options):

@@ -22,6 +22,9 @@ hr{
     }
 }
 
+.left { text-align: left; }
+.right { text-align: right; }
+
 
 code {
     display: inline-table;

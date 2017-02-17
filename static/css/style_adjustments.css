@@ -12,9 +12,22 @@ hr{
 				rgba(0, 20, 80, 0) 75%);
 }
 
+/* On mobile devices, headers and footers overlap text, 
+   remove absolute positioning */
+
+@media only screen and (max-device-width: 640px) {
+    header,
+    section footer {
+	position: inherit !important;
+    }
+}
+
+
 code {
     display: inline-table;
 }
+
+/* Clean up markdown lists */
 
 ul.markdownlist {
     padding: 0;

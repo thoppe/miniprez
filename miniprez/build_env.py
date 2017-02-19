@@ -21,7 +21,7 @@ def build_environment(**args):
         rel_dir = root.split('/miniprez/')[-1]
         if not os.path.exists(rel_dir):
             if verbose:
-                print ("Creating directory {}".format(rel_dir))
+                print("Creating directory {}".format(rel_dir))
             os.makedirs(rel_dir)
             has_touched = True
 
@@ -32,7 +32,7 @@ def build_environment(**args):
             if not os.path.exists(f_dest) or not filecmp.cmp(f_src, f_dest):
                 shutil.copyfile(f_src, f_dest)
                 if verbose:
-                    print ("Freshing file {}".format(f_dest))
+                    print("Refreshing file {}".format(f_dest))
                 has_touched = True
 
     return has_touched

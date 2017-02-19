@@ -1,13 +1,8 @@
 import itertools
 import bs4
 import copy
-import re
-import string
-import pyparsing as pyp
-import custom_tags
 
 from tagline import tagline
-from inline_markdown import inline_markdown_parser
 
 _section_header_token = '----'
 _comment_marker_token = '//'
@@ -35,7 +30,6 @@ def section_iterator(lines):
 def file_iterator(f_md):
 
     # Read all the lines
-    lines = []
     with open(f_md) as FIN:
         for line in FIN:
             if not line.strip():
@@ -149,7 +143,6 @@ class section(object):
                 ul = soup.new_tag('ul')
                 ul['class'] = ['markdownlist', ]
 
-                tags = []
                 for x in tag.find_next_siblings('li'):
                     ul.append(x.extract())
                 ul.insert(0, copy.copy(tag))
@@ -179,4 +172,4 @@ if __name__ == "__main__":
 '''
 
     S = section(section_text.split('\n'))
-    print S.soup.prettify()
+    print(S.soup.prettify())

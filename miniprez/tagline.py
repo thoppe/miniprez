@@ -20,7 +20,8 @@ class tagline(object):
 
         self.line = line
 
-        token = lambda c: Literal(c).suppress()
+        def token(c):
+            return Literal(c).suppress()
 
         name = Word(pyp.alphanums + '-_://.')
         quote = QuotedString('"') | QuotedString("'")
@@ -59,8 +60,8 @@ class tagline(object):
         try:
             res = grammar.parseString(line)
         except pyp.ParseException as Ex:
-            print 'Failed parsing "{}"'.format(line)
-            raise Ex
+            msg = 'Failed parsing "{}"'.format(line)
+            raise Ex(msg)
 
         self.text = res['text'].strip()
         self.tags = []
@@ -104,7 +105,8 @@ class tagline(object):
 
     @property
     def indent(self):
-        is_space = lambda x: x in ['\t', ' ']
+        def is_space(x):
+            return x in ['\t', ' ']
         return len(list(itertools.takewhile(is_space, self.line)))
 
     @property
@@ -194,29 +196,30 @@ class tagline(object):
 
 if __name__ == "__main__":
 
-    print tagline("+ list item").build()
+    print(tagline("+ list item").build())
 
-    print tagline("@h1 big dog")
-    print tagline("# big dog").build()
-    print tagline("### little dog").build()
+    print(tagline("@h1 big dog"))
+    print(tagline("# big dog").build())
+    print(tagline("### little dog").build())
 
-    print tagline("This is the **end**. People.").build()
-    print tagline("-----")
-    print tagline("---- .blue .purple")
-    print tagline("----")
-    print tagline("@h1(sky='orange' sun='set') .red .blue @h2 .dragons @h3(moon='blue') hi")
-    print tagline("@h1 @h2 hi")
+    print(tagline("This is the **end**. People.").build())
+    print(tagline("-----"))
+    print(tagline("---- .blue .purple"))
+    print(tagline("----"))
+    print(tagline("@h1(sky='orange' sun='set') .red "
+                  ".blue @h2 .dragons @h3(moon='blue') hi"))
+    print(tagline("@h1 @h2 hi"))
 
-    print tagline(".blue .red moon")
-    print tagline("hi")
-    print tagline("").empty, tagline("hi").empty, tagline(".blue").empty
-    print tagline("  .baby").indent, tagline("baby").indent
+    print(tagline(".blue .red moon"))
+    print(tagline("hi"))
+    print(tagline("").empty, tagline("hi").empty, tagline(".blue").empty)
+    print(tagline("  .baby").indent, tagline("baby").indent)
 
     T = tagline('@h1(sky="orange") @h2 @h3 hi')
-    print T.build(indent=2)
+    print(T.build(indent=2))
 
-    print tagline('@h2 @line').build()
-    print tagline('cars').build()
+    print(tagline('@h2 @line').build())
+    print(tagline('cars').build())
 
     # This fails!
-    # print tagline('@background(src="www") .blue @h2 dogs').build()
+    # print(tagline('@background(src="www") .blue @h2 dogs').build())

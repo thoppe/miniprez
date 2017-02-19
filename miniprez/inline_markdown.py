@@ -32,7 +32,8 @@ class Inline_Markdown_Paser(object):
         link = (text + href).setParseAction(self._link)
 
         text_transforms = strong | strongred | italic
-        transforms = math | text_transforms | code | font_awesome | emoji | link
+        transforms = (math | text_transforms | code |
+                      font_awesome | emoji | link)
         plain_text = pyp.Word(pyp.printables)
         whitespace = pyp.White(' ') | pyp.White('\t')
         self.grammar = pyp.OneOrMore(transforms | plain_text | whitespace)
@@ -92,20 +93,20 @@ soup = bs4.BeautifulSoup("<div></div>", 'html.parser')
 
 if __name__ == "__main__":
 
-    print "add unit tests here please :)"
+    print("add unit tests here please :)")
 
     P = Inline_Markdown_Paser()
 
     text = "This is a [link](https://www.google.com)"
-    print P(text)
+    print(P(text))
 
     text = "This is **bold** _text_ with `code`."
-    print P(text)
+    print(P(text))
 
     text = "This is $$\int_a^b a*b*c x^2 \frac{x}{y}$$ math."
-    print P(text)
+    print(P(text))
 
     text = "This is :coffee: and ::coffee:: emoji."
-    print P(text)
+    print(P(text))
 
-    print P.used
+    print(P.used)

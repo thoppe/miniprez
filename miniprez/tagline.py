@@ -6,11 +6,13 @@ from pyparsing import ZeroOrMore, OneOrMore, Optional, Literal
 from custom_tags import _registered_custom_tags
 from inline_markdown import inline_markdown_parser
 
-_soup = bs4.BeautifulSoup("","html.parser")
+_soup = bs4.BeautifulSoup("", "html.parser")
+
 
 class tagline(object):
+
     '''
-    Each line is parsed by tokens individually until no preprocessing 
+    Each line is parsed by tokens individually until no preprocessing
     tokens are left.
     '''
 
@@ -20,21 +22,21 @@ class tagline(object):
 
         token = lambda c: Literal(c).suppress()
 
-        name = Word(pyp.alphanums+'-_://.')
-        quote = QuotedString('"')|QuotedString("'")
-        header = Word('----')("name")+ZeroOrMore('-')
+        name = Word(pyp.alphanums + '-_://.')
+        quote = QuotedString('"') | QuotedString("'")
+        header = Word('----')("name") + ZeroOrMore('-')
 
-        named_option = name("key") + token('=') + (name|quote)("value")
-        unnamed_option = (name|quote)("value")
-        option_token = Group(named_option|unnamed_option)
-        
+        named_option = name("key") + token('=') + (name | quote)("value")
+        unnamed_option = (name | quote)("value")
+        option_token = Group(named_option | unnamed_option)
+
         option = pyp.nestedExpr(content=option_token)
 
         tag = token('@') + name('name') + Optional(option('options'))
 
-        MD_tags = OneOrMore('#')|Literal('+')|Literal('|')
+        MD_tags = OneOrMore('#') | Literal('+') | Literal('|')
         MD_tags = Combine(MD_tags)('name') + Optional(option('options'))
-                       
+
         cls = token('.') + name('name')
 
         classlist = Group(ZeroOrMore(cls))('classes')
@@ -44,12 +46,12 @@ class tagline(object):
         format_MD_tag = MD_tags + classlist
         format_div_tag = Group(OneOrMore(cls))('classes')
 
-        format_tag = Group(format_named_tag|
-                             format_div_tag|
-                             format_MD_tag)
-        
-        g_format = Group(Group(format_header)|OneOrMore(format_tag))
-        
+        format_tag = Group(format_named_tag |
+                           format_div_tag |
+                           format_MD_tag)
+
+        g_format = Group(Group(format_header) | OneOrMore(format_tag))
+
         grammar = Optional(g_format)('format') + pyp.restOfLine('text')
 
         self.tags = None
@@ -67,20 +69,20 @@ class tagline(object):
             self.parse_format(res.format[0])
 
     def parse_format(self, res):
-        
+
         for tag in res:
             extra_classes = []
-            
-            if len(tag.name)>=4 and tag.name[:4] == '----':
+
+            if len(tag.name) >= 4 and tag.name[:4] == '----':
                 tag.name = 'section'
 
-            elif set(tag.name)==set('#'):
+            elif set(tag.name) == set('#'):
                 tag.name = 'h{}'.format(len(tag.name))
 
-            elif tag.name=='+':
+            elif tag.name == '+':
                 tag.name = 'li'
 
-            elif tag.name=='|':
+            elif tag.name == '|':
                 tag.name = 'div'
                 extra_classes += ['column']
 
@@ -90,20 +92,20 @@ class tagline(object):
                 tag.name = 'div'
 
             item = {}
-            item = {"name":tag.name,
-                    "classes":tag.classes.asList()+extra_classes,
-                    "options":{}}
+            item = {"name": tag.name,
+                    "classes": tag.classes.asList() + extra_classes,
+                    "options": {}}
 
             if len(tag.options):
                 for opt in tag.options[0]:
                     item["options"][opt.key] = opt.value
 
             self.tags.append(item)
-    
+
     @property
     def indent(self):
-        is_space = lambda x:x in ['\t',' ']
-        return len(list(itertools.takewhile(is_space,self.line)))
+        is_space = lambda x: x in ['\t', ' ']
+        return len(list(itertools.takewhile(is_space, self.line)))
 
     @property
     def empty(self):
@@ -120,56 +122,55 @@ class tagline(object):
 
     def __repr__(self):
         keys = ("tags", "text", "indent")
-        vals = (getattr(self,x) for x in keys)
-        return str(dict(zip(keys,vals)))
+        vals = (getattr(self, x) for x in keys)
+        return str(dict(zip(keys, vals)))
 
     def build(self, **kwargs):
 
         # Build the nested tags
-        
+
         blocks = []
-        for k,item in enumerate(self.tags):
+        for k, item in enumerate(self.tags):
             name = item["name"]
-            if k == len(self.tags)-1:
+            if k == len(self.tags) - 1:
                 item["text"] = self.text
-            
+
             if name in _registered_custom_tags:
                 tag = _registered_custom_tags[name](item)
 
                 # Text may have changed, reflect this
                 self.text = item["text"]
-                
+
             else:
                 tag = _soup.new_tag(name)
 
             if item["classes"]:
-                tag['class'] = tag.get('class',[]) + item["classes"]
+                tag['class'] = tag.get('class', []) + item["classes"]
 
-            for key,val in item["options"].items():
+            for key, val in item["options"].items():
                 tag[key] = val
 
             blocks.append(tag)
-        
+
         # Insert text into the deepest tag
         if self.text:
             # Make any markdown modifications
             text = inline_markdown_parser(self.text)
             tag = _soup.new_tag("text")
-            tag.append( bs4.BeautifulSoup(text,'html.parser') )
-            
+            tag.append(bs4.BeautifulSoup(text, 'html.parser'))
+
             if blocks:
                 blocks[-1].append(tag)
             else:
                 blocks.append(tag)
 
         # Only insert items into the outermost tag
-        for key,val in kwargs.items():
+        for key, val in kwargs.items():
             blocks[0][key] = val
 
         # Nest the blocks
-        while len(blocks)>1:
+        while len(blocks) > 1:
             blocks[-2].append(blocks.pop(-1))
-
 
         block = blocks[0]
 
@@ -179,16 +180,16 @@ class tagline(object):
 
         # Othwerwise, fix punctuation errors
         punctuation = ".,!/%;:'\""
-        
+
         for x in block.find():
             if type(x) is not bs4.element.NavigableString:
                 continue
-            if len(x)<=1:
+            if len(x) <= 1:
                 continue
             if x[0] == ' ' and x[1] in punctuation:
                 xs = bs4.element.NavigableString(x.string[1:])
                 x.replace_with(xs)
-        
+
         return block
 
 if __name__ == "__main__":
@@ -200,7 +201,7 @@ if __name__ == "__main__":
     print tagline("### little dog").build()
 
     print tagline("This is the **end**. People.").build()
-    print tagline("-----")    
+    print tagline("-----")
     print tagline("---- .blue .purple")
     print tagline("----")
     print tagline("@h1(sky='orange' sun='set') .red .blue @h2 .dragons @h3(moon='blue') hi")
@@ -218,7 +219,4 @@ if __name__ == "__main__":
     print tagline('cars').build()
 
     # This fails!
-    #print tagline('@background(src="www") .blue @h2 dogs').build()
-
-
-
+    # print tagline('@background(src="www") .blue @h2 dogs').build()

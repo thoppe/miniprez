@@ -9,11 +9,12 @@ __location__ = realpath(join(os.getcwd(), dirname(__file__)))
 static_path = join(dirname(__location__), "static")
 dest_path = os.getcwd()
 
+
 def build_environment(**args):
 
     verbose = args["--verbose"]
     has_touched = False
-    
+
     for root, dirs, files in os.walk(static_path):
 
         # Create any missing directories
@@ -25,7 +26,7 @@ def build_environment(**args):
             has_touched = True
 
         for f in files:
-            f_src = join(root,f)
+            f_src = join(root, f)
             f_dest = os.path.join(rel_dir, basename(f_src))
 
             if not os.path.exists(f_dest) or not filecmp.cmp(f_src, f_dest):
@@ -35,4 +36,3 @@ def build_environment(**args):
                 has_touched = True
 
     return has_touched
-

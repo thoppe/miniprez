@@ -175,14 +175,14 @@ class tagline(object):
         block = blocks[0]
 
         # If there aren't any inner sections, we are done
-        if block.find() == None:
+        if block.find() is None:
             return block
 
         # Othwerwise, fix punctuation errors
         punctuation = ".,!/%;:'\""
 
         for x in block.find():
-            if type(x) is not bs4.element.NavigableString:
+            if not isinstance(x, bs4.element.NavigableString):
                 continue
             if len(x) <= 1:
                 continue

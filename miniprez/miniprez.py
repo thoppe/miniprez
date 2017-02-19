@@ -11,7 +11,6 @@ Usage: miniprez.py INPUT [-o OUTPUT|-t] [--condense] [--nocopy] [--verbose] [--w
 --verbose     Print more text [default: False]
 """
 
-import sys
 import bs4
 import os
 import codecs
@@ -47,9 +46,9 @@ def build(args):
 
     if args["--term"]:
         if args["--condense"]:
-            print (slides.encode('utf-8'))
+            print(slides.encode('utf-8'))
         else:
-            print (slides.prettify().encode('utf-8'))
+            print(slides.prettify().encode('utf-8'))
         return True
 
     with codecs.open(args["OUTPUT"], 'w', 'utf-8') as FOUT:
@@ -59,7 +58,7 @@ def build(args):
             output = base.prettify()
 
         FOUT.write(output)
-        print ("Output written to {OUTPUT}".format(**args))
+        print("Output written to {OUTPUT}".format(**args))
 
 
 if __name__ == "__main__":

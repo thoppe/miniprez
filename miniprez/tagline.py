@@ -20,7 +20,7 @@ class tagline(object):
 
         token = lambda c: Literal(c).suppress()
 
-        name = Word(pyp.alphanums+'-_')
+        name = Word(pyp.alphanums+'-_://.')
         quote = QuotedString('"')|QuotedString("'")
         header = Word('----')("name")+ZeroOrMore('-')
 

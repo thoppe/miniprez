@@ -43,7 +43,7 @@
      easily on mobile.
 
 ---- .align-left .bg-black
-@unsplash(url=F1dSr7I4AmY) .dark
+@unsplash(F1dSr7I4AmY) .dark
 
 .text-landing .text-content _Slide 2_
 @h2 _simple markdown support_
@@ -58,7 +58,7 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
  + :computer: `code` `&&&`code&&&`` 
 
 ---- .align-left .bg-apple
-@unsplash(url=pmX9BkDDr_A) .light
+@unsplash(pmX9BkDDr_A) .light
 
 .text-landing Slide 3
 @h2 _emoji_
@@ -72,7 +72,7 @@ Standard emoji and [font-awesome](http://fontawesome.io/)
   | `::ra::` ::ra:: 
 
 ---- .bg-apple .align-left
-@unsplash(url=5mZ_M06Fc9g) .dark
+@unsplash(5mZ_M06Fc9g) .dark
 
 .text-landing Slide 4
 @h2 _math support_
@@ -83,7 +83,7 @@ LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)
 `$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$`
 
 ---- .align-left .bg-black					
-@unsplash(url=7BiMECHFgFY)
+@unsplash(7BiMECHFgFY)
 
 .text-landing Slide 5
 @h2 _pretty code blocks_
@@ -107,14 +107,14 @@ main() {
 ```
 
 ----- .slide-top
-@background_video(src="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4")
+@background_video(https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4)
 
 .text-landing Slide 6
 @h2 _looping background animations_
 Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 
 ---- .slide-bottom .bg-black
-@unsplash(url=U5rMrSI7Pn4) .light
+@unsplash(U5rMrSI7Pn4) .light
 
 .content-center .text-shadow 
   @h1 .text-landing **A pug and an Equation**

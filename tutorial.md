@@ -1,5 +1,5 @@
 ---- .aligncenter .bg-white
-@unsplash(url=4mta-DkJUAg) .dark
+@unsplash(4mta-DkJUAg) .dark
 
 @h3 .text-data **miniprez** 
 @h4 Beautiful presentations in minimalist format <br>

@@ -23,10 +23,10 @@ class tagline(object):
         name = Word(pyp.alphanums+'-_')
         quote = QuotedString('"')|QuotedString("'")
         header = Word('----')("name")+ZeroOrMore('-')
-        
-        option_token = Group( name("key") +
-                                    token('=') +
-                                    (name|quote)("value") )
+
+        named_option = name("key") + token('=') + (name|quote)("value")
+        unnamed_option = (name|quote)("value")
+        option_token = Group(named_option|unnamed_option)
         
         option = pyp.nestedExpr(content=option_token)
 

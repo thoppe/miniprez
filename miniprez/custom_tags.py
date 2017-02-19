@@ -7,7 +7,7 @@ from inline_markdown import inline_markdown_parser, soup
 
 def _get_src(tagline):
     opts = tagline["options"]
-    for key in ["url","href","src"]:
+    for key in ["url","href","src",""]:
         if key in opts:
             link = opts[key]
             del opts[key]

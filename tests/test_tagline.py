@@ -1,4 +1,6 @@
 from miniprez.tagline import tagline
+from miniprez.custom_tags import _registered_custom_tags
+
 from nose.tools import assert_equal
 
 def test_empty_section():
@@ -93,3 +95,10 @@ def test_custom_background():
 
     assert_equal(str(T1),out)
     assert_equal(str(T1),str(T2))
+
+def test_registered_custom_tags():
+    # Test all tags that are registered
+    line = '@{}(foobar) .red big dog'
+
+    for name, func in _registered_custom_tags.items():
+        T1 = tagline(line.format(name))

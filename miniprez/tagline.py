@@ -158,6 +158,9 @@ class tagline(object):
                 tag['class'] = tag.get('class', []) + item["classes"]
 
             for key, val in item["options"].items():
+                if key and key[0]=='_':
+                    continue
+                
                 tag[key] = val
 
             blocks.append(tag)
@@ -219,7 +222,9 @@ if __name__ == "__main__":
     #print(T.build(indent=2))
     #print(tagline('@h2 @line').build())
 
-    T = tagline('@h1(sky="orange") @h2 @h3 hi')
+    T1 = tagline('@background(foobar)')
+    print T1.build()
+    print T1.build()    
     
     # This fails!
     # print(tagline('@background(src="www") .blue @h2 dogs').build())

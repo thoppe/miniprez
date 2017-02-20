@@ -5,13 +5,21 @@ Custom tags. Make sure you register new custom tags at the bottom.
 import bs4
 from inline_markdown import inline_markdown_parser, soup
 
+src_options  = ["url", "href", "src", ""]
 
 def _get_src(tagline):
     opts = tagline["options"]
-    for key in ["url", "href", "src", ""]:
+    link = ""
+    for key in src_options:
         if key in opts:
             link = opts[key]
+            opts['_'+key] = link
             del opts[key]
+            return link
+            
+        elif '_'+key in opts:
+            return opts['_'+key]
+
     return link
 
 

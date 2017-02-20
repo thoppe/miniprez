@@ -73,6 +73,12 @@ def test_options():
     T1 = tagline('@h1(name="foo" class=bar)')
     out = '<h1 class="bar" name="foo"></h1>'
     assert_equal(str(T1),out)
+
+def test_rebuild():
+    # Building sometimes failed when run twice
+    T1 = tagline('@background(foobar)')
+    T1.build()
+    T1.build()
     
 def test_custom_function():
     T1 = tagline("@line")
@@ -86,4 +92,4 @@ def test_custom_background():
         'style="background-image:url(\'foobar\')"></span>')
 
     assert_equal(str(T1),out)
-    assert_equal(str(T1), str(T2))
+    assert_equal(str(T1),str(T2))

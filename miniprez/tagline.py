@@ -221,10 +221,7 @@ if __name__ == "__main__":
     #print(tagline("+ list item").build())
     #print(T.build(indent=2))
     #print(tagline('@h2 @line').build())
-
-    T1 = tagline('@background(foobar)')
-    print T1.build()
-    print T1.build()    
+    #T1 = tagline('@background(foobar)')
     
     # This fails!
-    # print(tagline('@background(src="www") .blue @h2 dogs').build())
+    print(tagline('@background(src="www") .blue @h2 dogs').build())

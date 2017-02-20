@@ -102,3 +102,9 @@ def test_registered_custom_tags():
 
     for name, func in _registered_custom_tags.items():
         T1 = tagline(line.format(name))
+
+def test_nested_custom_tags_with_text():
+    # Currently failing test
+    line = '@background(src=foobar) @h2 big dogs'
+    print tagline(line)
+

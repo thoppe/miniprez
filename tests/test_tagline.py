@@ -77,3 +77,13 @@ def test_options():
 def test_custom_function():
     T1 = tagline("@line")
     assert_equal(str(T1),"<hr/>")
+
+def test_custom_background():
+    T1 = tagline('@background(url="foobar")')
+    T2 = tagline('@background(foobar)')
+    out = (
+        '<span class="background" ' 
+        'style="background-image:url(\'foobar\')"></span>')
+
+    assert_equal(str(T1),out)
+    assert_equal(str(T1), str(T2))

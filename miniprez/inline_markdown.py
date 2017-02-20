@@ -93,8 +93,6 @@ soup = bs4.BeautifulSoup("<div></div>", 'html.parser')
 
 if __name__ == "__main__":
 
-    print("add unit tests here please :)")
-
     P = Inline_Markdown_Paser()
 
     text = "This is a [link](https://www.google.com)"

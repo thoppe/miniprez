@@ -122,10 +122,18 @@ class tagline(object):
     def is_header(self):
         return self.primary_name == "section"
 
+    def __eq__(self, T2):
+        if T2.text != self.text:
+            return False
+        if T2.indent != self.indent:
+            return False
+        return T2.tags == self.tags
+
     def __repr__(self):
-        keys = ("tags", "text", "indent")
-        vals = (getattr(self, x) for x in keys)
-        return str(dict(zip(keys, vals)))
+        #keys = ("tags", "text", "indent")
+        #vals = (getattr(self, x) for x in keys)
+        #return str(dict(zip(keys, vals)))
+        return str(self.build())
 
     def build(self, **kwargs):
 
@@ -196,22 +204,24 @@ class tagline(object):
 
 if __name__ == "__main__":
 
+    #print(tagline("----"))
+    #print(tagline("-----"))    
+
+    #print(tagline("@h1 big dog"))
+    #print(tagline("### little dog").build())
+    #print(tagline("---- .blue .purple"))
+    #print(tagline("hi"))
+    #print(tagline("This is the **end**. People.").build())
+    
     print(tagline("+ list item").build())
 
-    print(tagline("@h1 big dog"))
-    print(tagline("# big dog").build())
-    print(tagline("### little dog").build())
-
-    print(tagline("This is the **end**. People.").build())
-    print(tagline("-----"))
-    print(tagline("---- .blue .purple"))
-    print(tagline("----"))
+    
     print(tagline("@h1(sky='orange' sun='set') .red "
                   ".blue @h2 .dragons @h3(moon='blue') hi"))
     print(tagline("@h1 @h2 hi"))
 
     print(tagline(".blue .red moon"))
-    print(tagline("hi"))
+    
     print(tagline("").empty, tagline("hi").empty, tagline(".blue").empty)
     print(tagline("  .baby").indent, tagline("baby").indent)
 

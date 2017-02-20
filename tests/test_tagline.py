@@ -69,5 +69,11 @@ def test_markdown_style_list():
     T2 = tagline("@li little dog")
     assert_equal(T1,T2)
 
-
+def test_options():
+    T1 = tagline('@h1(name="foo" class=bar)')
+    out = '<h1 class="bar" name="foo"></h1>'
+    assert_equal(str(T1),out)
     
+def test_custom_function():
+    T1 = tagline("@line")
+    assert_equal(str(T1),"<hr/>")

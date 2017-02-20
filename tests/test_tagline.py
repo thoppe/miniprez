@@ -38,9 +38,35 @@ def test_section_with_classes():
     out = '<section class="blue red"></section>'
     assert_equal(str(T1), out)
 
+def test_indent():
+    assert_equal(tagline("@h1 big dog").indent, 0)
+    assert_equal(tagline("    @h1 big dog").indent, 4)
+    assert_equal(str(tagline("@h1 big dog").build(indent=2)),
+                '<h1 indent="2"><text>big dog</text></h1>')
+
+def test_automatic_div():
+    T1 = tagline(".red .blue big dog")
+    T2 = tagline("@div .red .blue big dog")
+    assert_equal(T1,T2)
+
+def test_nested_classes():
+    T1 = tagline("@h1 .red @p .blue big dog")
+    out = '<h1 class="red"><p class="blue"><text>big dog</text></p></h1>'
+    assert_equal(str(T1),out)
+
+def test_is_empty():
+    assert_equal(tagline("").empty, True)
+    assert_equal(tagline(".blue").empty, False)
+    assert_equal(tagline("big dog").empty, False)
+    
 def test_markdown_style_header():
     T1 = tagline("### little dog")
     T2 = tagline("@h3 little dog")
+    assert_equal(T1,T2)
+
+def test_markdown_style_list():
+    T1 = tagline("+ little dog")
+    T2 = tagline("@li little dog")
     assert_equal(T1,T2)
 
 

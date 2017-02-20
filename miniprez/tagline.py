@@ -212,24 +212,18 @@ if __name__ == "__main__":
     #print(tagline("---- .blue .purple"))
     #print(tagline("hi"))
     #print(tagline("This is the **end**. People.").build())
-    
-    print(tagline("+ list item").build())
-
-    
+    #print(tagline("  .baby").indent, tagline("baby").indent)
+    #print(tagline(".blue .red moon"))
+    #print(tagline("@h1 @h2 hi"))    
+    #print(tagline("+ list item").build())
     print(tagline("@h1(sky='orange' sun='set') .red "
                   ".blue @h2 .dragons @h3(moon='blue') hi"))
-    print(tagline("@h1 @h2 hi"))
-
-    print(tagline(".blue .red moon"))
     
-    print(tagline("").empty, tagline("hi").empty, tagline(".blue").empty)
-    print(tagline("  .baby").indent, tagline("baby").indent)
 
     T = tagline('@h1(sky="orange") @h2 @h3 hi')
     print(T.build(indent=2))
 
     print(tagline('@h2 @line').build())
-    print(tagline('cars').build())
 
     # This fails!
     # print(tagline('@background(src="www") .blue @h2 dogs').build())

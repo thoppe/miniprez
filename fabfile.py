@@ -4,7 +4,6 @@ def test():
     local("nosetests -vs")
     local("flake8 --ignore=E501 miniprez tests")
     local("aspell check README.md")
-    
     #local("detox")
 
 def pep():

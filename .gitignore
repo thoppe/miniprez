@@ -2,4 +2,8 @@
 *~
 \#*
 .\#*
+
+# Testing files
 .coverage
+.tox
+miniprez.egg-info

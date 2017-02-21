@@ -1,6 +1,6 @@
 # miniprez
 
-Dead simple markup to web-friendly presentations that look great on mobile and on the big screen.
+Simple markup to web-friendly presentations that look great on mobile and on the big screen.
 For a live demo see the tutorial [input](https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md) and the [slides](https://thoppe.github.io/miniprez/tutorial.html).
 
 Miniprez is a command-line tool that turns special markup into slides.

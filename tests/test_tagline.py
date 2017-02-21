@@ -23,7 +23,7 @@ def test_simple_header():
 def test_header_with_classes():
     T1 = tagline("@h1 .blue .red big dog")
     out = '<h1 class="blue red"><text>big dog</text></h1>'
-    assert_equal(str(T1), out)
+    assert_equal(str(T1), out)    
 
 def test_text_only():
     T1 = tagline("big dog")
@@ -104,10 +104,16 @@ def test_registered_custom_tags():
         T1 = tagline(line.format(name))
 
 def test_nested_custom_tags_with_text():
-    # Currently failing test
     T1 = tagline('@background(src=foobar) @h2 big dogs')
     out  = ('<span class="background" '
             'style="background-image:url(\'foobar\')"><h2><text>'
             'big dogs</text></h2></span>')
+
+    assert_equal(str(T1),out)
+
+def test_codeblock_with_text():
+    T1 = tagline('@codeblock print x')
+    out  = '<pre class="prettyprint">print x</pre>'
+    
 
     assert_equal(str(T1),out)

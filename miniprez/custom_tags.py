@@ -93,7 +93,8 @@ def codeblock(tagline):
     tag["class"] = ["prettyprint", ]
 
     tag.string = tagline["text"].replace('__CODE_BLOCK_SPACE', '\n').strip()
-    tagline["text"] = None
+    #tagline["text"] = None
+    tagline["text"] = ""
 
     return tag
 

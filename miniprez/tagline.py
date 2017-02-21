@@ -144,16 +144,19 @@ class tagline(object):
         for k, item in enumerate(self.tags):
             name = item["name"]
 
+            item["text"] = ""
+            is_last_element = (k == len(self.tags) - 1)
+
             # Assign text to only the final element
-            if k == len(self.tags) - 1:
-                item["text"] = ""
-            else:
+            if is_last_element:
                 item["text"] = text
 
             if name in _registered_custom_tags:
                 tag = _registered_custom_tags[name](item)
+
                 # Text may have changed, reflect this
-                self.text = item["text"]
+                if is_last_element:
+                    text  = item["text"]
 
             else:
                 tag = _soup.new_tag(name)
@@ -170,11 +173,11 @@ class tagline(object):
             blocks.append(tag)
 
         # Insert text into the deepest tag
-        if self.text:
+        if text:
             # Make any markdown modifications
-            text = inline_markdown_parser(self.text)
+            MD_text = inline_markdown_parser(text)
             tag = _soup.new_tag("text")
-            tag.append(bs4.BeautifulSoup(text, 'html.parser'))
+            tag.append(bs4.BeautifulSoup(MD_text, 'html.parser'))
 
             if blocks:
                 blocks[-1].append(tag)

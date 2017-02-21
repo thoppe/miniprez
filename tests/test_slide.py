@@ -34,6 +34,15 @@ Below is a list
 '''
 slide3_out = '''<section><text>Below is a list</text><h1><ul class="markdownlist"><li><text>item one</text></li><li><text>item <strong>two</strong></text></li></ul></h1></section>'''
 
+slide4 = '''
+----
+Below is some code
+```
+for x in range(20):
+    print x
+```
+'''
+slide4_out = '''<section><text>Below is some code</text><pre class="prettyprint">for x in range(20):\n    print x</pre></section>'''
 
 
 def test_empty_section():
@@ -56,3 +65,7 @@ def test_background_div_wrap():
 def test_markdownlist():
     S = section(slide3.split('\n'))
     assert_equal(str(S),slide3_out)
+
+def test_codeblock():
+    S = section(slide4.split('\n'))
+    assert_equal(str(S),slide4_out)

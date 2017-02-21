@@ -167,8 +167,11 @@ class section(object):
 
 if __name__ == "__main__":
     section_text = '''----
-@h1 .text-data @h2 .bg-red
-    work it girl
+This is a code block
+```
+print x
+```
+And we're done!
 '''
 
     S = section(section_text.split('\n'))

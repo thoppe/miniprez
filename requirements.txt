@@ -2,3 +2,6 @@ bs4
 emoji
 lxml
 docopt
+
+## Testings
+## flake8 autopep8 coverage nose

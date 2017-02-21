@@ -4,4 +4,4 @@ lxml
 docopt
 
 ## Testings
-## flake8 autopep8 coverage nose
+## flake8 autopep8 coverage nose tox

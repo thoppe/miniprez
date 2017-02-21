@@ -160,7 +160,7 @@ class section(object):
             yield line
 
     def __repr__(self):
-        return self.soup.prettify()
+        return str(self.soup)#.soup.prettify()
 
 
 #

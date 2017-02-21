@@ -146,7 +146,7 @@ class tagline(object):
 
             # Assign text to only the final element
             if k == len(self.tags) - 1:
-                item["text"] = None
+                item["text"] = ""
             else:
                 item["text"] = text
 

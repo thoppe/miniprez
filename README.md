@@ -29,7 +29,7 @@ If you want tags to nest into each other, whitespace matters
        This is big text.
        @strong This is big bold text.
 
-If all you want to do is create a div with a class you don't need to explictly say `@div`, for example:
+If all you want to do is create a div with a class you don't need to explicitly say `@div`, for example:
 
     .text-landing Hello.
 
@@ -39,7 +39,7 @@ Inline markdown shortcuts that work too,
 
     This is **bold**, this is _italic_, this is `code`, this is a [link](www.github.com/thoppe).
 
-The markdown is enchanced with [emoji](http://www.webpagefx.com/tools/emoji-cheat-sheet/), [font-awesome](http://fontawesome.io/icons/) and [math](https://en.wikibooks.org/wiki/LaTeX/Mathematics),
+The markdown is enhanced with [emoji](http://www.webpagefx.com/tools/emoji-cheat-sheet/), [font-awesome](http://fontawesome.io/icons/) and [math](https://en.wikibooks.org/wiki/LaTeX/Mathematics),
 
     This is a :smile: and this is ::twitter:: and and equation $(a+b)^2$.
 
@@ -75,13 +75,13 @@ With this syntax there are some additional elements miniprez has added
 | `@background_video`  | @background_video(url="https://cdn.shutterstock.com/...") | |
 | `@button`  |  @button(href="https://github.com/thoppe/miniprez") | `.ghost` text after  |
 | `@figure`  | @figure(src="images/1/image18.png" height=200px) | `height` caption text after  |
-| `@line`  | Horzontial  | Shortcut for hr  |
+| `@line`  | Horizontal  | Shortcut for hr  |
 
 
 ### Libraries used:
 
 + [webslides](https://github.com/jlantunez/webslides): Custom CSS 
-+ [KaTeX](https://github.com/Khan/KaTeX): Javascript math rendering
++ [KaTeX](https://github.com/Khan/KaTeX): JavaScript math rendering
 + [code prettify](https://github.com/google/code-prettify): Syntax highlighting 
 
 + [pyparsing](http://pyparsing.wikispaces.com/)
@@ -91,11 +91,11 @@ With this syntax there are some additional elements miniprez has added
 
 + [x] Custom tags (background, background_video, line, button, figure)
 + [x] Code blocks
-+ [x] BG videos examples!
++ [x] Background videos examples!
 + [x] Nested divs
 + [x] List support
 + [ ] Support for command line compilation
 + [ ] Embedding tools (convert project to monolith html)
 + [ ] Global options (font?)
-+ [ ] Selectively load libraries (eg. font-awesome & katex) on use
-+ [ ] Slide number url
++ [ ] Selectively load libraries (e.g. font-awesome & KaTeX) on use
++ [ ] Slide number URL

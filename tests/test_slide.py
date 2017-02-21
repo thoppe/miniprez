@@ -28,7 +28,7 @@ slide2_out = '''<section><span class="background" style="background-image:url(\'
 slide3 = '''
 ----
 Below is a list
-@h1 
+@h1
   + item one
   + item **two**
 '''
@@ -48,24 +48,29 @@ slide4_out = '''<section><text>Below is some code</text><pre class="prettyprint"
 def test_empty_section():
     empty_section = ["----"]
     S = section(empty_section)
-    assert_equal(str(S),"<section></section>")
+    assert_equal(str(S), "<section></section>")
+
 
 def test_simple_slide0():
     S = section(slide0.split('\n'))
-    assert_equal(str(S),slide0_out)
+    assert_equal(str(S), slide0_out)
+
 
 def test_simple_slide1():
     S = section(slide1.split('\n'))
-    assert_equal(str(S),slide1_out)
+    assert_equal(str(S), slide1_out)
+
 
 def test_background_div_wrap():
     S = section(slide2.split('\n'))
-    assert_equal(str(S),slide2_out)
+    assert_equal(str(S), slide2_out)
+
 
 def test_markdownlist():
     S = section(slide3.split('\n'))
-    assert_equal(str(S),slide3_out)
+    assert_equal(str(S), slide3_out)
+
 
 def test_codeblock():
     S = section(slide4.split('\n'))
-    assert_equal(str(S),slide4_out)
+    assert_equal(str(S), slide4_out)

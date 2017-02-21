@@ -5,7 +5,8 @@ Custom tags. Make sure you register new custom tags at the bottom.
 import bs4
 from inline_markdown import inline_markdown_parser, soup
 
-src_options  = ["url", "href", "src", ""]
+src_options = ["url", "href", "src", ""]
+
 
 def _get_src(tagline):
     opts = tagline["options"]
@@ -13,12 +14,12 @@ def _get_src(tagline):
     for key in src_options:
         if key in opts:
             link = opts[key]
-            opts['_'+key] = link
+            opts['_' + key] = link
             del opts[key]
             return link
-            
-        elif '_'+key in opts:
-            return opts['_'+key]
+
+        elif '_' + key in opts:
+            return opts['_' + key]
 
     return link
 
@@ -93,7 +94,7 @@ def codeblock(tagline):
     tag["class"] = ["prettyprint", ]
 
     tag.string = tagline["text"].replace('__CODE_BLOCK_SPACE', '\n').strip()
-    #tagline["text"] = None
+    # tagline["text"] = None
     tagline["text"] = ""
 
     return tag
@@ -101,6 +102,7 @@ def codeblock(tagline):
 #
 
 # Register new custom tags here
+
 
 _registered_custom_tags = {
     "background": background,

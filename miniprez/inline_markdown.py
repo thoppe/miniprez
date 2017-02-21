@@ -87,6 +87,7 @@ class Inline_Markdown_Paser(object):
         tags = self.grammar.parseString(text)
         return ' '.join(map(unicode, tags))
 
+
 # Create one shared instance
 inline_markdown_parser = Inline_Markdown_Paser()
 soup = bs4.BeautifulSoup("<div></div>", 'html.parser')

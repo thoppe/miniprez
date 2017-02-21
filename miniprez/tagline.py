@@ -130,15 +130,15 @@ class tagline(object):
         return T2.tags == self.tags
 
     def __repr__(self):
-        #keys = ("tags", "text", "indent")
-        #vals = (getattr(self, x) for x in keys)
-        #return str(dict(zip(keys, vals)))
+        # keys = ("tags", "text", "indent")
+        # vals = (getattr(self, x) for x in keys)
+        # return str(dict(zip(keys, vals)))
         return str(self.build())
 
     def build(self, **kwargs):
 
         text = self.text
-        
+
         # Build the nested tags
         blocks = []
         for k, item in enumerate(self.tags):
@@ -156,7 +156,7 @@ class tagline(object):
 
                 # Text may have changed, reflect this
                 if is_last_element:
-                    text  = item["text"]
+                    text = item["text"]
 
             else:
                 tag = _soup.new_tag(name)
@@ -165,9 +165,9 @@ class tagline(object):
                 tag['class'] = tag.get('class', []) + item["classes"]
 
             for key, val in item["options"].items():
-                if key and key[0]=='_':
+                if key and key[0] == '_':
                     continue
-                
+
                 tag[key] = val
 
             blocks.append(tag)
@@ -212,22 +212,23 @@ class tagline(object):
 
         return block
 
+
 if __name__ == "__main__":
-
-    #print(tagline("----"))
-    #print(tagline("-----"))    
-
-    #print(tagline("@h1 big dog"))
-    #print(tagline("### little dog").build())
-    #print(tagline("---- .blue .purple"))
-    #print(tagline("hi"))
-    #print(tagline("This is the **end**. People.").build())
-    #print(tagline("  .baby").indent, tagline("baby").indent)
-    #print(tagline(".blue .red moon"))
-    #print(tagline("@h1 @h2 hi"))    
-    #print(tagline("+ list item").build())
-    #print(T.build(indent=2))
-    #print(tagline('@h2 @line').build())
-    #T1 = tagline('@background(foobar)')
-    #T = tagline('@background(src="www") .blue @h2 dogs')
     pass
+
+    # print(tagline("----"))
+    # print(tagline("-----"))
+
+    # print(tagline("@h1 big dog"))
+    # print(tagline("### little dog").build())
+    # print(tagline("---- .blue .purple"))
+    # print(tagline("hi"))
+    # print(tagline("This is the **end**. People.").build())
+    # print(tagline("  .baby").indent, tagline("baby").indent)
+    # print(tagline(".blue .red moon"))
+    # print(tagline("@h1 @h2 hi"))
+    # print(tagline("+ list item").build())
+    # print(T.build(indent=2))
+    # print(tagline('@h2 @line').build())
+    # T1 = tagline('@background(foobar)')
+    # T = tagline('@background(src="www") .blue @h2 dogs')

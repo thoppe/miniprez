@@ -137,17 +137,21 @@ class tagline(object):
 
     def build(self, **kwargs):
 
+        text = self.text
+        
         # Build the nested tags
-
         blocks = []
         for k, item in enumerate(self.tags):
             name = item["name"]
+
+            # Assign text to only the final element
             if k == len(self.tags) - 1:
-                item["text"] = self.text
+                item["text"] = None
+            else:
+                item["text"] = text
 
             if name in _registered_custom_tags:
                 tag = _registered_custom_tags[name](item)
-
                 # Text may have changed, reflect this
                 self.text = item["text"]
 
@@ -222,6 +226,5 @@ if __name__ == "__main__":
     #print(T.build(indent=2))
     #print(tagline('@h2 @line').build())
     #T1 = tagline('@background(foobar)')
-    
-    # This fails!
-    print(tagline('@background(src="www") .blue @h2 dogs').build())
+    #T = tagline('@background(src="www") .blue @h2 dogs')
+    pass

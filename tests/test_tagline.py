@@ -105,6 +105,9 @@ def test_registered_custom_tags():
 
 def test_nested_custom_tags_with_text():
     # Currently failing test
-    line = '@background(src=foobar) @h2 big dogs'
-    print tagline(line)
+    T1 = tagline('@background(src=foobar) @h2 big dogs')
+    out  = ('<span class="background" '
+            'style="background-image:url(\'foobar\')"><h2><text>'
+            'big dogs</text></h2></span>')
 
+    assert_equal(str(T1),out)

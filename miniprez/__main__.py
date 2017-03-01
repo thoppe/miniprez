@@ -24,6 +24,7 @@ __location__ = os.path.realpath(os.path.join(
 
 f_base_html = os.path.join(os.path.dirname(__location__),
                            "static", "minipres_base.html")
+print(f_base_html)
 
 
 def build(args):
@@ -36,7 +37,7 @@ def build(args):
         base = bs4.BeautifulSoup(raw, 'lxml')
         slides = base.find("article", {"id": "minislides"})
 
-    F = file_iterator(f_md)
+    F = file_iterator(args["INPUT"])
 
     for k, x in enumerate(section_iterator(F)):
         soup = section(x).soup
@@ -61,8 +62,7 @@ def build(args):
         print("Output written to {OUTPUT}".format(**args))
 
 
-if __name__ == "__main__":
-
+def main():
     args = docopt(__doc__)
     f_md = args["INPUT"]
 
@@ -80,3 +80,7 @@ if __name__ == "__main__":
     while True:
         build(args)
         time.sleep(float(args["--watch"]))
+
+
+if __name__ == "__main__":
+    main()

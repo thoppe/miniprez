@@ -1,0 +1,7 @@
+include *.html
+include *.md
+include *.py
+include *.txt
+include tox.ini
+recursive-include miniprez/static *
+recursive-include tests *.py

@@ -6,7 +6,7 @@ from os.path import realpath, join, dirname, basename
 
 __location__ = realpath(join(os.getcwd(), dirname(__file__)))
 
-static_path = join(dirname(__location__), "static")
+static_path = join(dirname(__location__), "miniprez", "static")
 dest_path = os.getcwd()
 
 
@@ -18,7 +18,8 @@ def build_environment(**args):
     for root, dirs, files in os.walk(static_path):
 
         # Create any missing directories
-        rel_dir = root.split('/miniprez/')[-1]
+        rel_dir = root.split('/miniprez/miniprez/')[-1]
+
         if not os.path.exists(rel_dir):
             if verbose:
                 print("Creating directory {}".format(rel_dir))

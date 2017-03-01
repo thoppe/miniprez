@@ -22,15 +22,13 @@ from build_env import build_environment
 __location__ = os.path.realpath(os.path.join(
     os.getcwd(), os.path.dirname(__file__)))
 
-f_base_html = os.path.join(os.path.dirname(__location__),
-                           "static", "minipres_base.html")
-print(f_base_html)
-
 
 def build(args):
     if not args["--nocopy"]:
         if build_environment(**args):
             print("Created environment in ./static")
+
+    f_base_html = os.path.join(__location__, "static", "minipres_base.html")
 
     with open(f_base_html) as FIN:
         raw = FIN.read()

@@ -1,8 +1,19 @@
 from fabric.api import local
+import time
+
+f_tutorial = "tutorial.md"
+
+def build():
+    local("python miniprez/miniprez.py {}".format(f_tutorial))
+
+def watch():
+    while True:
+        build()
+        time.sleep(1.0)
 
 def test():
     local("nosetests -vs")
-    local("flake8 --ignore=E501 miniprez tests")
+    local("flake8 --ignore=E501,F821 miniprez tests")
     local("aspell check README.md")
     #local("detox")
 

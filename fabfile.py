@@ -17,11 +17,16 @@ def test():
     local("nosetests -vs")
     local("flake8 --ignore=E501,F821 miniprez tests")
     local("aspell check README.md")
-    local("check-manifest")
+    local("check-manifest --ignore tutorial.html")
     local("python miniprez tutorial.md")
 
 def pep():
     local("autopep8 miniprez/*.py tests/*.py -a --in-place --jobs=0")
+
+def push():
+    test()
+    local("tox")
+    local("git commit -a")
 
 def coverage():
     local("nosetests --with-coverage --cover-package=miniprez")

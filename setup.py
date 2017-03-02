@@ -15,6 +15,7 @@ setup(
     keywords = ["presentations", "reveal.js", "powerpoint", ],
     url="https://github.com/thoppe/miniprez",
     test_suite="tests",
+    include_package_data=True,
     entry_points={
         'console_scripts': [
             'miniprez=miniprez.__main__:main',

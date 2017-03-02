@@ -7,3 +7,6 @@
 .coverage
 .tox
 miniprez.egg-info
+
+# Temp files
+static

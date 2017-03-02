@@ -17,6 +17,7 @@ def test():
     local("nosetests -vs")
     local("flake8 --ignore=E501,F821 miniprez tests")
     local("aspell check README.md")
+    local("check-manifest")
     local("python miniprez tutorial.md")
 
 def pep():

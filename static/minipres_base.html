@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- 
+      Hi you.
+
+      Feel free to edit the html here, but minislides was
+      designed to be run on the command line by compiling a .md file.
+
+      Got an issue or something to say? 
+      Contribute on Github: https://github.com/thoppe/miniprez
+      
+      Thanks, you.
+      @metasemantic
+    -->
+      
+    <!-- SEO --> 
+    <title>miniprez: Simple, beautiful web presentations</title>
+    <meta name="description" content="<Miniprez: Simple, beautiful web presentations">
+    
+    <!-- URL CANONICAL -->
+    <!-- <link rel="canonical" href="http://your-url.com/"> -->
+
+    <!-- KaTeX imports -->
+    <link rel="stylesheet" href="static/katex/katex.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext" rel="stylesheet">
+    
+    <!-- CSS Base -->
+    <link rel="stylesheet" type='text/css' media='all' href="static/css/webslides_base.css">
+    
+    <!-- CSS Colors -->
+    <link rel="stylesheet" type='text/css' media='all' href="static/css/webslides_colors.css">
+
+    <!-- JavaScript code prettifier from Google -->
+    <script src="static/js/run_prettify.js"></script>
+
+    <!-- Font-awesome CSS --> 
+    <link rel="stylesheet" href="static/css/font-awesome.min.css ">
+    
+    <!-- miniprez style adjustments -->
+    <link rel="stylesheet" href="static/css/style_adjustments.css">
+
+    <!-- SOCIAL CARDS (ADD YOUR INFO) -->
+    
+    <!-- FACEBOOK -->
+    <meta property="og:url" content="http://your-url.com/"> <!-- YOUR URL -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="WebSlides - Making HTML Presentations Easy"> <!-- EDIT -->
+    <meta property="og:description" content="WebSlides is about telling stories beautifully. Just the essential features. Good karma."> <!-- EDIT -->
+    <meta property="og:updated_time" content="2017-01-04T17:20:50"> <!-- EDIT -->
+    <meta property="og:image" content="static/images/share-webslides.jpg"> <!-- EDIT -->
+    
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@metasemantic"> <!-- EDIT -->
+    <meta name="twitter:creator" content="@metasemantic"> <!-- EDIT -->
+    <meta name="twitter:title" content="minipres - ..."> <!-- EDIT -->
+    <meta name="twitter:description" content="..."> <!-- EDIT -->
+    <meta name="twitter:image" content="static/images/share-webslides.jpg"> <!-- EDIT -->
+    
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" sizes="16x16" href="static/images/favicons/favicon.png">
+    <link rel="shortcut icon" sizes="32x32" href="static/images/favicons/favicon-32.png">
+    <link rel="apple-touch-icon icon" sizes="76x76" href="static/images/favicons/favicon-76.png">
+    <link rel="apple-touch-icon icon" sizes="120x120" href="static/images/favicons/favicon-120.png">
+    <link rel="apple-touch-icon icon" sizes="152x152" href="static/images/favicons/favicon-152.png">
+    <link rel="apple-touch-icon icon" sizes="180x180" href="static/images/favicons/favicon-180.png">
+    <link rel="apple-touch-icon icon" sizes="192x192" href="static/images/favicons/favicon-192.png">
+    
+    <!-- Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#333333">
+    
+  </head>
+  <body>
+
+    <main role="main">          
+      <article id="minislides">
+        <!-- Content will be auto filled here -->
+      </article>
+    </main>
+  <!-- end main --> 
+  
+  <!-- jQuery (required for slides to work) -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- Custom slide control -->
+  <script src="static/js/slider.js"></script>
+  
+  
+
+  <!-- KaTeX imports -->
+  <script src="static/katex/katex.min.js"></script>
+
+  <!-- Render the equations -->
+  <script type="text/javascript">
+
+    // grab all elements in DOM with the class 'equation'
+    var tex = document.getElementsByClassName("equation");
+
+    // for each element, render the expression attribute
+    Array.prototype.forEach.call(tex, function(el) {
+        katex.render(el.getAttribute("data-expr"), el);
+    });
+  </script>
+  <!-- End of imports -->
+  
+  </body>
+</html>

@@ -99,3 +99,7 @@ With this syntax there are some additional elements miniprez has added
 + [ ] Global options (font?)
 + [ ] Selectively load libraries (e.g. font-awesome & KaTeX) on use
 + [ ] Slide number URL
+
+### Presentations
+
+First presented at [DC: Hack && Tell Round 41: Polka Sprockets](https://www.meetup.com/DC-Hack-and-Tell/events/236404104/).

@@ -1,4 +1,4 @@
-# miniprez
+# MINIPREZ
 
 Simple markup to web-friendly presentations that look great on mobile and on the big screen.
 For a live demo see the tutorial [input](https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md) and the [slides](https://thoppe.github.io/miniprez/tutorial.html).
@@ -59,7 +59,7 @@ Columns can be built up from `.grid` and `.column` or use the shorthand for a co
         | # Big title
 	| some text
     
-Large code blocks are made from fences of ` ``` ` and will be automatically highlighted.
+Large code fences made from ` ``` ` and will be automatically code highlighted
 
     ```
     for x in A:
@@ -87,7 +87,6 @@ With this syntax there are some additional elements miniprez has added
 + [webslides](https://github.com/jlantunez/webslides): Custom CSS 
 + [KaTeX](https://github.com/Khan/KaTeX): JavaScript math rendering
 + [code prettify](https://github.com/google/code-prettify): Syntax highlighting 
-
 + [pyparsing](http://pyparsing.wikispaces.com/)
 + [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 

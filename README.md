@@ -12,6 +12,14 @@ View `hello.html` in your web-browser and make sure to refresh each time you re-
 
     pip install git+git://github.com/miniprez/miniprez.git
 
+### Usage
+
+miniprez is a command-line utility. If you've written a text file named `hello.md` with your presentation you can compile
+
+    miniprez hello.md
+
+and if everything works, `hello.html` should be ready to go! Follow the examples below and dig into [tutorial.md](tutorial.md) for more syntax usage. To continuously rebuild every 3 seconds add the flag `--watch=3`.
+
 ### Tutorial
 
 All slides are separated by `----`. Hello world in miniprez looks like:

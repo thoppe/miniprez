@@ -2,12 +2,4 @@
 *~
 \#*
 .\#*
-
-# Testing files
-.coverage
 .tox
-miniprez.egg-info
-
-# Temp files
-static
-tutorial.html

@@ -10,7 +10,7 @@ View `hello.html` in your web-browser and make sure to refresh each time you re-
 
 ### Installation
 
-    pip install git+git://github.com/miniprez/miniprez.git
+    pip install git+git://github.com/thoppe/miniprez.git
 
 ### Usage
 

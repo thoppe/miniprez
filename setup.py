@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 
 __local__ = os.path.abspath(os.path.dirname(__file__))
-f_version = os.path.join(__local__, 'nlpre', '_version.py')
+f_version = os.path.join(__local__, 'miniprez', '_version.py')
 exec(open(f_version).read())
 
 setup(

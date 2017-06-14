@@ -59,7 +59,7 @@ Columns can be built up from `.grid` and `.column` or use the shorthand for a co
         | # Big title
 	| some text
     
-Large code blocks are made from fences of `\`\`\`` and will be automatically highlighted.
+Large code blocks are made from fences of ` ``` ` and will be automatically highlighted.
 
     ```
     for x in A:

@@ -2,6 +2,7 @@ bs4
 emoji
 lxml
 docopt
+pyparsing
 
 ## Testings
 ## flake8 autopep8 coverage nose tox

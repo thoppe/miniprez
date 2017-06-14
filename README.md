@@ -8,6 +8,10 @@ Create a file called `hello.md` with the following examples to follow along.
 Run `miniprez hello.md` to create a file named `hello.html`.
 View `hello.html` in your web-browser and make sure to refresh each time you re-compile your slides!
 
+### Installation
+
+    pip install git+git://github.com/miniprez/miniprez.git
+
 ### Tutorial
 
 All slides are separated by `----`. Hello world in miniprez looks like:

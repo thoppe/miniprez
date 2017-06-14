@@ -36,6 +36,8 @@ def clean():
         shutil.rmtree("static")
     if os.path.exists("tutorial.html"):
         os.remove("tutorial.html")
+    if os.path.exists("miniprez.egg-info"):
+        shutil.rmtree("miniprez.egg-info")
     
 
 

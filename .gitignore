@@ -9,4 +9,5 @@
 miniprez.egg-info
 
 # Temp files
-#static
+static
+tutorial.html

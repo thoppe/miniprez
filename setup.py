@@ -1,7 +1,9 @@
-
 from setuptools import setup
+import os
 
-__version__ = 0.1
+__local__ = os.path.abspath(os.path.dirname(__file__))
+f_version = os.path.join(__local__, 'miniprez', '_version.py')
+exec(open(f_version).read())
 
 setup(
     name="miniprez",

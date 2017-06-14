@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 """
-Usage: miniprez.py INPUT [-o OUTPUT|-t] [--condense] [--nocopy] [--verbose] [--watch=<kn>]
+Usage:
+    miniprez.py INPUT [-o OUTPUT|-t] [--condense] [--nocopy] [--verbose] [--watch=<kn>]
+    miniprez.py --version
 
 -h --help     Show this help
 -o, --output  FILE specify output file [default: INPUT.html]
@@ -9,17 +11,22 @@ Usage: miniprez.py INPUT [-o OUTPUT|-t] [--condense] [--nocopy] [--verbose] [--w
 --condense    Don't pretty-print the output [default: False]
 --nocopy      Don't copy the static files: css, js, etc [default: False]
 --verbose     Print more text [default: False]
+--version     Output the current version number and exit
 """
 
 import os
 import time
 from docopt import docopt
-from miniprez import build
+import miniprez
 
 
 def main():
     args = docopt(__doc__)
     f_md = args["INPUT"]
+
+    if args["--version"]:
+        print miniprez.__version__
+        exit()
 
     if not os.path.exists(f_md):
         raise IOError("{} not found".format(f_md))
@@ -29,11 +36,11 @@ def main():
         args["OUTPUT"] = '.'.join(f_base.split('.')[:-1]) + '.html'
 
     if args["--watch"] == 'once':
-        build(args)
+        miniprez.build(args)
         exit()
 
     while True:
-        build(args)
+        miniprez.build(args)
         time.sleep(float(args["--watch"]))
 
 

@@ -1,4 +1,4 @@
-# miniprez
+# MINIPREZ
 
 Simple markup to web-friendly presentations that look great on mobile and on the big screen.
 For a live demo see the tutorial [input](https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md) and the [slides](https://thoppe.github.io/miniprez/tutorial.html).
@@ -7,6 +7,18 @@ Miniprez is a command-line tool that turns special markup into slides.
 Create a file called `hello.md` with the following examples to follow along.
 Run `miniprez hello.md` to create a file named `hello.html`.
 View `hello.html` in your web-browser and make sure to refresh each time you re-compile your slides!
+
+### Installation
+
+    pip install git+git://github.com/miniprez/miniprez.git
+
+### Usage
+
+miniprez is a command-line utility. If you've written a text file named `hello.md` with your presentation you can compile
+
+    miniprez hello.md
+
+and if everything works, `hello.html` should be ready to go! Follow the examples below and dig into [tutorial.md](tutorial.md) for more syntax usage. To continuously rebuild every 3 seconds add the flag `--watch=3`.
 
 ### Tutorial
 
@@ -55,7 +67,7 @@ Columns can be built up from `.grid` and `.column` or use the shorthand for a co
         | # Big title
 	| some text
     
-Large code blocks are made from fences of '```' and will be automatically highlighted.
+Large code fences made from ` ``` ` and will be automatically code highlighted
 
     ```
     for x in A:
@@ -83,7 +95,6 @@ With this syntax there are some additional elements miniprez has added
 + [webslides](https://github.com/jlantunez/webslides): Custom CSS 
 + [KaTeX](https://github.com/Khan/KaTeX): JavaScript math rendering
 + [code prettify](https://github.com/google/code-prettify): Syntax highlighting 
-
 + [pyparsing](http://pyparsing.wikispaces.com/)
 + [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
 

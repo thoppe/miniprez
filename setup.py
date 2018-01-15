@@ -24,6 +24,14 @@ setup(
         ]
     },
     
+    install_requires=[
+        "pyparsing",
+        "bs4",
+        "emoji",
+        "lxml",
+        "docopt",
+    ],
+    
     # Fill this in when ready...
     download_url='',
 )

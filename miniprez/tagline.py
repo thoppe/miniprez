@@ -199,7 +199,7 @@ class tagline(object):
             return block
 
         # Othwerwise, fix punctuation errors
-        punctuation = ".,!/%;:'\""
+        punctuation = ".,!/;:%'\""
 
         for x in block.find():
             if not isinstance(x, bs4.element.NavigableString):
@@ -232,3 +232,5 @@ if __name__ == "__main__":
     # print(tagline('@h2 @line').build())
     # T1 = tagline('@background(foobar)')
     # T = tagline('@background(src="www") .blue @h2 dogs')
+    #print tagline('@figure(src="www" width=700) ')
+    print tagline('@img(src="www" width=700) ')

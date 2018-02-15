@@ -25,7 +25,7 @@ def main():
     f_md = args["INPUT"]
 
     if args["--version"]:
-        print miniprez.__version__
+        print(miniprez.__version__)
         exit()
 
     if not os.path.exists(f_md):

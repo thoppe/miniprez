@@ -57,11 +57,23 @@ def figure(tagline):
     img['style'] = []
 
     if 'height' in tagline["options"]:
-        opt = "height:{}".format(tagline["options"].pop('height'))
+        val = tagline["options"].pop('height')
+        try:
+            float(val)
+            val += "%"
+        except:
+            pass
+        opt = "height:{}".format(val)
         img['style'].append(opt)
 
     if 'width' in tagline["options"]:
-        opt = "width:{}".format(tagline["options"].pop('width'))
+        val = tagline["options"].pop('width')
+        try:
+            float(val)
+            val += "%"
+        except:
+            pass
+        opt = "width:{}".format(val)
         img['style'].append(opt)
 
     tag.append(img)
@@ -75,6 +87,34 @@ def figure(tagline):
         tag.append(caption)
 
     return tag
+
+
+def img(tagline):
+    img = soup.new_tag("img")
+    img['src'] = _get_src(tagline)
+    img['style'] = []
+
+    if 'height' in tagline["options"]:
+        val = tagline["options"].pop('height')
+        try:
+            float(val)
+            val += "%"
+        except:
+            pass
+        opt = "height:{}".format(val)
+        img['style'].append(opt)
+
+    if 'width' in tagline["options"]:
+        val = tagline["options"].pop('width')
+        try:
+            float(val)
+            val += "%"
+        except:
+            pass
+        opt = "width:{}".format(val)
+        img['style'].append(opt)
+        
+    return img
 
 
 def line(tagline):
@@ -112,4 +152,5 @@ _registered_custom_tags = {
     "button": button,
     "codeblock": codeblock,
     "figure": figure,
+    "img": img, 
 }

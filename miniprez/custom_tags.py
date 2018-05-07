@@ -28,6 +28,7 @@ def background_video(tagline):
     tag = soup.new_tag("video")
     tag["autoplay"] = None
     tag["loop"] = None
+    tag["muted"] = None
     tag["class"] = ["background-video"]
     source = soup.new_tag("source")
     source['src'] = _get_src(tagline)

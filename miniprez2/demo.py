@@ -2,6 +2,11 @@ import mistune
 import bs4
 import re
 
+# https://github.com/webslides/WebSlides
+# https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md
+# https://webslides.tv/demos/
+# https://github.com/lepture/mistune
+
 
 _global_class_pattern = re.compile('\.\.\.([a-z\-]+)')
 _class_pattern = re.compile('\.\.([a-z\-]+)')

@@ -1,0 +1,9 @@
+-e .
+
+# Needed for testing
+coverage
+flake8
+nose
+Fabric3
+black
+tox

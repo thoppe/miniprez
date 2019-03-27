@@ -233,4 +233,4 @@ if __name__ == "__main__":
     # T1 = tagline('@background(foobar)')
     # T = tagline('@background(src="www") .blue @h2 dogs')
     #print tagline('@figure(src="www" width=700) ')
-    print tagline('@img(src="www" width=700) ')
+    print (tagline('@img(src="www" width=700) '))

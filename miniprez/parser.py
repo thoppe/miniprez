@@ -2,7 +2,7 @@ import itertools
 import bs4
 import copy
 
-from tagline import tagline
+from .tagline import tagline
 
 _section_header_token = '----'
 _comment_marker_token = '//'

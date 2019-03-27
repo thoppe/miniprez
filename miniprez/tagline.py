@@ -3,8 +3,8 @@ import bs4
 import pyparsing as pyp
 from pyparsing import Word, Group, QuotedString, Combine
 from pyparsing import ZeroOrMore, OneOrMore, Optional, Literal
-from custom_tags import _registered_custom_tags
-from inline_markdown import inline_markdown_parser
+from .custom_tags import _registered_custom_tags
+from .inline_markdown import inline_markdown_parser
 
 _soup = bs4.BeautifulSoup("", "html.parser")
 

@@ -21,3 +21,8 @@
 Oh, and it should work well* on mobile too.
 
 .@footer ..alignright *just show me the content!
+
+------
+
+# Testing an equation
+# $x^2 = x*x$

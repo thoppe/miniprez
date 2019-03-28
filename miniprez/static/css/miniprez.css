@@ -1,0 +1,28 @@
+/* Clean up markdown lists */
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+ul>li {
+    margin:0 0 2rem 0;
+}
+
+/* On mobile devices, headers and footers overlap text, 
+   remove absolute positioning */
+
+@media only screen and (max-device-width: 640px) {
+    header,
+    section footer {
+	position: inherit !important;
+    }
+}
+
+.left { text-align: left; }
+.right { text-align: right; }
+
+
+code {
+    display: inline-table;
+}

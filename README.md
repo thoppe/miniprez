@@ -1,7 +1,7 @@
 Desired functionality
 
 + [x] async building
-+ [ ] pagedown weird and broken...
++ [x] pagedown weird and broken... (force feed jquery though)
 + [ ] make into module (deprecate old version to directory)
 + [ ] importlib to access static files
 + [ ] (double dot) .. syntax

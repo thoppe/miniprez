@@ -57,8 +57,12 @@ def build_body(html):
     css = soup.new_tag("link", href="static/css/miniprez.css", **css_args)
     soup.head.append(css)
 
-    # script = soup.new_tag('script', src="static/js/webslides.js")
-    # soup.body.append(script)
+    script = soup.new_tag(
+        'script', src="https://code.jquery.com/jquery-3.1.1.min.js")
+    soup.body.append(script)
+    
+    script = soup.new_tag('script', src="static/js/slider.js")
+    soup.body.append(script)
 
     # Remove empty paragraph tags
     for p in soup.find_all("p", text=None):

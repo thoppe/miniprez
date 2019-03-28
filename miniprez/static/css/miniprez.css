@@ -1,5 +1,10 @@
-/* Clean up markdown lists */
+/* Fix the hidding of side bars */
+#webslides {
+  overflow-y: visible;
+  overflow-x: visible;
+}
 
+/* Clean up markdown lists */
 ul {
     padding: 0;
     list-style: none;

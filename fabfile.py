@@ -2,8 +2,12 @@ from fabric.api import local
 
 exclude_command = ""
 # exclude_command = "--exclude nlpre/spacy_models/"
-# def test():
-#    local("nosetests --with-coverage --cover-package nlpre --cover-html")
+
+
+def test():
+    local("rm -rf static/")
+    local("python miniprez index.md")
+
 
 # def view_cover():
 #    local("xdg-open cover/index.html")

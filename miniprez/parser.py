@@ -1,12 +1,7 @@
 import mistune
 import bs4
 import re
-import os
-from importlib import resources
-import logging
-
-logger = logging.getLogger("miniprez")
-
+from build_static import include_resource
 
 # https://github.com/webslides/WebSlides
 # https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md
@@ -53,34 +48,15 @@ def miniprez_markdown(markdown_text):
     return str(article)
 
 
-def add_file(filename):
-
-    if not os.path.exists(filename):
-        logger.warning(f"Building {filename}")
-
-        # Create the directory if we need to
-        directory = os.path.dirname(filename)
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-
-        module_path = ".".join(os.path.split(directory))
-        basename = os.path.basename(filename)
-
-        # Read the file into the location
-        res = resources.open_binary(module_path, basename)
-        with res as FIN, open(filename, "wb") as FOUT:
-            FOUT.write(res.read())
-
-
 def add_script(soup, src):
-    add_file(src)
+    include_resource(src)
 
     tag = soup.new_tag("script", src=src)
     soup.body.append(tag)
 
 
 def add_css(soup, src):
-    add_file(src)
+    include_resource(src)
 
     css_args = {"rel": "stylesheet", "type": "text/css", "media": "all"}
     tag = soup.new_tag("link", href=src, **css_args)

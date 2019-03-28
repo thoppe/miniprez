@@ -14,7 +14,7 @@ Options:
 import asyncio
 from docopt import docopt
 from _version import __version__
-from build_loop import parser_loop, build_html
+from continuous_integration import parser_loop, build_html
 
 
 def main():

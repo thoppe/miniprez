@@ -8,3 +8,4 @@ Desired functionality
 + [ ] pulling external resources locally
 + [ ] Notes when resources are not being used
 + [ ] Math support optionally loaded
++ [ ] Check python version?

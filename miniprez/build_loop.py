@@ -30,20 +30,17 @@ async def file_watcher(target_file, sleep_time=0.5):
 
 async def parser_loop(f_markdown):
     """
-    Main event loop. If the target file is modified, start a rebuild.
+    Main event loop. If the target file is modified, or new start a build.
     """
-
     async for f_target, dt in file_watcher(f_markdown):
-
-        # If dt is not None, this isn't the first build
-        if dt:
-            logger.warning(f"{f_target} modified, building")
-
-        # Regardless, start the build
         build_html(f_target)
 
 
 def build_html(f_target):
+    """
+    Build the html from the markdown.
+    """
+    
     f_html_output = f_target.replace(".md", ".html")
     logger.warning(f"Building {f_target} to {f_html_output}")
 

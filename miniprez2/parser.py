@@ -7,7 +7,6 @@ import re
 # https://webslides.tv/demos/
 # https://github.com/lepture/mistune
 
-
 _global_class_pattern = re.compile('\.\.\.([a-z\-]+)')
 _class_pattern = re.compile('\.\.([a-z\-]+)')
 _end_class_pattern = re.compile('\.\.')
@@ -71,49 +70,11 @@ def build_body(html):
     
     return soup
 
-text = '''
-# header 1 **so bold** 
-## header 2
+if __name__ == "__main__":
+    text = '**hello** world.'
 
------
-
-inline `code`
-For the win!
-
------
- 
-$x^2$
-'''
-
-text = '''...bg-white ...dark
-..aligncenter 
-
-### ..text-data **miniprez** ..
-#### Beautiful presentations in minimalist format
-
-..text-intro miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
-
------
-...bg-black 
-
-# ..text-landing The problem ..
-
-..text-intro
-+ I want simple and beautiful presentations.
-+ Presentations that compile from text to interactive webpages.
-+ Presentations that seperate content from style like Markdown. 
-+ Presentations that render mathematics and highlight code.
-
-..
-Oh, and it should work well* on mobile too.
-
-.@footer ..alignright *just show me the content!
-'''
-html = miniprez_markdown(text)
-
-
-soup = build_body(html)
-with open('test.html', 'w') as FOUT:
-    FOUT.write(str(soup))
-
-print(soup.prettify())
+    html = miniprez_markdown(text)
+    soup = build_body(html)
+    #with open('test.html', 'w') as FOUT:
+    #    FOUT.write(str(soup))
+    print(soup.prettify())

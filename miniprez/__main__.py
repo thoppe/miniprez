@@ -21,7 +21,7 @@ def main():
     args = docopt(__doc__, version=__version__)
     f_markdown = args["<markdown_file>"]
 
-    if args['watch']:
+    if args["watch"]:
         loop = asyncio.get_event_loop()
         function = parser_loop(f_markdown)
         loop.run_until_complete(function)

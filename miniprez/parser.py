@@ -46,23 +46,25 @@ def miniprez_markdown(markdown_text):
     return str(article)
 
 
+def add_script(soup, src):
+    tag = soup.new_tag("script", src=src)
+    soup.body.append(tag)
+
+
+def add_css(soup, src):
+    css_args = {"rel": "stylesheet", "type": "text/css", "media": "all"}
+    tag = soup.new_tag("link", href=src, **css_args)
+    soup.head.append(tag)
+
+
 def build_body(html):
     soup = bs4.BeautifulSoup(html, "html5lib")
 
-    css_args = {"rel": "stylesheet", "type": "text/css", "media": "all"}
+    add_css(soup, "static/css/webslides.css")
+    add_css(soup, "static/css/miniprez.css")
 
-    css = soup.new_tag("link", href="static/css/webslides.css", **css_args)
-    soup.head.append(css)
-
-    css = soup.new_tag("link", href="static/css/miniprez.css", **css_args)
-    soup.head.append(css)
-
-    script = soup.new_tag(
-        'script', src="https://code.jquery.com/jquery-3.1.1.min.js")
-    soup.body.append(script)
-    
-    script = soup.new_tag('script', src="static/js/slider.js")
-    soup.body.append(script)
+    add_script(soup, "https://code.jquery.com/jquery-3.1.1.min.js")
+    add_script(soup, "static/js/slider.js")
 
     # Remove empty paragraph tags
     for p in soup.find_all("p", text=None):

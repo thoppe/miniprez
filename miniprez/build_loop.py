@@ -40,7 +40,7 @@ def build_html(f_target):
     """
     Build the html from the markdown.
     """
-    
+
     f_html_output = f_target.replace(".md", ".html")
     logger.warning(f"Building {f_target} to {f_html_output}")
 

@@ -4,3 +4,6 @@ mistune
 docopt
 bs4
 html5lib
+
+# For testing
+Fabric3

@@ -7,12 +7,14 @@ Usage:
 
 Options:
   -h --help     Show this screen.
+  -v --version  Show the version.
 """
 
 import asyncio
 import os 
 from docopt import docopt
 from parser import  miniprez_markdown, build_body
+from _version import __version__
 
 import logging
 logger = logging.getLogger('miniprez')
@@ -66,10 +68,9 @@ def build_html(f_target):
     with open(f_html_output, 'w') as FOUT:
         FOUT.write(soup.prettify())
 
-
             
 if __name__ == "__main__":
-    arguments = docopt(__doc__, version='UNVERSIONED')
+    arguments = docopt(__doc__, version=__version__)
     f_markdown = arguments["<markdown_file>"]
 
     loop = asyncio.get_event_loop()

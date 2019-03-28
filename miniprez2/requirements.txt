@@ -1,8 +1,6 @@
 # markdown parser
-
 mistune
+
+docopt
 bs4
 html5lib
-
-# watchdog
-# watchgod

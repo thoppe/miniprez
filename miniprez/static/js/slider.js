@@ -1,30 +1,6 @@
-var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent) ? true : false;
-
-var _scroll_check_interval = 100;
 var _slide_speed = 300;
 var _slides_visible = null;
 
-var has_scrolled = true;
-
-// Only run this if we are not on mobile
-// We should actually capture these events better, right now
-// animation triggers them
-/*
-if(!isMobile) {
-    window.onscroll = function() {
-        has_scrolled = true;
-    };
-}
-
-if(!isMobile) {
-    setInterval(function() {
-        if(has_scrolled) {
-            has_scrolled = false;
-            onmove();
-        }
-    }, _scroll_check_interval);
-}
-*/
 $( document ).ready(function() {
     onmove();
 });
@@ -72,7 +48,6 @@ function moveDOWN() {
         }
     }
 
-    //console.log("DOWN", _slides_visible); 
 }
 
 function moveUP() {
@@ -98,22 +73,9 @@ $(document).keydown(function(e) {
     /*
     case 37: break;
     case 39: break;
-
     case 38: // up
-        e.preventDefault();
-        moveUP();
-        break;
-        
     case 40: // down
-        e.preventDefault();
-        moveDOWN();
-        break;
     */
-    case 32: // down
-        e.preventDefault();
-        moveDOWN();
-        break;
-
         
     case 33: // pageup
         e.preventDefault();

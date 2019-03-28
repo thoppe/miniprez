@@ -25,7 +25,7 @@ def miniprez_markdown(markdown_text):
     article = bs4.BeautifulSoup("", "html.parser").new_tag("article")
     article["id"] = "webslides"
 
-    for html in html.split(strict_hr_tag):
+    for slide_number, html in enumerate(html.split(strict_hr_tag)):
 
         # Note the globals and remove them
         section_classes = _global_class_pattern.findall(html)
@@ -39,6 +39,7 @@ def miniprez_markdown(markdown_text):
 
         section = soup.new_tag("section")
         section["class"] = section_classes
+        section["data-slide-number"] = slide_number
 
         section.append(soup)
         article.append(section)
@@ -63,7 +64,7 @@ def build_body(html):
     add_css(soup, "static/css/webslides.css")
     add_css(soup, "static/css/miniprez.css")
 
-    add_script(soup, "https://code.jquery.com/jquery-3.1.1.min.js")
+    add_script(soup, "static/js/jquery-3.1.1.min.js")
     add_script(soup, "static/js/slider.js")
 
     # Remove empty paragraph tags

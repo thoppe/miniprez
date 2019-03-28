@@ -3,11 +3,14 @@
 \#*
 .\#*
 
+# pyenv file
+.python-version
+
 # Testing files
-.coverage
-.tox
-miniprez.egg-info
+#.coverage
+#.tox
+#miniprez.egg-info
 
 # Temp files
-static
-tutorial.html
+#static
+#tutorial.html

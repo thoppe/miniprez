@@ -1,20 +1,6 @@
-"""Miniprez. 
-Running with a filename starts a watcher that will build the html whenever
-the input changes.
-
-Usage:
-  miniprez.py <markdown_file>
-
-Options:
-  -h --help     Show this screen.
-  -v --version  Show the version.
-"""
-
 import asyncio
 import os 
-from docopt import docopt
 from parser import  miniprez_markdown, build_body
-from _version import __version__
 
 import logging
 logger = logging.getLogger('miniprez')
@@ -40,7 +26,7 @@ async def file_watcher(target_file, sleep_time=0.5):
         await asyncio.sleep(sleep_time)
 
         
-async def parser_loop():
+async def parser_loop(f_markdown):
     '''
     Main event loop. If the target file is modified, start a rebuild.
     '''
@@ -67,11 +53,3 @@ def build_html(f_target):
 
     with open(f_html_output, 'w') as FOUT:
         FOUT.write(soup.prettify())
-
-            
-if __name__ == "__main__":
-    arguments = docopt(__doc__, version=__version__)
-    f_markdown = arguments["<markdown_file>"]
-
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(parser_loop())

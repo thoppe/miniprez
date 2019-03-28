@@ -7,3 +7,6 @@ html5lib
 
 # For testing
 Fabric3
+
+# For linting
+black

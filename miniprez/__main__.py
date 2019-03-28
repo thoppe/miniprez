@@ -18,9 +18,10 @@ from build_loop import parser_loop
 def main():
     args = docopt(__doc__, version=__version__)
     f_markdown = args["<markdown_file>"]
-    
+
     loop = asyncio.get_event_loop()
     loop.run_until_complete(parser_loop(f_markdown))
-    
+
+
 if __name__ == "__main__":
     main()

@@ -24,7 +24,7 @@ async def file_watcher(target_file, sleep_time=0.5):
     '''
     
     # Yield the file first
-    yield target_file, None
+    yield target_file, 0
 
     latest_modification_time = os.path.getmtime(target_file)
     
@@ -39,11 +39,17 @@ async def file_watcher(target_file, sleep_time=0.5):
 
         
 async def parser_loop():
+    '''
+    Main event loop. If the target file is modified, start a rebuild.
+    '''
 
     async for f_target, dt in file_watcher(f_markdown):
+
+        # If dt is not None, this isn't the first build
         if dt:
             logger.warning(f"{f_target} modified, building")
 
+        # Regardless, start the build
         build_html(f_target)
 
 

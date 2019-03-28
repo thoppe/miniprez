@@ -8,15 +8,15 @@ from build_static import include_resource
 # https://webslides.tv/demos/
 # https://github.com/lepture/mistune
 
-_global_class_pattern = re.compile("\.\.\.([a-z\-]+)")
-_class_pattern = re.compile("\.\.([a-z\-]+)")
+_global_class_pattern = re.compile("\.\.\.([a-z\-0-9]+)")
+_class_pattern = re.compile("\.\.([a-z\-0-9]+)")
 _end_class_pattern = re.compile("\.\.")
 _tag_pattern = re.compile(".@([a-z]+)")
 
 
 def miniprez_markdown(markdown_text):
 
-    parser = mistune.Markdown(escape=False, use_xhtml=True, hard_wrap=True)
+    parser = mistune.Markdown(escape=False, use_xhtml=True, hard_wrap=False)
     html = parser(markdown_text)
     html = _tag_pattern.sub(r"<\1>", html)
 
@@ -74,8 +74,8 @@ def build_body(html):
 
     # Remove empty paragraph tags
     for p in soup.find_all("p", text=None):
-        # pass
-        p.decompose()
+        if not p.contents:
+            p.decompose()
 
     return soup
 

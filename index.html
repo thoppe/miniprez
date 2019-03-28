@@ -6,6 +6,8 @@
  <body>
   <article id="webslides">
    <section class="bg-white dark" data-slide-number="0">
+    <p>
+    </p>
     <div class="aligncenter">
      <h3>
       <div class="text-data">
@@ -51,7 +53,6 @@
       </li>
      </ul>
      <div>
-      <br/>
       Oh, and it should work well* on mobile too.
       <footer>
        <div class="alignright">
@@ -61,13 +62,280 @@
      </div>
     </div>
    </section>
-   <section class="" data-slide-number="2">
-    <h1>
-     Testing an equation
-    </h1>
-    <h1>
-     $x^2 = x*x$
-    </h1>
+   <section class="align-left bg-white" data-slide-number="2">
+    <p>
+    </p>
+    <div class="size-50">
+     <div class="wrap">
+      <h1>
+       <div class="text-landing">
+        The solution:
+        <br/>
+        miniprez
+        <div>
+        </div>
+       </div>
+      </h1>
+      <hr/>
+      <p>
+       A
+       <a href="https://github.com/thoppe/miniprez">
+        python library
+       </a>
+       written using
+       <a href="http://pyparsing.wikispaces.com/">
+        pyparsing
+       </a>
+       and
+       <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">
+        Beautiful Soup
+       </a>
+       .
+Miniprez compiles
+       <a href="tutorial.md">
+        text
+       </a>
+       into a single-page html presentation
+ (like this one) with extra goodies. Emoji, font-awesome, LaTeX, and code
+ highlighting are built in. Full-screen backgrounds and video can render behind
+ the each screen. Slides are controlled with page-up and page-down and scrolled
+easily on mobile.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="align-left bg-black" data-slide-number="3">
+    <p>
+    </p>
+    <p<unsplash>
+     (F1dSr7I4AmY) .dark
+     <p>
+      %%%%#.text-landing #.text-content
+      <em>
+       Slide 2
+      </em>
+     </p>
+     <div class="text-landing">
+      <em>
+       Slide 2
+      </em>
+      <div>
+       <h2>
+        <em>
+         simple markdown support
+        </em>
+       </h2>
+       <p>
+        Basic
+        <a href="https://daringfireball.net/projects/markdown/syntax">
+         Markdown
+        </a>
+        with tweaks!
+       </p>
+       <hr/>
+       <ul>
+        <li>
+         :muscle:
+         <strong>
+          bold
+         </strong>
+         <code>
+          **text**
+         </code>
+        </li>
+        <li>
+         :fire:
+         <em>
+          fire
+         </em>
+         <code>
+          *text*
+         </code>
+        </li>
+        <li>
+         :cloud:
+         <em>
+          emph
+         </em>
+         <code>
+          _text_
+         </code>
+        </li>
+        <li>
+         :computer:
+         <code>
+          code
+         </code>
+         <code>
+          &amp;&amp;&amp;
+         </code>
+         code&amp;&amp;&amp;``
+        </li>
+       </ul>
+      </div>
+     </div>
+    </p<unsplash>
+   </section>
+   <section class="align-left bg-apple" data-slide-number="4">
+    <p>
+     @unsplash(pmX9BkDDr_A) .light
+    </p>
+    <p>
+     .text-landing Slide 3
+@h2
+     <em>
+      emoji
+     </em>
+     Standard emoji and
+     <a href="http://fontawesome.io/">
+      font-awesome
+     </a>
+     <br/>
+     @line
+    </p>
+    <p>
+     .grid
+     <h>
+      3
+  |
+      <code>
+       :battery:
+      </code>
+      :battery:
+  |
+      <code>
+       :heart_eyes:
+      </code>
+      :heart_eyes:
+  |
+      <code>
+       ::meetup::
+      </code>
+      ::meetup::
+  |
+      <code>
+       ::ra::
+      </code>
+      ::ra::
+     </h>
+    </p>
+   </section>
+   <section class="bg-apple align-left" data-slide-number="5">
+    <p>
+    </p>
+    <p<unsplash>
+     (5mZ_M06Fc9g) .dark
+     <p>
+      .text-landing Slide 4
+@h2
+      <em>
+       math support
+      </em>
+      LaTeX rendered inline with
+      <a href="https://github.com/Khan/KaTeX">
+       KaTex
+      </a>
+      <br/>
+      @line
+@h3 $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
+      <br/>
+      <code>
+       $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
+      </code>
+     </p>
+    </p<unsplash>
+   </section>
+   <section class="align-left bg-black" data-slide-number="6">
+    <p>
+     @unsplash(7BiMECHFgFY)
+    </p>
+    <p>
+     .text-landing Slide 5
+@h2
+     <em>
+      pretty code blocks
+     </em>
+     Syntax highlighting Google's
+     <a href="https://github.com/google/code-prettify">
+      code prettify
+     </a>
+    </p>
+    <pre><code>sort [] = []
+sort (x:xs) = sort lower ++ [x] ++ sort higher
+    where
+        lower = filter (&lt; x) xs
+        higher = filter (&gt;= x) xs
+</code></pre>
+    <p>
+     Code blocks are context-aware
+    </p>
+    <pre><code>// to convert prefix to postfix
+main() {
+  char c = getchar();
+  (c == '+' || c == '-' || c == '*' || c == '/') ? main(), main() : 0;
+  putchar(c);
+}
+</code></pre>
+   </section>
+   <section class="slide-top" data-slide-number="7">
+    <p>
+     @background_video(
+     <a href="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4">
+      https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4
+     </a>
+     )
+    </p>
+    <p>
+     .text-landing Slide 6
+@h2
+     <em>
+      looping background animations
+     </em>
+     Embed/hotlink any video file (thanks
+     <a href="https://www.shutterstock.com/">
+      Shutterstock
+     </a>
+     !)
+    </p>
+   </section>
+   <section class="slide-bottom bg-black" data-slide-number="8">
+    <p>
+     @unsplash(U5rMrSI7Pn4) .light
+    </p>
+    <p>
+     .content-center .text-shadow
+     <h>
+      1 .text-landing
+      <strong>
+       A pug and an Equation
+      </strong>
+      <h>
+       3 $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
+      </h>
+     </h>
+    </p>
+    <p<footer>
+     this slide looks important right? It's not!
+    </p<footer>
+   </section>
+   <section class="bg-apple" data-slide-number="9">
+    <p>
+    </p>
+    <div class="wrap">
+     <h1>
+      <div class="text-data">
+       Thanks, you!
+      </div>
+     </h1>
+     <h4>
+      Contribute at
+     </h4>
+     <h2>
+      <a href="https://github.com/thoppe/miniprez">
+       https://github.com/thoppe/miniprez
+      </a>
+     </h2>
+    </div>
    </section>
   </article>
   <script src="static/js/jquery-3.1.1.min.js">

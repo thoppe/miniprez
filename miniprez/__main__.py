@@ -11,10 +11,11 @@ Options:
   -h --help     Show this screen.
   -v --version  Show the version.
 """
+from _version import __version__
 import asyncio
 from docopt import docopt
-from _version import __version__
 from continuous_integration import parser_loop, build_html
+import sys
 
 
 def main():

@@ -8,11 +8,14 @@ from build_static import include_resource
 # https://webslides.tv/demos/
 # https://github.com/lepture/mistune
 
-_global_class_pattern = re.compile("\.\.\.([a-z\-0-9]+)")
-_class_pattern = re.compile("\.\.([a-z\-0-9]+)")
+_global_class_pattern = re.compile("\.\.\.[\-\w\d]+[\.[\-\w\d]+]?")
+_class_pattern = re.compile("\.\.[\-\w\d]+[\.[\-\w\d]+]?")
 _end_class_pattern = re.compile("\.\.")
 _tag_pattern = re.compile(".@([a-z]+)")
 
+def class_tags(x):
+    tokens = ' '.join(x.group().strip('.').split('.'))
+    return f"<div class='{tokens}'>"
 
 def miniprez_markdown(markdown_text):
 
@@ -30,20 +33,33 @@ def miniprez_markdown(markdown_text):
 
         # Note the globals and remove them
         section_classes = _global_class_pattern.findall(html)
+        section_classes = ' '.join(
+            [' '.join(x.strip('.').split('.')) for x in section_classes])
+
         html = _global_class_pattern.sub("", html)
 
-        html = _class_pattern.sub(r'<div class="\1">', html)
+        html = re.sub(_class_pattern, class_tags, html)
         html = _end_class_pattern.sub(r"<div>", html)
 
         # Parse with a error-correcting soup
         soup = bs4.BeautifulSoup(html, "html5lib")
 
         section = soup.new_tag("section")
-        section["class"] = section_classes
+        section["class"] = ' '.join(
+            section_classes.strip('.').split('.'))
+        
         section["data-slide-number"] = slide_number
 
+        #section.extend(soup.body.contents)
+        #print(soup.body.contents)
+        #for x in soup.body.contents:
+        #    print("HERE",x)
+        #    section.append(x)
         section.append(soup)
         article.append(section)
+
+    print(article)
+
 
     return str(article)
 

@@ -1,4 +1,5 @@
-...bg-white ...dark
+...bg-white.dark
+
 ..aligncenter 
 
 ### ..text-data **miniprez** ..
@@ -24,13 +25,11 @@ Oh, and it should work well* on mobile too.
 .@footer ..alignright *just show me the content!
 
 --------
+...align-right.bg-white 
 
-...align-left ...bg-white 
+..size-50.wrap
 
-..size-50 
-..wrap
-
-# ..text-landing The solution: <br> miniprez ..
+# ..text-landing The solution: <br> miniprez 
 
 <hr>
 
@@ -45,13 +44,15 @@ easily on mobile.
 
 --------
 
-...align-left ...bg-black
+...align-left.bg-black
 
 @unsplash(F1dSr7I4AmY) .dark
 
 %%%%#.text-landing #.text-content _Slide 2_
 
-..text-landing _Slide 2_ ..
+..text-landing
+_Slide 2_
+..
 
 ## _simple markdown support_
 Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweaks!

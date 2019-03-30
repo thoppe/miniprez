@@ -1,6 +1,6 @@
-...bg-white.dark
+...bg-white
 
-..aligncenter 
+..aligncenter.wrap
 
 ### ..text-data **miniprez** ..
 #### Beautiful presentations in minimalist format

@@ -1,7 +1,7 @@
 import mistune
 import bs4
 import re
-from build_static import include_resource
+from build_static import add_css, add_script
 
 # https://github.com/webslides/WebSlides
 # https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md
@@ -13,8 +13,9 @@ _open_class_pattern = re.compile("\.\.[\-\w\d]+[\.[\-\w\d]+]?")
 _close_class_pattern = re.compile("\.\.")
 
 # Must start the line
-_line_class_pattern = re.compile("^\s*\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)")
-_tag_pattern = re.compile(".@([a-z]+)")
+#_line_class_pattern = re.compile("^\s*\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)")
+#_tag_pattern = re.compile(".@([a-z]+)")
+
 
 
 def process_open_class_tags(x):
@@ -26,18 +27,112 @@ def process_line_class_tags(x):
     tokens = " ".join(x.group(1).strip().strip(".").split("."))
     return f"<div class='{tokens}'>{x.group(2)}</div>"
 
+def get_classnames(class_string):
+    return ' '.join(class_string.lstrip('.').split('.'))
 
+line_class_pattern = re.compile("\.([\-\w\d]+[\.[\-\w\d]+]?)")
+open_class_pattern = re.compile("\.\.[\-\w\d]+[\.[\-\w\d]+]?")
+close_class_pattern = re.compile("\.\.")
 def line_parser(line):
-    line = re.sub(_open_class_pattern, process_open_class_tags, line)
-    line = _close_class_pattern.sub(r"</div>", line)
-    line = re.sub(_line_class_pattern, process_line_class_tags, line)
+    tokens = line.split()
 
-    return line
+    if not tokens:
+        return None
+
+    if re.match(line_class_pattern, tokens[0]):        
+        names = get_classnames(tokens[0])
+        remaining = ' '.join(tokens[1:])
+        return f"<div class='{names}'>{remaining}</div>"
+    
+    if re.match(open_class_pattern, tokens[0]):        
+        names = get_classnames(tokens[0])
+        remaining = ' '.join(tokens[1:])
+        return f"<div class='{names}'>{remaining}"
+
+    if re.match(close_class_pattern, tokens[0]):
+        remaining = ' '.join(tokens[1:])
+        return f"</div>"
+        
+
+    return None
+
+
+def slide_parser(html):
+    '''
+    Takes a single slide after being markdown parsed and split by ----
+    Returns the slide after parsing the class_patterns.
+    '''
+
+    # Note the slide-level classes and remove them
+    section_classes = _slide_class_pattern.findall(html)
+    section_classes = " ".join(
+        [" ".join(x.strip(".").split(".")) for x in section_classes]
+    )
+    html = _slide_class_pattern.sub("", html)
+    
+    # Parse with a error-correcting soup
+    soup = bs4.BeautifulSoup(html, "html5lib")
+
+    # Create a new section and the slide-level classes in
+    section = soup.new_tag("section")
+    section["class"] = section_classes
+
+    # Only parse the text elements. Tricky since we can't directly
+    # put in html to bs4.strings (they get escaped)
+    replace_patterns = {}
+
+    for text_element in soup.find_all(text=True):
+        new_text = line_parser(str(text_element))
+
+        # Replacing is expensive, skip if we can
+        if new_text is None:
+            continue
+
+        key = f"MINIPREZ_{len(replace_patterns)}"
+        replace_patterns[key] = new_text
+        text_element.replace_with(key)
+
+
+    # Unwrap paragraph tags
+    for p in soup.find_all("p", text=None):
+        p.unwrap()
+
+    print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+
+    # For good measure, reparse with an error-correcting soup
+    #article = bs4.BeautifulSoup("", "html.parser").new_tag("article")
+    #soup = bs4.BeautifulSoup(soup, "html.parser")
+    
+    # Do this so we remove the head.body parts of the tag
+    for ele in soup.body.find_all():
+        section.append(ele)
+        
+    if replace_patterns:
+        section = str(section)
+        for key, val in replace_patterns.items():
+            section = section.replace(key, val)
+            
+    print(section)
+
+    exit()
+    exit()
+
+
+    for text in soup.find_all(text=True):
+        new_text = line_parser(text)
+
+
+        if text == new_text:
+            continue
+
+
+    return section
+
 
 
 def miniprez_markdown(markdown_text):
 
-    parser = mistune.Markdown(escape=False, use_xhtml=True, hard_wrap=False)
+    parser = mistune.Markdown(escape=False, use_xhtml=False, hard_wrap=False)
     html = parser(markdown_text)
     html = _tag_pattern.sub(r"<\1>", html)
 
@@ -48,69 +143,15 @@ def miniprez_markdown(markdown_text):
     article["id"] = "webslides"
 
     for slide_number, html in enumerate(html.split(strict_hr_tag)):
-
-        # Note the slide-level classes and remove them
-        section_classes = _slide_class_pattern.findall(html)
-        section_classes = " ".join(
-            [" ".join(x.strip(".").split(".")) for x in section_classes]
-        )
-        html = _slide_class_pattern.sub("", html)
-
-        # Parse with a error-correcting soup
-        soup = bs4.BeautifulSoup(html, "html5lib")
-
-        # Create a new section and give a sequential slide number
-        section = soup.new_tag("section")
+        section = slide_parser(html)
+        
+        # Give each slide a sequential number
         section["data-slide-number"] = slide_number
-
-        # Add the slide-level classes in
-        section["class"] = " ".join(section_classes.strip(".").split("."))
-
-        # Only parse the text elements
-        replace_patterns = {}
-
-        for text in soup.find_all(text=True):
-            new_text = line_parser(text)
-
-            # Replacing is expensive, skip if we can
-            if text == new_text:
-                continue
-
-            key = f"MINIPREZ_ESCAPED_REPLACEMENT{len(replace_patterns)}"
-            replace_patterns[key] = new_text
-            text.replace_with(key)
-
-        # Make the replacements
-        if replace_patterns:
-            soup = str(soup)
-            for key, val in replace_patterns.items():
-                soup = soup.replace(key, val)
-
-            # For good measure, reparse with an error-correcting soup
-            soup = bs4.BeautifulSoup(soup, "html5lib")
-
-        # Do this so we remove the head.body parts of the tag
-        for ele in soup.body.find_all():
-            section.append(ele)
 
         article.append(section)
 
     return str(article)
 
-
-def add_script(soup, src):
-    include_resource(src)
-
-    tag = soup.new_tag("script", src=src)
-    soup.body.append(tag)
-
-
-def add_css(soup, src):
-    include_resource(src)
-
-    css_args = {"rel": "stylesheet", "type": "text/css", "media": "all"}
-    tag = soup.new_tag("link", href=src, **css_args)
-    soup.head.append(tag)
 
 
 def build_body(html):
@@ -131,16 +172,19 @@ def build_body(html):
 
 
 if __name__ == "__main__":
-    text = """...bg-white.dark
+    text = """..aligncenter 
+### ..text-data **miniprez** .."""
 
-..aligncenter 
+    parser = mistune.Markdown(escape=False, use_xhtml=True, hard_wrap=False)
+    html = parser(text)
+    print("MARKDOWN")
+    print(html)
 
-### ..text-data **miniprez** ..
-#### Beautiful presentations in minimalist format
-
-..text-intro miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
-"""
-    html = miniprez_markdown(text)
+    print("SLIDE")
+    print(slide_parser(html))
+    exit()
+    
+    #html = miniprez_markdown(text)
 
     print("****************************")
 

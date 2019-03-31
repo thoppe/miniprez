@@ -13,9 +13,8 @@ _open_class_pattern = re.compile("\.\.[\-\w\d]+[\.[\-\w\d]+]?")
 _close_class_pattern = re.compile("\.\.")
 
 # Must start the line
-#_line_class_pattern = re.compile("^\s*\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)")
-#_tag_pattern = re.compile(".@([a-z]+)")
-
+# _line_class_pattern = re.compile("^\s*\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)")
+# _tag_pattern = re.compile(".@([a-z]+)")
 
 
 def process_open_class_tags(x):
@@ -27,55 +26,62 @@ def process_line_class_tags(x):
     tokens = " ".join(x.group(1).strip().strip(".").split("."))
     return f"<div class='{tokens}'>{x.group(2)}</div>"
 
+
 def get_classnames(class_string):
-    return ' '.join(class_string.lstrip('.').split('.'))
+    return " ".join(class_string.lstrip(".").split("."))
+
 
 line_class_pattern = re.compile("\.([\-\w\d]+[\.[\-\w\d]+]?)")
 open_class_pattern = re.compile("\.\.[\-\w\d]+[\.[\-\w\d]+]?")
 close_class_pattern = re.compile("\.\.")
+
+
 def line_parser(line):
     tokens = line.split()
 
     if not tokens:
         return None
 
-    if re.match(line_class_pattern, tokens[0]):        
+    if re.match(line_class_pattern, tokens[0]):
         names = get_classnames(tokens[0])
-        remaining = ' '.join(tokens[1:])
+        remaining = " ".join(tokens[1:])
         return f"<div class='{names}'>{remaining}</div>"
-    
-    if re.match(open_class_pattern, tokens[0]):        
+
+    if re.match(open_class_pattern, tokens[0]):
         names = get_classnames(tokens[0])
-        remaining = ' '.join(tokens[1:])
+        remaining = " ".join(tokens[1:])
         return f"<div class='{names}'>{remaining}"
 
     if re.match(close_class_pattern, tokens[0]):
-        remaining = ' '.join(tokens[1:])
+        remaining = " ".join(tokens[1:])
         return f"</div>"
-        
 
     return None
 
 
 def slide_parser(html):
-    '''
+    """
     Takes a single slide after being markdown parsed and split by ----
     Returns the slide after parsing the class_patterns.
-    '''
+    """
 
     # Note the slide-level classes and remove them
     section_classes = _slide_class_pattern.findall(html)
     section_classes = " ".join(
         [" ".join(x.strip(".").split(".")) for x in section_classes]
     )
-    html = _slide_class_pattern.sub("", html)
+    # Remove the class attribute if we don't have any
+    if not section_classes:
+        section_classes = None
     
+    html = _slide_class_pattern.sub("", html)
+
     # Parse with a error-correcting soup
     soup = bs4.BeautifulSoup(html, "html5lib")
-
-    # Create a new section and the slide-level classes in
-    section = soup.new_tag("section")
-    section["class"] = section_classes
+    
+    # Unwrap paragraph tags
+    for p in soup.find_all("p", text=None):
+        p.unwrap()
 
     # Only parse the text elements. Tricky since we can't directly
     # put in html to bs4.strings (they get escaped)
@@ -88,53 +94,39 @@ def slide_parser(html):
         if new_text is None:
             continue
 
-        key = f"MINIPREZ_{len(replace_patterns)}"
+        key = f"MINIPREZ_REPLACE_{len(replace_patterns)}"
         replace_patterns[key] = new_text
         text_element.replace_with(key)
 
-
-    # Unwrap paragraph tags
-    for p in soup.find_all("p", text=None):
-        p.unwrap()
-
-    print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-
-    # For good measure, reparse with an error-correcting soup
-    #article = bs4.BeautifulSoup("", "html.parser").new_tag("article")
-    #soup = bs4.BeautifulSoup(soup, "html.parser")
     
-    # Do this so we remove the head.body parts of the tag
-    for ele in soup.body.find_all():
-        section.append(ele)
-        
+    print(soup)
+    print(replace_patterns)
+    exit()
+
+    
     if replace_patterns:
-        section = str(section)
+        soup = str(soup)
         for key, val in replace_patterns.items():
-            section = section.replace(key, val)
+            soup = soup.replace(key, val)
             
-    print(section)
+    soup = bs4.BeautifulSoup(soup, "html5lib")
+        
+    # Create a new section and the slide-level classes in
+    section = soup.new_tag("section")
+    section["class"] = section_classes
 
-    exit()
-    exit()
-
-
-    for text in soup.find_all(text=True):
-        new_text = line_parser(text)
-
-
-        if text == new_text:
-            continue
-
-
+    # Add the parsed soup to the section and unwrap the body tags
+    section.append(soup.body)
+    section.body.unwrap()
+        
     return section
-
 
 
 def miniprez_markdown(markdown_text):
 
     parser = mistune.Markdown(escape=False, use_xhtml=False, hard_wrap=False)
     html = parser(markdown_text)
-    html = _tag_pattern.sub(r"<\1>", html)
+    #html = _tag_pattern.sub(r"<\1>", html)
 
     # Nest each block in a section div
     blocks = []
@@ -144,14 +136,13 @@ def miniprez_markdown(markdown_text):
 
     for slide_number, html in enumerate(html.split(strict_hr_tag)):
         section = slide_parser(html)
-        
+
         # Give each slide a sequential number
         section["data-slide-number"] = slide_number
 
         article.append(section)
 
     return str(article)
-
 
 
 def build_body(html):
@@ -172,8 +163,9 @@ def build_body(html):
 
 
 if __name__ == "__main__":
-    text = """..aligncenter 
-### ..text-data **miniprez** .."""
+    text = """introduction
+..aligncenter 
+### .text-data **miniprez**"""
 
     parser = mistune.Markdown(escape=False, use_xhtml=True, hard_wrap=False)
     html = parser(text)
@@ -183,8 +175,8 @@ if __name__ == "__main__":
     print("SLIDE")
     print(slide_parser(html))
     exit()
-    
-    #html = miniprez_markdown(text)
+
+    # html = miniprez_markdown(text)
 
     print("****************************")
 

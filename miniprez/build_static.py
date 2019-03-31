@@ -4,6 +4,7 @@ import logging
 
 logger = logging.getLogger("miniprez")
 
+
 def include_resource(filename):
 
     if not os.path.exists(filename):
@@ -23,12 +24,10 @@ def include_resource(filename):
             FOUT.write(res.read())
 
 
-
-
 def add_script(soup, src):
-    '''
+    """
     Takes a bs4 soup and adds the following script to the end of the body.
-    '''
+    """
     include_resource(src)
 
     tag = soup.new_tag("script", src=src)
@@ -36,9 +35,9 @@ def add_script(soup, src):
 
 
 def add_css(soup, src):
-    '''
+    """
     Takes a bs4 soup and adds the following css to the header
-    '''
+    """
     include_resource(src)
 
     css_args = {"rel": "stylesheet", "type": "text/css", "media": "all"}

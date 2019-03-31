@@ -35,17 +35,13 @@ line_class_pattern = re.compile("\.([\-\w\d]+[\.[\-\w\d]+]?)")
 open_class_pattern = re.compile("\.\.[\-\w\d]+[\.[\-\w\d]+]?")
 close_class_pattern = re.compile("\.\.")
 
-
 def line_parser(line):
     tokens = line.split()
 
+    print(tokens)
+
     if not tokens:
         return None
-
-    if re.match(line_class_pattern, tokens[0]):
-        names = get_classnames(tokens[0])
-        remaining = " ".join(tokens[1:])
-        return f"<div class='{names}'>{remaining}</div>"
 
     if re.match(open_class_pattern, tokens[0]):
         names = get_classnames(tokens[0])
@@ -55,6 +51,18 @@ def line_parser(line):
     if re.match(close_class_pattern, tokens[0]):
         remaining = " ".join(tokens[1:])
         return f"</div>"
+
+    match = re.search(line_class_pattern, line)
+    if match is not None:
+        names = get_classnames(tokens[0])
+        soup = bs4.BeautifulSoup(line, 'html5lib')
+        
+        print("MATCH!", match.group(), names)
+        print(line)
+        print(soup.find(text=match.group()))
+        exit()
+        remaining = " ".join(tokens[1:])
+        return f"<div class='{names}'>{remaining}</div>"
 
     return None
 
@@ -77,11 +85,21 @@ def slide_parser(html):
     html = _slide_class_pattern.sub("", html)
 
     # Parse with a error-correcting soup
-    soup = bs4.BeautifulSoup(html, "html5lib")
+    soup = bs4.BeautifulSoup(html, "html5lib").body
     
     # Unwrap paragraph tags
     for p in soup.find_all("p", text=None):
         p.unwrap()
+
+    # TESTING
+    # For each line, parse it by itself
+    for line in str(soup).split('\n'):
+        print(line_parser(line))
+
+    #print("HERE FUCKER")
+    #soup.body.unwrap()
+
+    exit()
 
     # Only parse the text elements. Tricky since we can't directly
     # put in html to bs4.strings (they get escaped)

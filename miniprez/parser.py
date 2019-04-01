@@ -37,7 +37,6 @@ def slide_parser(html):
     for ele in soup.find_all("emoji"):
         symbol = emojize(ele["data-emoji-alias"], use_aliases=True)
         ele.replace_with(symbol)
-        print(ele, symbol)
 
     # Add the parsed soup to the section and unwrap the body tags
     section.append(soup.body)

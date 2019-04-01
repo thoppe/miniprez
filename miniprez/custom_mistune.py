@@ -9,20 +9,20 @@ def get_classnames(class_string):
 
 
 class DivClassRenderer(Renderer):
-    def OpenBlockClass(self, names):
+    def OpenBlock(self, names):
         return f"<div class='{names}'>"
 
-    def CloseBlockClass(self):
+    def CloseBlock(self):
         return f"</div>"
 
-    def LineBlockClass(self, names, remaining):
+    def LineBlock(self, names, remaining):
         remaining = remaining.lstrip()
         return f"<span class='{names}'>{remaining}</span>"
 
-    def SectionBlockClass(self, names):
+    def SectionTags(self, names):
         return f"<meta data-slide-classes='{names}'/>"
 
-    def EmojiBlockClass(self, name):
+    def Emoji(self, name):
         return f"<emoji data-emoji-alias='{name}'/></emoji>"
 
 
@@ -32,67 +32,62 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.remove("escape")
         self.default_rules.remove("linebreak")
 
-        # def enable_OpenBlockClass(self):
-        # Matching pattern, three dots then valid class names dot separated
+        # OpenBlock, ...align-center.bg-black
         grammar = r"\.\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
-        self.rules.SectionBlockClass = re.compile(grammar)
-        self.default_rules.insert(0, "SectionBlockClass")
+        self.rules.SectionTags = re.compile(grammar)
+        self.default_rules.insert(0, "SectionTags")
 
-        # def enable_OpenBlockClass(self):
+        # OpenBlock, ..align-center.bg-black
         # Matching pattern, two dots then valid class names dot separated
         grammar = r"\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
-        self.rules.OpenBlockClass = re.compile(grammar)
-        self.default_rules.insert(1, "OpenBlockClass")
+        self.rules.OpenBlock = re.compile(grammar)
+        self.default_rules.insert(1, "OpenBlock")
 
-        # def enable_CloseBlockClass(self):
-        # Matching pattern, two dots, but no triple dot
+        # CloseBlock, ..
         grammar = r"[^\\]\.\."
-        self.rules.CloseBlockClass = re.compile(grammar)
-        self.default_rules.insert(2, "CloseBlockClass")
+        self.rules.CloseBlock = re.compile(grammar)
+        self.default_rules.insert(2, "CloseBlock")
 
-        # def enable_LineBlockClass(self):
-        # Matching pattern, one dots and a space. Do a lookahead here
+        # LineBlock, .text-data
         grammar = r"\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)"
-        self.rules.LineBlockClass = re.compile(grammar)
-        self.default_rules.insert(3, "LineBlockClass")
+        self.rules.LineBlock = re.compile(grammar)
+        self.default_rules.insert(3, "LineBlock")
 
-        # def enable_emoji(self):
-        # Matching pattern, :stuck_out_tongue_closed_eyes:
+        # Emoji, :stuck_out_tongue_closed_eyes:
         grammar = r"(:[\w\_]+:)(?!:)"
-        self.rules.EmojiBlockClass = re.compile(grammar)
-        self.default_rules.insert(4, "EmojiBlockClass")
+        self.rules.Emoji = re.compile(grammar)
+        self.default_rules.insert(4, "Emoji")
 
-        # Fix slashdot escape
+        # SlashDotEscape, \.
         grammar = r"\\\."
         self.rules.SlashDotEscape = re.compile(grammar)
         self.default_rules.insert(-1, "SlashDotEscape")
 
-        # def enable_AlmostText(self):
-        # Anything BUT a prefixed dot or @ pattern
+        # AlmostText, anything but a prefixed (:.@)
         grammar = r"^[\s\S]+?(?=[\\<!\[_*`~@.:]|https?://| {2,}\n|$)"
         self.rules.AlmostText = re.compile(grammar)
         self.default_rules.insert(-1, "AlmostText")
 
-    def output_LineBlockClass(self, m):
+    def output_LineBlock(self, m):
         tags = get_classnames(m.group(1))
 
         # Run the parser over what's inside
         remaining = self.output(m.group(2))
-        return self.renderer.LineBlockClass(tags, remaining)
+        return self.renderer.LineBlock(tags, remaining)
 
-    def output_SectionBlockClass(self, m):
+    def output_SectionTags(self, m):
         tags = get_classnames(m.group())
-        return self.renderer.SectionBlockClass(tags)
+        return self.renderer.SectionTags(tags)
 
-    def output_OpenBlockClass(self, m):
+    def output_OpenBlock(self, m):
         tags = get_classnames(m.group())
-        return self.renderer.OpenBlockClass(tags)
+        return self.renderer.OpenBlock(tags)
 
-    def output_CloseBlockClass(self, m):
-        return self.renderer.CloseBlockClass()
+    def output_CloseBlock(self, m):
+        return self.renderer.CloseBlock()
 
-    def output_EmojiBlockClass(self, m):
-        return self.renderer.EmojiBlockClass(m.group(1))
+    def output_Emoji(self, m):
+        return self.renderer.Emoji(m.group(1))
 
     def output_SlashDotEscape(self, m):
         return "."

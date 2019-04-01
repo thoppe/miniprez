@@ -32,14 +32,14 @@ class DivClassInlineLexer(InlineLexer):
 
         # def enable_OpenBlockClass(self):
         # Matching pattern, two dots then valid class names dot separated
-        grammar = r"\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
+        grammar = r"[^\\]\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
 
         self.rules.OpenBlockClass = re.compile(grammar) 
         self.default_rules.insert(self.rule_num, "OpenBlockClass")
 
         # def enable_CloseBlockClass(self):
-        # Matching pattern, two dots and a space
-        grammar = r"(\r\n|\r|\n|\s)\.\."
+        # Matching pattern, two dots, but no triple dot
+        grammar = r"[^\\]\.\."
 
         self.rules.CloseBlockClass = re.compile(grammar) 
         self.default_rules.insert(self.rule_num+1, "CloseBlockClass")
@@ -47,16 +47,22 @@ class DivClassInlineLexer(InlineLexer):
         # def enable_LineBlockClass(self):
         # Matching pattern, one dots and a space. Do a lookahead here
         #grammar = r"\.([\-\w\d]+[\.[\-\w\d]+]?)(?=(.*))"
-        grammar = r"\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)"
+        grammar = r"[^\\]\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)"
 
         self.rules.LineBlockClass = re.compile(grammar) 
         self.default_rules.insert(self.rule_num+2, "LineBlockClass")
+
+        # Fix slashdot escape
+        grammar = r'\\\.'
+        self.rules.SlashDotEscape = re.compile(grammar) 
+        self.default_rules.insert(-1, "SlashDotEscape")
 
         # def enable_AlmostText(self):
         # Anything BUT a prefixed dot or @ pattern
         grammar = r'^[\s\S]+?(?=[\\<!\[_*`~@.]|https?://| {2,}\n|$)'
         self.rules.AlmostText = re.compile(grammar) 
         self.default_rules.insert(-1, "AlmostText")
+
 
     def output_LineBlockClass(self, m):
         tags = get_classnames(m.group(1))
@@ -73,6 +79,9 @@ class DivClassInlineLexer(InlineLexer):
     def output_CloseBlockClass(self, m):
         return self.renderer.CloseBlockClass()
 
+    def output_SlashDotEscape(self, m):
+        return '.'
+    
     def output_AlmostText(self, m):
         #print("ALMOST", m.group())
         return m.group()
@@ -110,9 +119,7 @@ the
 words
 on
 the table 
-..
-
-.wtf Out *of* center
+\.wtf Out *of* center
 here *we* go
 '''
 

@@ -28,6 +28,9 @@ class DivClassRenderer(Renderer):
     def FontAwesome(self, name):
         return f"<span class='fa fa-{name}' aria-hidden=true></i>"
 
+    def KaTeX(self, expression):
+        return f'<span class="equation" data-expr="{expression}">'
+
 
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
@@ -66,6 +69,11 @@ class DivClassInlineLexer(InlineLexer):
         self.rules.Emoji = re.compile(grammar)
         self.default_rules.insert(5, "Emoji")
 
+        # Single line KaTeX, $\int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$
+        grammar = r"\$([^\n]+)\$"
+        self.rules.KaTeX = re.compile(grammar)
+        self.default_rules.insert(6, "KaTeX")
+
         # SlashDotEscape, \.
         grammar = r"\\\."
         self.rules.SlashDotEscape = re.compile(grammar)
@@ -100,6 +108,9 @@ class DivClassInlineLexer(InlineLexer):
     def output_FontAwesome(self, m):
         return self.renderer.FontAwesome(m.group(1))
 
+    def output_KaTeX(self, m):
+        return self.renderer.KaTeX(m.group(1).strip())
+
     def output_SlashDotEscape(self, m):
         return "."
 
@@ -130,7 +141,7 @@ parser = Markdown_NP(renderer, inline=inline)
 
 
 if __name__ == "__main__":
-    tx0 = """
+    tx0 = r"""
 ...bg-black
 
 ..aligncenter.black
@@ -141,6 +152,10 @@ on
 the table 
 .wtf Out *of* center
 here *we* go
+
+$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi $ dsdfsd
+
+sdasdasd
 """
     print(inline.default_rules)
     print(tx0)

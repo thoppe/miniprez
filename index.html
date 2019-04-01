@@ -1,8 +1,10 @@
+<!DOCTYPE HTML>
 <html>
  <head>
   <link href="static/css/webslides.css" media="all" rel="stylesheet" type="text/css"/>
   <link href="static/css/miniprez.css" media="all" rel="stylesheet" type="text/css"/>
   <link href="static/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="static/css/katex.min.css" media="all" rel="stylesheet" type="text/css"/>
  </head>
  <body>
   <article id="webslides">
@@ -18,12 +20,14 @@
      <h4>
       Beautiful presentations in minimalist format
      </h4>
-     <div class="text-intro">
-      miniprez is a static, mobile-friendly version of
-      <a href="https://github.com/jlantunez/webslides">
-       webslides
-      </a>
-     </div>
+     <span class="equation" data-expr="\int x^2">
+      <div class="text-intro">
+       miniprez is a static, mobile-friendly version of
+       <a href="https://github.com/jlantunez/webslides">
+        webslides
+       </a>
+      </div>
+     </span>
     </div>
    </section>
    <section class="bg-black" data-slide-number="1">
@@ -224,7 +228,8 @@ easily on mobile.
     </a>
     @line
     <h3>
-     $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
+     <span class="equation" data-expr="P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}">
+     </span>
     </h3>
     <br/>
     <code>
@@ -293,7 +298,8 @@ main() {
       </span>
      </h2>
      <h3>
-      $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
+      <span class="equation" data-expr="i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)">
+      </span>
      </h3>
      @footer this slide looks important right? It's not!
     </div>
@@ -319,6 +325,10 @@ main() {
   <script src="static/js/jquery-3.1.1.min.js">
   </script>
   <script src="static/js/slider.js">
+  </script>
+  <script src="static/js/katex.min.js">
+  </script>
+  <script src="static/js/start_katex.js">
   </script>
  </body>
 </html>

@@ -9,13 +9,17 @@ def test():
     local("python miniprez index.md")
 
 
-# def view_cover():
-#    local("xdg-open cover/index.html")
+def watch():
+    local("rm -rf static/")
+    local("python miniprez watch index.md")
 
 
 def lint():
     local(f"black -l 80 miniprez *.py {exclude_command}")
 
+
+# def view_cover():
+#    local("xdg-open cover/index.html")
 
 #    local(f"flake8 nlpre --ignore=E501,E203,W503 {exclude_command}")
 

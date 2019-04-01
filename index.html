@@ -5,8 +5,7 @@
  </head>
  <body>
   <article id="webslides">
-   <section data-slide-number="0">
-    bg-white
+   <section class="bg-white" data-slide-number="0">
     <div class="aligncenter wrap">
      <h3>
       <span class="text-data">
@@ -26,8 +25,7 @@
      </div>
     </div>
    </section>
-   <section data-slide-number="1">
-    bg-black
+   <section class="bg-black" data-slide-number="1">
     <h2>
      <span class="text-landing">
       The problem
@@ -55,10 +53,7 @@
      </span>
     </div>
    </section>
-   <section data-slide-number="2">
-    align-right
-    <span class="bg-white">
-    </span>
+   <section class="align-right bg-white" data-slide-number="2">
     <div class="size-50 wrap">
      <h2>
       <span class="text-landing">
@@ -91,27 +86,19 @@ Miniprez compiles
 easily on mobile.
     </div>
    </section>
-   <section data-slide-number="3">
-    align-left
-    <span class="bg-black">
-    </span>
+   <section class="align-left bg-black" data-slide-number="3">
     @unsplash(F1dSr7I4AmY)
     <span class="dark">
     </span>
-    %%%%#
-    <span class="text-landing">
-     #
-     <span class="text-content">
-      <em>
-       Slide 2
-      </em>
+    <h1>
+     <span class="text-landing">
+      <span class="text-content">
+       <em>
+        Slide 2
+       </em>
+      </span>
      </span>
-    </span>
-    <div class="text-landing">
-     <em>
-      Slide 2
-     </em>
-    </div>
+    </h1>
     <h2>
      <em>
       simple markdown support
@@ -164,49 +151,56 @@ easily on mobile.
      </li>
     </ul>
    </section>
-   <section data-slide-number="5">
-    align-left bg-apple
-@unsplash(pmX9BkDDr_A)
+   <section class="align-left" data-slide-number="5">
+    @unsplash(pmX9BkDDr_A)
     <span class="light">
     </span>
-    <span class="text-landing">
-     Slide 3
-    </span>
-    @h2
-    <em>
-     emoji
-    </em>
+    <h2>
+     <span class="text-landing">
+      Slide 3
+     </span>
+    </h2>
+    <h2>
+     <em>
+      emoji
+     </em>
+    </h2>
     Standard emoji and
     <a href="http://fontawesome.io/">
      font-awesome
     </a>
-    @line
-    <span class="grid">
-     @h3
-    </span>
-    |
-    <code>
-     :battery:
-    </code>
-    :battery:
-  |
-    <code>
-     :heart_eyes:
-    </code>
-    :heart_eyes:
-  |
-    <code>
-     ::meetup::
-    </code>
-    ::meetup::
-  |
-    <code>
-     ::ra::
-    </code>
-    ::ra::
+    <h3>
+     Emoji
+    </h3>
+    <ul>
+     <li>
+      <code>
+       :battery:
+      </code>
+      :battery:
+     </li>
+     <li>
+      <code>
+       :heart_eyes:
+      </code>
+      :heart_eyes:
+     </li>
+     <li>
+      <code>
+       ::meetup::
+      </code>
+      ::meetup::
+     </li>
+     <li>
+      <code>
+       ::ra::
+      </code>
+      ::ra::
+     </li>
+    </ul>
    </section>
-   <section data-slide-number="6">
-    bg-apple align-left @unsplash(5mZ_M06Fc9g)
+   <section class="bg-apple" data-slide-number="6">
+    @unsplash(5mZ_M06Fc9g)
     <span class="dark">
     </span>
     <span class="text-landing">
@@ -227,16 +221,16 @@ easily on mobile.
      $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
     </code>
    </section>
-   <section data-slide-number="7">
-    align-left bg-black
-@unsplash(7BiMECHFgFY)
+   <section class="align-left" data-slide-number="7">
+    @unsplash(7BiMECHFgFY)
     <span class="text-landing">
      Slide 5
     </span>
-    @h2
-    <em>
-     pretty code blocks
-    </em>
+    <h2>
+     <em>
+      pretty code blocks
+     </em>
+    </h2>
     Syntax highlighting Google's
     <a href="https://github.com/google/code-prettify">
      code prettify
@@ -256,9 +250,8 @@ main() {
 }
 </code></pre>
    </section>
-   <section data-slide-number="8">
-    slide-top
-@background_video(
+   <section class="slide-top" data-slide-number="8">
+    @background_video(
     <a href="https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4">
      https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4
     </a>
@@ -266,35 +259,38 @@ main() {
     <span class="text-landing">
      Slide 6
     </span>
-    @h2
-    <em>
-     looping background animations
-    </em>
+    <h2>
+     <em>
+      looping background animations
+     </em>
+    </h2>
     Embed/hotlink any video file (thanks
     <a href="https://www.shutterstock.com/">
      Shutterstock
     </a>
     !)
    </section>
-   <section data-slide-number="9">
-    slide-bottom bg-black
-@unsplash(U5rMrSI7Pn4)
+   <section class="slide-bottom" data-slide-number="9">
+    @unsplash(U5rMrSI7Pn4)
     <span class="light">
     </span>
     <span class="content-center">
      <span class="text-shadow">
      </span>
     </span>
-    @h1
-    <span class="text-landing">
-     <strong>
-      A pug and an Equation
-     </strong>
-    </span>
-    @h3 $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$ @footer this slide looks important right? It's not!
+    <h2>
+     <span class="text-landing">
+      <strong>
+       A pug and an Equation
+      </strong>
+     </span>
+    </h2>
+    <h3>
+     $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
+    </h3>
+    x@footer this slide looks important right? It's not!
    </section>
-   <section data-slide-number="10">
-    bg-apple
+   <section class="bg-apple" data-slide-number="10">
     <div class="wrap">
      <h1>
       <div class="text-data">

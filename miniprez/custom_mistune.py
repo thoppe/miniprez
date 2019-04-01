@@ -19,6 +19,9 @@ class DivClassRenderer(Renderer):
         remaining = remaining.lstrip()
         return f"<span class='{names}'>{remaining}</span>"
 
+    def SectionBlockClass(self, names):
+        return f"<meta data-slide-classes='{names}'/>"
+
 
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
@@ -27,24 +30,29 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.remove("linebreak")
 
         # def enable_OpenBlockClass(self):
+        # Matching pattern, three dots then valid class names dot separated
+        grammar = r"\.\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
+        self.rules.SectionBlockClass = re.compile(grammar)
+        self.default_rules.insert(0, "SectionBlockClass")
+
+        # def enable_OpenBlockClass(self):
         # Matching pattern, two dots then valid class names dot separated
         grammar = r"\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
-
         self.rules.OpenBlockClass = re.compile(grammar)
-        self.default_rules.insert(0, "OpenBlockClass")
+        self.default_rules.insert(1, "OpenBlockClass")
 
         # def enable_CloseBlockClass(self):
         # Matching pattern, two dots, but no triple dot
         grammar = r"[^\\]\.\."
         self.rules.CloseBlockClass = re.compile(grammar)
-        self.default_rules.insert(1, "CloseBlockClass")
+        self.default_rules.insert(2, "CloseBlockClass")
 
         # def enable_LineBlockClass(self):
         # Matching pattern, one dots and a space. Do a lookahead here
         grammar = r"\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)"
 
         self.rules.LineBlockClass = re.compile(grammar)
-        self.default_rules.insert(2, "LineBlockClass")
+        self.default_rules.insert(3, "LineBlockClass")
 
         # Fix slashdot escape
         grammar = r"\\\."
@@ -62,8 +70,11 @@ class DivClassInlineLexer(InlineLexer):
 
         # Run the parser over what's inside
         remaining = self.output(m.group(2))
-
         return self.renderer.LineBlockClass(tags, remaining)
+
+    def output_SectionBlockClass(self, m):
+        tags = get_classnames(m.group())
+        return self.renderer.SectionBlockClass(tags)
 
     def output_OpenBlockClass(self, m):
         tags = get_classnames(m.group())
@@ -76,12 +87,10 @@ class DivClassInlineLexer(InlineLexer):
         return "."
 
     def output_AlmostText(self, m):
-        # print("ALMOST", m.group())
         return m.group()
 
     def output_text(self, m):
-        print("TEXT", m.group())
-        # We don't want to escape any text! Be gentle here.
+        # We normally shouldn't be here, but return even if we do
         return m.group()
 
 
@@ -105,6 +114,8 @@ parser = Markdown_NP(renderer, inline=inline)
 
 if __name__ == "__main__":
     tx0 = """
+...bg-black
+
 ..aligncenter.black
 # fool.
 the

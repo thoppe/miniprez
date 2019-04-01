@@ -47,11 +47,8 @@ easily on mobile.
 
 @unsplash(F1dSr7I4AmY) .dark
 
-%%%%#.text-landing #.text-content _Slide 2_
+# .text-landing .text-content _Slide 2_
 
-..text-landing
-_Slide 2_
-..
 
 ## _simple markdown support_
 Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweaks!
@@ -69,16 +66,17 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
 ...align-left ...bg-apple
 @unsplash(pmX9BkDDr_A) .light
 
-.text-landing Slide 3
-@h2 _emoji_
-Standard emoji and [font-awesome](http://fontawesome.io/)  
-@line
+## .text-landing Slide 3
 
-.grid @h3
-  | `:battery:` :battery:
-  | `:heart_eyes:` :heart_eyes:
-  | `::meetup::` ::meetup::
-  | `::ra::` ::ra:: 
+## _emoji_
+
+Standard emoji and [font-awesome](http://fontawesome.io/)  
+
+### Emoji
++ `:battery:` :battery:
++ `:heart_eyes:` :heart_eyes:
++ `::meetup::` ::meetup::
++ `::ra::` ::ra:: 
 
 -----
 ...bg-apple ...align-left
@@ -98,7 +96,7 @@ LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)
 @unsplash(7BiMECHFgFY)
 
 .text-landing Slide 5
-@h2 _pretty code blocks_
+## _pretty code blocks_
 Syntax highlighting Google's [code prettify](https://github.com/google/code-prettify)  
 
 ```
@@ -123,18 +121,19 @@ main() {
 @background_video(https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4)
 
 .text-landing Slide 6
-@h2 _looping background animations_
+## _looping background animations_
 Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 
 -----
+
 ...slide-bottom ...bg-black
 @unsplash(U5rMrSI7Pn4) .light
 
 .content-center .text-shadow 
-  @h1 .text-landing **A pug and an Equation**
-  @h3 $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
+## .text-landing **A pug and an Equation**
+### $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
   
-@footer this slide looks important right? It's not!
+x@footer this slide looks important right? It's not!
 
 ------
 

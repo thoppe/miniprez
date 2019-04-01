@@ -12,8 +12,7 @@ from custom_mistune import parser
 # Must start the line
 # _line_class_pattern = re.compile("^\s*\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)")
 # _tag_pattern = re.compile(".@([a-z]+)")
-
-slide_class_pattern = re.compile(r"[^\\]\.\.[\-\w\d]+[\.[\-\w\d]+]?\s")
+# slide_class_pattern = re.compile(r"[^\\]\.\.[\-\w\d]+[\.[\-\w\d]+]?\s")
 
 
 def slide_parser(html):
@@ -22,21 +21,17 @@ def slide_parser(html):
     Returns the slide after parsing the class_patterns.
     """
 
-    # Note the slide-level classes and remove them
-    section_classes = slide_class_pattern.findall(html)
-    section_classes = " ".join(
-        [" ".join(x.strip(".").split(".")) for x in section_classes]
-    )
-    html = slide_class_pattern.sub("", html)
-
     # Parse with a error-correcting soup
     soup = bs4.BeautifulSoup(html, "html5lib")
 
     # Create a new section and the slide-level classes in
     section = soup.new_tag("section")
 
-    if section_classes:
-        section["class"] = section_classes
+    # Note the slide-level classes and remove them
+    meta = soup.find("meta", attrs={"data-slide-classes": True})
+    if meta:
+        section["class"] = meta["data-slide-classes"]
+        meta.decompose()
 
     # Add the parsed soup to the section and unwrap the body tags
     section.append(soup.body)
@@ -84,7 +79,8 @@ def build_body(html):
 
 
 if __name__ == "__main__":
-    text = """introduction
+    text = """...bg-black.foo
+introduction
 ..aligncenter 
 ### .text-data **miniprez**
 --------------------------

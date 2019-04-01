@@ -32,8 +32,8 @@ class DivClassRenderer(Renderer):
         return f'<span class="inline-equation" data-expr="{expression}"></span>'
 
     def BlockLaTeX(self, expression):
-        expression = ' '.join(expression.strip().split())
-        return f'<div class="block-equation" data-expr="{expression}"></span>'
+        expression = " ".join(expression.strip().split())
+        return f'<div class="block-equation" data-expr="{expression}"></div>'
 
 
 class DivClassInlineLexer(InlineLexer):

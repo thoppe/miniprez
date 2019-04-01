@@ -5,7 +5,9 @@
 ### .text-data **miniprez** 
 #### Beautiful presentations in minimalist format
 
-$\int x^2$
+$\int_{x=0}^{\infty} x^2$
+
+$$\int_{x=0}^{\infty} x^2$$
 
 ..text-intro miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
 

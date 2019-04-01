@@ -1,4 +1,4 @@
-import copy, re
+import copy, re, itertools
 from mistune import Renderer, InlineGrammar, InlineLexer, Markdown
 from mistune import BlockGrammar, BlockLexer, Markdown
 
@@ -28,8 +28,15 @@ class DivClassRenderer(Renderer):
     def FontAwesome(self, name):
         return f"<span class='fa fa-{name}' aria-hidden=true></i>"
 
-    def KaTeX(self, expression):
-        return f'<span class="equation" data-expr="{expression}">'
+    def InlineLaTeX(self, expression):
+        return f'<span class="inline-equation" data-expr="{expression}"></span>'
+
+    def BlockLaTeX(self, expression):
+
+        print("HERE!")
+        print("*****************************************")
+        exit()
+        return f'<span class="block-equation" data-expr="{expression}"></span>'
 
 
 class DivClassInlineLexer(InlineLexer):
@@ -38,41 +45,49 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.remove("escape")
         self.default_rules.remove("linebreak")
 
+        rule_n = itertools.count()
+
         # OpenBlock, ...align-center.bg-black
         grammar = r"\.\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
         self.rules.SectionTags = re.compile(grammar)
-        self.default_rules.insert(0, "SectionTags")
+        self.default_rules.insert(next(rule_n), "SectionTags")
 
         # OpenBlock, ..align-center.bg-black
         # Matching pattern, two dots then valid class names dot separated
         grammar = r"\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
         self.rules.OpenBlock = re.compile(grammar)
-        self.default_rules.insert(1, "OpenBlock")
+        self.default_rules.insert(next(rule_n), "OpenBlock")
 
         # CloseBlock, ..
         grammar = r"[^\\]\.\."
         self.rules.CloseBlock = re.compile(grammar)
-        self.default_rules.insert(2, "CloseBlock")
+        self.default_rules.insert(next(rule_n), "CloseBlock")
 
         # LineBlock, .text-data
         grammar = r"\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)"
         self.rules.LineBlock = re.compile(grammar)
-        self.default_rules.insert(3, "LineBlock")
+        self.default_rules.insert(next(rule_n), "LineBlock")
 
         # Emoji, :stuck_out_tongue_closed_eyes:
         grammar = r"::([\w\_]+)::"
         self.rules.FontAwesome = re.compile(grammar)
-        self.default_rules.insert(4, "FontAwesome")
+        self.default_rules.insert(next(rule_n), "FontAwesome")
 
         # Emoji, :stuck_out_tongue_closed_eyes:
         grammar = r"(:[\w\_]+:)"
         self.rules.Emoji = re.compile(grammar)
-        self.default_rules.insert(5, "Emoji")
+        self.default_rules.insert(next(rule_n), "Emoji")
 
-        # Single line KaTeX, $\int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$
+        # Block LaTeX, $$\int_{-\infty}^\infty \n \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$$
+        # Not working yet
+        # grammar = r"\$\$[^\$]\$\$"
+        # self.rules.BlockLaTeX = re.compile(grammar)
+        # self.default_rules.insert(next(rule_n), "BlockLaTeX")
+
+        # Single line LaTeX, $\int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$
         grammar = r"\$([^\n]+)\$"
-        self.rules.KaTeX = re.compile(grammar)
-        self.default_rules.insert(6, "KaTeX")
+        self.rules.InlineLaTeX = re.compile(grammar)
+        self.default_rules.insert(next(rule_n), "InlineLaTeX")
 
         # SlashDotEscape, \.
         grammar = r"\\\."
@@ -108,8 +123,11 @@ class DivClassInlineLexer(InlineLexer):
     def output_FontAwesome(self, m):
         return self.renderer.FontAwesome(m.group(1))
 
-    def output_KaTeX(self, m):
-        return self.renderer.KaTeX(m.group(1).strip())
+    def output_InlineLaTeX(self, m):
+        return self.renderer.InlineLaTeX(m.group(1).strip())
+
+    def output_BlockLaTeX(self, m):
+        return self.renderer.BlockLaTeX(m.group(1).strip())
 
     def output_SlashDotEscape(self, m):
         return "."
@@ -153,7 +171,7 @@ the table
 .wtf Out *of* center
 here *we* go
 
-$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi $ dsdfsd
+$$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi $$ dsdfsd
 
 sdasdasd
 """

@@ -32,11 +32,8 @@ class DivClassRenderer(Renderer):
         return f'<span class="inline-equation" data-expr="{expression}"></span>'
 
     def BlockLaTeX(self, expression):
-
-        print("HERE!")
-        print("*****************************************")
-        exit()
-        return f'<span class="block-equation" data-expr="{expression}"></span>'
+        expression = ' '.join(expression.strip().split())
+        return f'<div class="block-equation" data-expr="{expression}"></span>'
 
 
 class DivClassInlineLexer(InlineLexer):
@@ -80,9 +77,9 @@ class DivClassInlineLexer(InlineLexer):
 
         # Block LaTeX, $$\int_{-\infty}^\infty \n \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$$
         # Not working yet
-        # grammar = r"\$\$[^\$]\$\$"
-        # self.rules.BlockLaTeX = re.compile(grammar)
-        # self.default_rules.insert(next(rule_n), "BlockLaTeX")
+        grammar = "\$\$([^\$]*)\$\$"
+        self.rules.BlockLaTeX = re.compile(grammar)
+        self.default_rules.insert(next(rule_n), "BlockLaTeX")
 
         # Single line LaTeX, $\int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$
         grammar = r"\$([^\n]+)\$"
@@ -95,7 +92,7 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.insert(-1, "SlashDotEscape")
 
         # AlmostText, anything but a prefixed (:.@)
-        grammar = r"^[\s\S]+?(?=[\\<!\[_*`~@.:]|https?://| {2,}\n|$)"
+        grammar = r"^[\s\S]+?(?=[\\<!\[_*`~@.:\$]|https?://| {2,}\n|$)"
         self.rules.AlmostText = re.compile(grammar)
         self.default_rules.insert(-1, "AlmostText")
 
@@ -171,7 +168,10 @@ the table
 .wtf Out *of* center
 here *we* go
 
-$$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi $$ dsdfsd
+$$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} 
+\,d\xi $$ 
+
+dsdfsd
 
 sdasdasd
 """

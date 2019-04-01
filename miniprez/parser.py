@@ -2,70 +2,18 @@ import mistune
 import bs4
 import re
 from build_static import add_css, add_script
+from custom_mistune import parser
 
 # https://github.com/webslides/WebSlides
 # https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md
 # https://webslides.tv/demos/
 # https://github.com/lepture/mistune
 
-_slide_class_pattern = re.compile("\.\.\.[\-\w\d]+[\.[\-\w\d]+]?")
-_open_class_pattern = re.compile("\.\.[\-\w\d]+[\.[\-\w\d]+]?")
-_close_class_pattern = re.compile("\.\.")
-
 # Must start the line
 # _line_class_pattern = re.compile("^\s*\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)")
 # _tag_pattern = re.compile(".@([a-z]+)")
 
-
-def process_open_class_tags(x):
-    tokens = " ".join(x.group().strip(".").split("."))
-    return f"<div class='{tokens}'>"
-
-
-def process_line_class_tags(x):
-    tokens = " ".join(x.group(1).strip().strip(".").split("."))
-    return f"<div class='{tokens}'>{x.group(2)}</div>"
-
-
-def get_classnames(class_string):
-    return " ".join(class_string.lstrip(".").split("."))
-
-
-line_class_pattern = re.compile("\.([\-\w\d]+[\.[\-\w\d]+]?)")
-open_class_pattern = re.compile("\.\.[\-\w\d]+[\.[\-\w\d]+]?")
-close_class_pattern = re.compile("\.\.")
-
-def line_parser(line):
-    tokens = line.split()
-
-    print(tokens)
-
-    if not tokens:
-        return None
-
-    if re.match(open_class_pattern, tokens[0]):
-        names = get_classnames(tokens[0])
-        remaining = " ".join(tokens[1:])
-        return f"<div class='{names}'>{remaining}"
-
-    if re.match(close_class_pattern, tokens[0]):
-        remaining = " ".join(tokens[1:])
-        return f"</div>"
-
-    match = re.search(line_class_pattern, line)
-    if match is not None:
-        names = get_classnames(tokens[0])
-        soup = bs4.BeautifulSoup(line, 'html5lib')
-        
-        print("MATCH!", match.group(), names)
-        print(line)
-        print(soup.find(text=match.group()))
-        exit()
-        remaining = " ".join(tokens[1:])
-        return f"<div class='{names}'>{remaining}</div>"
-
-    return None
-
+slide_class_pattern = re.compile(r"[^\\]\.\.[\-\w\d]+[\.[\-\w\d]+]?\s")
 
 def slide_parser(html):
     """
@@ -73,16 +21,22 @@ def slide_parser(html):
     Returns the slide after parsing the class_patterns.
     """
 
+    '''
     # Note the slide-level classes and remove them
-    section_classes = _slide_class_pattern.findall(html)
+    section_classes = slide_class_pattern.findall(html)
     section_classes = " ".join(
         [" ".join(x.strip(".").split(".")) for x in section_classes]
     )
-    # Remove the class attribute if we don't have any
+    html = slide_class_pattern.sub("", html)
+
+    # Set section_classes to None if empty
     if not section_classes:
         section_classes = None
+    '''
+    print("HTML")
+    print(html)
+    exit()
     
-    html = _slide_class_pattern.sub("", html)
 
     # Parse with a error-correcting soup
     soup = bs4.BeautifulSoup(html, "html5lib").body
@@ -141,8 +95,8 @@ def slide_parser(html):
 
 
 def miniprez_markdown(markdown_text):
-
-    parser = mistune.Markdown(escape=False, use_xhtml=False, hard_wrap=False)
+    print(markdown_text)
+    exit()
     html = parser(markdown_text)
     #html = _tag_pattern.sub(r"<\1>", html)
 
@@ -184,8 +138,7 @@ if __name__ == "__main__":
     text = """introduction
 ..aligncenter 
 ### .text-data **miniprez**"""
-
-    parser = mistune.Markdown(escape=False, use_xhtml=True, hard_wrap=False)
+    
     html = parser(text)
     print("MARKDOWN")
     print(html)

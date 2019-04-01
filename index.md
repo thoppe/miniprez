@@ -73,6 +73,7 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
 Standard emoji and [font-awesome](http://fontawesome.io/)  
 
 ### Emoji
+..text-intro
 + `:battery:` :battery:
 + `:heart_eyes:` :heart_eyes:
 + `::meetup::` ::meetup::
@@ -83,12 +84,16 @@ Standard emoji and [font-awesome](http://fontawesome.io/)
 
 @unsplash(5mZ_M06Fc9g) .dark
 
-.text-landing Slide 4
-@h2 _math support_
+## .text-landing Slide 4
+## _math support_
 LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)  
+
 @line
-@h3 $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
+
+### $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
+
 <br>
+
 `$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$`
 
 -----
@@ -129,18 +134,19 @@ Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com
 ...slide-bottom ...bg-black
 @unsplash(U5rMrSI7Pn4) .light
 
-.content-center .text-shadow 
+..content-center.text-shadow 
 ## .text-landing **A pug and an Equation**
 ### $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
   
-x@footer this slide looks important right? It's not!
+@footer this slide looks important right? It's not!
 
 ------
 
 ...bg-apple
+
 ..wrap
 
-# ..text-data Thanks, you!
+## .text-data Thanks, you!
 #### Contribute at
 ## [https://github.com/thoppe/miniprez](https://github.com/thoppe/miniprez)
 

@@ -25,6 +25,9 @@ class DivClassRenderer(Renderer):
     def Emoji(self, name):
         return f"<emoji data-emoji-alias='{name}'/></emoji>"
 
+    def FontAwesome(self, name):
+        return f"<span class='fa fa-{name}' aria-hidden=true></i>"
+
 
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
@@ -54,9 +57,14 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.insert(3, "LineBlock")
 
         # Emoji, :stuck_out_tongue_closed_eyes:
-        grammar = r"(:[\w\_]+:)(?!:)"
+        grammar = r"::([\w\_]+)::"
+        self.rules.FontAwesome = re.compile(grammar)
+        self.default_rules.insert(4, "FontAwesome")
+
+        # Emoji, :stuck_out_tongue_closed_eyes:
+        grammar = r"(:[\w\_]+:)"
         self.rules.Emoji = re.compile(grammar)
-        self.default_rules.insert(4, "Emoji")
+        self.default_rules.insert(5, "Emoji")
 
         # SlashDotEscape, \.
         grammar = r"\\\."
@@ -88,6 +96,9 @@ class DivClassInlineLexer(InlineLexer):
 
     def output_Emoji(self, m):
         return self.renderer.Emoji(m.group(1))
+
+    def output_FontAwesome(self, m):
+        return self.renderer.FontAwesome(m.group(1))
 
     def output_SlashDotEscape(self, m):
         return "."
@@ -124,7 +135,7 @@ if __name__ == "__main__":
 
 ..aligncenter.black
 # fool.
-the :smile:
+the :smile: ::igloo::
 words
 on
 the table 

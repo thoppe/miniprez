@@ -2,6 +2,7 @@
  <head>
   <link href="static/css/webslides.css" media="all" rel="stylesheet" type="text/css"/>
   <link href="static/css/miniprez.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="static/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
  </head>
  <body>
   <article id="webslides">
@@ -172,50 +173,59 @@ easily on mobile.
     <h3>
      Emoji
     </h3>
-    <ul>
-     <li>
-      <code>
-       :battery:
-      </code>
-      🔋
-     </li>
-     <li>
-      <code>
-       :heart_eyes:
-      </code>
-      😍
-     </li>
-     <li>
-      <code>
-       ::meetup::
-      </code>
-      ::meetup::
-     </li>
-     <li>
-      <code>
-       ::ra::
-      </code>
-      ::ra::
-     </li>
-    </ul>
+    <div class="text-intro">
+     <ul>
+      <li>
+       <code>
+        :battery:
+       </code>
+       🔋
+      </li>
+      <li>
+       <code>
+        :heart_eyes:
+       </code>
+       😍
+      </li>
+      <li>
+       <code>
+        ::meetup::
+       </code>
+       <span aria-hidden="true" class="fa fa-meetup">
+       </span>
+      </li>
+      <li>
+       <code>
+        ::ra::
+       </code>
+       <span aria-hidden="true" class="fa fa-ra">
+       </span>
+      </li>
+     </ul>
+    </div>
    </section>
    <section class="bg-apple" data-slide-number="6">
     @unsplash(5mZ_M06Fc9g)
     <span class="dark">
     </span>
-    <span class="text-landing">
-     Slide 4
-    </span>
-    @h2
-    <em>
-     math support
-    </em>
+    <h2>
+     <span class="text-landing">
+      Slide 4
+     </span>
+    </h2>
+    <h2>
+     <em>
+      math support
+     </em>
+    </h2>
     LaTeX rendered inline with
     <a href="https://github.com/Khan/KaTeX">
      KaTex
     </a>
     @line
-@h3 $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
+    <h3>
+     $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
+    </h3>
     <br/>
     <code>
      $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
@@ -274,29 +284,27 @@ main() {
     @unsplash(U5rMrSI7Pn4)
     <span class="light">
     </span>
-    <span class="content-center">
-     <span class="text-shadow">
-     </span>
-    </span>
-    <h2>
-     <span class="text-landing">
-      <strong>
-       A pug and an Equation
-      </strong>
-     </span>
-    </h2>
-    <h3>
-     $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
-    </h3>
-    x@footer this slide looks important right? It's not!
+    <div class="content-center text-shadow">
+     <h2>
+      <span class="text-landing">
+       <strong>
+        A pug and an Equation
+       </strong>
+      </span>
+     </h2>
+     <h3>
+      $i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$
+     </h3>
+     @footer this slide looks important right? It's not!
+    </div>
    </section>
    <section class="bg-apple" data-slide-number="10">
     <div class="wrap">
-     <h1>
-      <div class="text-data">
+     <h2>
+      <span class="text-data">
        Thanks, you!
-      </div>
-     </h1>
+      </span>
+     </h2>
      <h4>
       Contribute at
      </h4>

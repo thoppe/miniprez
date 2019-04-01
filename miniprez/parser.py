@@ -1,7 +1,7 @@
 import mistune
 import bs4
 from emoji import emojize
-from build_static import add_css, add_script
+from build_static import add_css, add_script, include_resource
 from custom_mistune import parser
 
 # https://github.com/webslides/WebSlides
@@ -75,10 +75,11 @@ def build_body(html):
     add_script(soup, "static/js/jquery-3.1.1.min.js")
     add_script(soup, "static/js/slider.js")
 
-    # Remove empty paragraph tags
-    for p in soup.find_all("p", text=None):
-        if not p.contents:
-            p.decompose()
+    # If we used font-awesome, add the class and fonts
+    if soup.find("span", class_="fa") is not None:
+        add_css(soup, "static/css/font-awesome.min.css")
+        include_resource("static/fonts/fontawesome-webfont.woff")
+        include_resource("static/fonts/fontawesome-webfont.woff2")
 
     return soup
 

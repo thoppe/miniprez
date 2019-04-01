@@ -22,6 +22,9 @@ class DivClassRenderer(Renderer):
     def SectionBlockClass(self, names):
         return f"<meta data-slide-classes='{names}'/>"
 
+    def EmojiBlockClass(self, name):
+        return f"<emoji data-emoji-alias='{name}'/></emoji>"
+
 
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
@@ -50,9 +53,14 @@ class DivClassInlineLexer(InlineLexer):
         # def enable_LineBlockClass(self):
         # Matching pattern, one dots and a space. Do a lookahead here
         grammar = r"\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)"
-
         self.rules.LineBlockClass = re.compile(grammar)
         self.default_rules.insert(3, "LineBlockClass")
+
+        # def enable_emoji(self):
+        # Matching pattern, :stuck_out_tongue_closed_eyes:
+        grammar = r"(:[\w\_]+:)(?!:)"
+        self.rules.EmojiBlockClass = re.compile(grammar)
+        self.default_rules.insert(4, "EmojiBlockClass")
 
         # Fix slashdot escape
         grammar = r"\\\."
@@ -61,7 +69,7 @@ class DivClassInlineLexer(InlineLexer):
 
         # def enable_AlmostText(self):
         # Anything BUT a prefixed dot or @ pattern
-        grammar = r"^[\s\S]+?(?=[\\<!\[_*`~@.]|https?://| {2,}\n|$)"
+        grammar = r"^[\s\S]+?(?=[\\<!\[_*`~@.:]|https?://| {2,}\n|$)"
         self.rules.AlmostText = re.compile(grammar)
         self.default_rules.insert(-1, "AlmostText")
 
@@ -82,6 +90,9 @@ class DivClassInlineLexer(InlineLexer):
 
     def output_CloseBlockClass(self, m):
         return self.renderer.CloseBlockClass()
+
+    def output_EmojiBlockClass(self, m):
+        return self.renderer.EmojiBlockClass(m.group(1))
 
     def output_SlashDotEscape(self, m):
         return "."
@@ -118,7 +129,7 @@ if __name__ == "__main__":
 
 ..aligncenter.black
 # fool.
-the
+the :smile:
 words
 on
 the table 

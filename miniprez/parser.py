@@ -1,6 +1,6 @@
 import mistune
 import bs4
-import re
+from emoji import emojize
 from build_static import add_css, add_script
 from custom_mistune import parser
 
@@ -32,6 +32,12 @@ def slide_parser(html):
     if meta:
         section["class"] = meta["data-slide-classes"]
         meta.decompose()
+
+    # Replace the emoji with their targets
+    for ele in soup.find_all("emoji"):
+        symbol = emojize(ele["data-emoji-alias"], use_aliases=True)
+        ele.replace_with(symbol)
+        print(ele, symbol)
 
     # Add the parsed soup to the section and unwrap the body tags
     section.append(soup.body)

@@ -4,6 +4,7 @@ mistune
 docopt
 bs4
 html5lib
+emoji
 
 # For testing
 Fabric3

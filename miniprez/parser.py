@@ -15,6 +15,7 @@ from custom_mistune import parser
 
 slide_class_pattern = re.compile(r"[^\\]\.\.[\-\w\d]+[\.[\-\w\d]+]?\s")
 
+
 def slide_parser(html):
     """
     Takes a single slide after being markdown parsed and split by ----
@@ -27,16 +28,16 @@ def slide_parser(html):
         [" ".join(x.strip(".").split(".")) for x in section_classes]
     )
     html = slide_class_pattern.sub("", html)
-    
+
     # Parse with a error-correcting soup
     soup = bs4.BeautifulSoup(html, "html5lib")
-    
+
     # Create a new section and the slide-level classes in
     section = soup.new_tag("section")
 
     if section_classes:
         section["class"] = section_classes
-    
+
     # Add the parsed soup to the section and unwrap the body tags
     section.append(soup.body)
     section.body.unwrap()
@@ -46,17 +47,17 @@ def slide_parser(html):
 
 def miniprez_markdown(markdown_text):
     html = parser(markdown_text)
-    #html = _tag_pattern.sub(r"<\1>", html)
-    
+    # html = _tag_pattern.sub(r"<\1>", html)
+
     # Nest each block in a section div
     blocks = []
     strict_hr_tag = "<hr>"
     article = bs4.BeautifulSoup("", "html.parser").new_tag("article")
     article["id"] = "webslides"
-    
+
     for slide_number, html in enumerate(html.split(strict_hr_tag)):
         section = slide_parser(html)
-        
+
         # Give each slide a sequential number
         section["data-slide-number"] = slide_number
 
@@ -89,7 +90,7 @@ if __name__ == "__main__":
 --------------------------
 slide two
 """
-    
+
     html = parser(text)
     html = miniprez_markdown(text)
 

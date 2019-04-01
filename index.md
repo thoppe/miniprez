@@ -2,7 +2,7 @@
 
 ..aligncenter.wrap
 
-### ..text-data **miniprez** ..
+### .text-data **miniprez** 
 #### Beautiful presentations in minimalist format
 
 ..text-intro miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
@@ -11,27 +11,26 @@
 
 ...bg-black 
 
-# ..text-landing The problem ..
+## .text-landing The problem
 
 ..text-intro
 + I want simple and beautiful presentations.
 + Presentations that compile from text to interactive webpages.
 + Presentations that seperate content from style like Markdown. 
 + Presentations that render mathematics and highlight code.
-
 ..
+
 Oh, and it should work well* on mobile too.
 
-.@footer ..alignright *just show me the content!
+.@footer
+.alignright *just show me the content!
 
 --------
 ...align-right.bg-white 
 
 ..size-50.wrap
 
-# ..text-landing The solution: <br> miniprez 
-
-<hr>
+## .text-landing The solution: <br> miniprez 
 
 A [python library](https://github.com/thoppe/miniprez) written using
 [pyparsing](http://pyparsing.wikispaces.com/) and

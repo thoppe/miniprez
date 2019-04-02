@@ -96,7 +96,7 @@ def build_body(html):
     if soup.find(class_="inline-equation") or soup.find(
         class_="block-equation"
     ):
-        logger.warning("EQUATION USED. Currently disabled.")
+        logger.warning("EQUATION DETECTED. Currently disabled.")
         # include_resource("static/fonts/KaTeX_Main-Regular.woff")
         # add_css(soup, "static/css/katex.min.css")
         # add_script(soup, "static/js/katex.min.js")

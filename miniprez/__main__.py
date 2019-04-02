@@ -29,7 +29,8 @@ def main():
     f_markdown = args["<markdown_file>"]
 
     if args["watch"]:
-        logger.debug(f"Rebuilding on changes every {0.5} seconds")
+        sleep_time = 0.5
+        logger.debug(f"Rebuilding on changes every {sleep_time:0.2f} seconds")
         loop = asyncio.get_event_loop()
         function = parser_loop(f_markdown)
         loop.run_until_complete(function)

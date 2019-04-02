@@ -28,11 +28,11 @@ async def file_watcher(target_file, sleep_time=0.5):
         await asyncio.sleep(sleep_time)
 
 
-async def parser_loop(f_markdown):
+async def parser_loop(f_markdown, sleep_time=0.5):
     """
     Main event loop. If the target file is modified, or new start a build.
     """
-    async for f_target, dt in file_watcher(f_markdown):
+    async for f_target, dt in file_watcher(f_markdown, sleep_time):
         build_html(f_target)
 
 

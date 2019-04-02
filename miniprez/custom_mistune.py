@@ -42,6 +42,10 @@ class DivClassRenderer(Renderer):
         arguments = " ".join(arguments)
         return f'{spacing}<img src="{src}" {arguments} />'
 
+    def BackgroundImageLink(self, src, arguments):
+        arguments = " ".join(arguments)
+        return f"""<span {arguments} style="background-image:url('{src}')" data-is-bg=true></span>"""
+
 
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
@@ -72,7 +76,12 @@ class DivClassInlineLexer(InlineLexer):
         self.rules.LineBlock = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "LineBlock")
 
-        # Short image link
+        # Background image link, !!(myimage.jpg class="dark")
+        grammar = r"(^[\s]*)\!\!\(([^\)]+)\)"
+        self.rules.BackgroundImageLink = re.compile(grammar)
+        self.default_rules.insert(next(rule_n), "BackgroundImageLink")
+
+        # Short image link, !(myimage.jpg class="dark")
         grammar = r"(^[\s]*)\!\(([^\)]+)\)"
         self.rules.ShortImageLink = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "ShortImageLink")
@@ -151,6 +160,10 @@ class DivClassInlineLexer(InlineLexer):
             tokens[0], tokens[1:], spacing=m.group(1)
         )
 
+    def output_BackgroundImageLink(self, m):
+        tokens = m.group(2).split()
+        return self.renderer.BackgroundImageLink(tokens[0], tokens[1:])
+
     def output_SlashDotEscape(self, m):
         return "."
 
@@ -203,11 +216,11 @@ $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x}
 """
     tx0 = "www.google.com"
     # tx0 = "The !(www.google.com foobar) "
-    # tx0 = "The !(www.google.com)"
+    tx0 = "The !!(www.google.com class='dark')"
     # tx0 = "The !(www.google.com height=300 width=400)"
     # tx0 = "The $x*x*x$"
     # tx0 = "The :smile:"
-    tx0 = ".text-landing **A pug and an Equation**"
+    # tx0 = ".text-landing **A pug and an Equation**"
     # import coloredlogs, logging
     # logger = logging.getLogger("miniprez")
     # fmt = "%(message)s"

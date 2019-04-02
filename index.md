@@ -1,5 +1,6 @@
-...bg-white
+!!(https://source.unsplash.com/4mta-DkJUAg class="dark")
 
+...bg-white
 ..aligncenter.wrap
 
 ### .text-data **miniprez** 
@@ -42,10 +43,10 @@ Miniprez compiles [text](tutorial.md) into a single-page html presentation
 easily on mobile.
 
 --------
+!!(https://source.unsplash.com/F1dSr7I4AmY class="dark")
 
 ...align-left.bg-black
 
-@unsplash(F1dSr7I4AmY) .dark
 
 # .text-landing .text-content _Slide 2_
 
@@ -55,16 +56,16 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
 
 <hr>
 
-
 + :muscle: **bold** `**text**`
 + :fire: *fire* `*text*`
 + :cloud: _emph_ `_text_`
 + :computer: `code` `&&&`code&&&``
 
-
 -----
+!!(https://source.unsplash.com/pmX9BkDDr_A class="light")
+
 ...align-left ...bg-apple
-@unsplash(pmX9BkDDr_A) .light
+
 
 ## .text-landing Slide 3
 

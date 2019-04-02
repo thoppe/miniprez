@@ -32,6 +32,9 @@ CDN_KaTeX_js = {
     # defer=None,
 }
 
+Roboto_FontLink = "https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
+
+
 
 def slide_parser(html):
     """
@@ -55,6 +58,11 @@ def slide_parser(html):
     for ele in soup.find_all("emoji"):
         symbol = emojize(ele["data-emoji-alias"], use_aliases=True)
         ele.replace_with(symbol)
+
+    # For all the background spans, append the correct class
+    for ele in soup.find_all("span", {"data-is-bg": True}):
+        ele['class'].append('background')
+        del ele['data-is-bg']
 
     # Add the parsed soup to the section and unwrap the body tags
     section.append(soup.body)
@@ -89,6 +97,7 @@ def build_body(html):
 
     add_css(soup, "static/css/webslides.css")
     add_css(soup, "static/css/miniprez.css")
+    add_css(soup, Roboto_FontLink, cdn=True)
 
     add_script(soup, "static/js/jquery-3.1.1.min.js")
     add_script(soup, "static/js/slider.js")

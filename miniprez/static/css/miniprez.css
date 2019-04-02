@@ -4,6 +4,13 @@
   overflow-x: visible;
 }
 
+/* Substitutes for <hr> */
+.line {
+    border-top: 6px solid purple;
+    width: 100%;
+    display:block;
+}
+
 /* Clean up markdown lists */
 ul {
     padding: 0;
@@ -31,3 +38,5 @@ ul>li {
 code {
     display: inline-table;
 }
+
+

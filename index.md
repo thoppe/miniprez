@@ -31,7 +31,9 @@ Oh, and it should work well* on mobile too.
 
 ..size-50.wrap
 
-# .text-landing The solution: <br> miniprez 
+# .text-landing The solution: <br> miniprez
+
+.line
 
 A [python library](https://github.com/thoppe/miniprez) written using
 [pyparsing](http://pyparsing.wikispaces.com/) and
@@ -47,9 +49,7 @@ easily on mobile.
 
 ...align-left.bg-black
 
-
-# .text-landing .text-content _Slide 2_
-
+# .text-landing.text-content _Slide 2_
 
 ## _simple markdown support_
 Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweaks!

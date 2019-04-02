@@ -141,12 +141,12 @@ def build_body(html):
 
     for ele in soup.find_all("span"):
         parent = ele.parent
-        if parent.name not in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+        if parent.name not in ["h1", "h2", "h3", "h4", "h5", "h6"]:
             continue
         if "class" not in ele.attrs:
             continue
-        if 'class' not in parent.attrs:
-            parent['class'] = []
+        if "class" not in parent.attrs:
+            parent["class"] = []
         parent["class"].extend(ele["class"])
         ele.unwrap()
 

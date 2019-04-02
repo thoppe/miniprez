@@ -6,9 +6,14 @@
 
 /* Substitutes for <hr> */
 .line {
-    border-top: 6px solid purple;
-    width: 100%;
     display:block;
+    background: radial-gradient(ellipse at center,
+				rgba(0, 20, 80, 0.2) 0,
+				rgba(255, 255, 255, 0) 75%);
+
+    height: 1px;
+    border: none;
+    margin: 3.2rem auto;
 }
 
 /* Clean up markdown lists */

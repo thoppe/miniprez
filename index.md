@@ -31,7 +31,7 @@ Oh, and it should work well* on mobile too.
 
 ..size-50.wrap
 
-## .text-landing The solution: <br> miniprez 
+# .text-landing The solution: <br> miniprez 
 
 A [python library](https://github.com/thoppe/miniprez) written using
 [pyparsing](http://pyparsing.wikispaces.com/) and

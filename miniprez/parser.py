@@ -134,6 +134,12 @@ def build_body(html):
     # Add the HTML doctype
     soup.insert(0, bs4.element.Doctype("HTML"))
 
+    # Unwrap all useless p tags
+    for ele in soup.find_all('p'):
+        if isinstance(ele, bs4.element.Tag):
+            if not ele.get_text().strip():
+                ele.unwrap()
+                
     return soup
 
 

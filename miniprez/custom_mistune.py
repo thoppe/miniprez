@@ -184,7 +184,8 @@ class DivClassInlineLexer(InlineLexer):
 class Markdown_NP(Markdown):
     def output_paragraph(self):
         text = self.token["text"].strip()
-        return self.inline(text + " ")
+        result = self.inline(text + " ")
+        return f"<p>{result}</p>"
 
 
 # Globally build the parser
@@ -214,9 +215,9 @@ here *we* go
 $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} 
 \,d\xi $$ 
 """
-    tx0 = "www.google.com"
+    #tx0 = "www.google.com"
     # tx0 = "The !(www.google.com foobar) "
-    tx0 = "The !!(www.google.com class='dark')"
+    #tx0 = "The !!(www.google.com class='dark')"
     # tx0 = "The !(www.google.com height=300 width=400)"
     # tx0 = "The $x*x*x$"
     # tx0 = "The :smile:"

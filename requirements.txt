@@ -6,6 +6,8 @@ bs4
 html5lib
 emoji
 
+coloredlogs
+
 # For testing
 Fabric3
 

@@ -4,11 +4,10 @@ import logging
 
 logger = logging.getLogger("miniprez")
 
-
 def include_resource(filename):
 
     if not os.path.exists(filename):
-        logger.warning(f"Copying {filename}")
+        logger.info(f"--> {filename}")
 
         # Create the directory if we need to
         directory = os.path.dirname(filename)

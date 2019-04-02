@@ -42,7 +42,7 @@ def build_html(f_target):
     """
 
     f_html_output = f_target.replace(".md", ".html")
-    logger.warning(f"Building {f_target} to {f_html_output}")
+    logger.info(f"Building {f_target} to {f_html_output}")
 
     with open(f_target) as FIN:
         markdown = FIN.read()

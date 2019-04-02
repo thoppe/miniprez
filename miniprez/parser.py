@@ -3,6 +3,9 @@ import bs4
 from emoji import emojize
 from build_static import add_css, add_script, include_resource
 from custom_mistune import parser
+import logging
+
+logger = logging.getLogger("miniprez")
 
 # https://github.com/webslides/WebSlides
 # https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md
@@ -93,7 +96,7 @@ def build_body(html):
     if soup.find(class_="inline-equation") or soup.find(
         class_="block-equation"
     ):
-        print("FOUND EQUATION, ADD RESOURCES, still a work in progress")
+        logger.warning("EQUATION USED. Currently disabled.")
         # include_resource("static/fonts/KaTeX_Main-Regular.woff")
         # add_css(soup, "static/css/katex.min.css")
         # add_script(soup, "static/js/katex.min.js")

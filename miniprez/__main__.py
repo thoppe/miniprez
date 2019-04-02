@@ -16,13 +16,19 @@ import asyncio
 from docopt import docopt
 from continuous_integration import parser_loop, build_html
 import sys
+import coloredlogs, logging
 
+# Create a logger object.
+logger = logging.getLogger("miniprez")
+fmt = '%(asctime)s %(levelname)s %(message)s'
+coloredlogs.install(level='DEBUG', logger=logger, fmt=fmt)
 
 def main():
     args = docopt(__doc__, version=__version__)
     f_markdown = args["<markdown_file>"]
 
     if args["watch"]:
+        logger.debug(f"Rebuilding on changes every {0.5} seconds")
         loop = asyncio.get_event_loop()
         function = parser_loop(f_markdown)
         loop.run_until_complete(function)

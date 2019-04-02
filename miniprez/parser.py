@@ -97,10 +97,19 @@ def build_body(html):
         class_="block-equation"
     ):
         logger.warning("EQUATION DETECTED. Currently disabled.")
+
+        add_script(
+            soup,
+            "https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js",
+            cdn=True,
+            integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij",
+            crossorigin="anonymous",
+            defer=None,
+        )
         # include_resource("static/fonts/KaTeX_Main-Regular.woff")
         # add_css(soup, "static/css/katex.min.css")
         # add_script(soup, "static/js/katex.min.js")
-        # add_script(soup, "static/js/start_katex.js")
+        add_script(soup, "static/js/render_equations.js")
 
     # Add the HTML doctype
     soup.insert(0, bs4.element.Doctype("HTML"))

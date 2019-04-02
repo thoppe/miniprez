@@ -24,13 +24,18 @@ def include_resource(filename):
             FOUT.write(res.read())
 
 
-def add_script(soup, src):
+def add_script(soup, src, cdn=False, *args, **kwargs):
     """
     Takes a bs4 soup and adds the following script to the end of the body.
     """
-    include_resource(src)
+    
+    if not cdn:
+        include_resource(src)
 
     tag = soup.new_tag("script", src=src)
+    for key, val in kwargs.items():
+        tag[key] = val
+        
     soup.body.append(tag)
 
 

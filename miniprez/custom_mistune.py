@@ -25,18 +25,22 @@ class DivClassRenderer(Renderer):
     def SectionTags(self, names):
         return f"<meta data-slide-classes='{names}'/>"
 
-    def Emoji(self, name):
-        return f"<emoji data-emoji-alias='{name}'/></emoji>"
+    def Emoji(self, name, spacing=""):
+        return f"{spacing}<emoji data-emoji-alias='{name}'/></emoji>"
 
-    def FontAwesome(self, name):
-        return f"<span class='fa fa-{name}' aria-hidden=true></i>"
+    def FontAwesome(self, name, spacing=""):
+        return f"{spacing}<span class='fa fa-{name}' aria-hidden=true></i>"
 
-    def InlineLaTeX(self, expression):
-        return f'<span class="inline-equation" data-expr="{expression}"></span>'
+    def InlineLaTeX(self, expression, spacing=""):
+        return f'{spacing}<span class="inline-equation" data-expr="{expression}"></span>'
 
     def BlockLaTeX(self, expression):
         expression = " ".join(expression.strip().split())
         return f'<div class="block-equation" data-expr="{expression}"></div>'
+
+    def ShortImageLink(self, src, arguments, spacing=""):
+        arguments = " ".join(arguments)
+        return f'{spacing}<img src="{src}" {arguments} />'
 
 
 class DivClassInlineLexer(InlineLexer):
@@ -69,27 +73,27 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.insert(next(rule_n), "LineBlock")
 
         # Short image link
-        # grammar = (r'''^!\s*(<)?([\s\S]*?)(?(2)>)(?:\s+['"]([\s\S]*?)['"])?\s*\)''')
-        # self.rules.ShortImageLink = re.compile(grammar)
-        # self.default_rules.insert(next(rule_n), "ShortImageLink")
+        grammar = r"(^[\s]*)\!\(([^\)]+)\)"
+        self.rules.ShortImageLink = re.compile(grammar)
+        self.default_rules.insert(next(rule_n), "ShortImageLink")
 
-        # Emoji, :stuck_out_tongue_closed_eyes:
-        grammar = r"::([\w\_]+)::"
+        # FontAwesome, ::github::
+        grammar = r"([\s]*)::([\w\_]+)::"
         self.rules.FontAwesome = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "FontAwesome")
 
         # Emoji, :stuck_out_tongue_closed_eyes:
-        grammar = r"(:[\w\_]+:)"
+        grammar = r"([\s]*)(:[\w\_]+:)"
         self.rules.Emoji = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "Emoji")
 
         # Block LaTeX, $$\int_{-\infty}^\infty \n \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$$
-        grammar = "\$\$([^\$]*)\$\$"
+        grammar = "[\s]*\$\$([^\$]*)\$\$"
         self.rules.BlockLaTeX = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "BlockLaTeX")
 
         # Single line LaTeX, $\int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$
-        grammar = r"\$([^\n]+)\$"
+        grammar = r"([\s]*)\$([^\n]+)\$"
         self.rules.InlineLaTeX = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "InlineLaTeX")
 
@@ -100,7 +104,7 @@ class DivClassInlineLexer(InlineLexer):
 
         # AlmostText1 matches \w\d and then things with a token
         tokens = r"\\<!\[_*`~@.:\$"
-        grammar = r"^[\s]+[a-zA-Z0-9.-][\w\d%s]+" % tokens
+        grammar = r"^[\s]*[a-zA-Z0-9.-][\w\d%s]+" % tokens
         self.rules.AlmostText1 = re.compile(grammar)
         self.default_rules.insert(-1, "AlmostText1")
 
@@ -128,16 +132,24 @@ class DivClassInlineLexer(InlineLexer):
         return self.renderer.CloseBlock()
 
     def output_Emoji(self, m):
-        return self.renderer.Emoji(m.group(1))
+        return self.renderer.Emoji(name=m.group(2), spacing=m.group(1))
 
     def output_FontAwesome(self, m):
-        return self.renderer.FontAwesome(m.group(1))
+        return self.renderer.FontAwesome(name=m.group(2), spacing=m.group(1))
 
     def output_InlineLaTeX(self, m):
-        return self.renderer.InlineLaTeX(m.group(1).strip())
+        return self.renderer.InlineLaTeX(
+            expression=m.group(2).strip(), spacing=m.group(1)
+        )
 
     def output_BlockLaTeX(self, m):
         return self.renderer.BlockLaTeX(m.group(1).strip())
+
+    def output_ShortImageLink(self, m):
+        tokens = m.group(2).split()
+        return self.renderer.ShortImageLink(
+            tokens[0], tokens[1:], spacing=m.group(1)
+        )
 
     def output_SlashDotEscape(self, m):
         return "."
@@ -189,9 +201,13 @@ here *we* go
 $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} 
 \,d\xi $$ 
 """
-
-    # tx0 = "The end _of_ the *world* ."
-
+    tx0 = "www.google.com"
+    # tx0 = "The !(www.google.com foobar) "
+    # tx0 = "The !(www.google.com)"
+    # tx0 = "The !(www.google.com height=300 width=400)"
+    # tx0 = "The $x*x*x$"
+    # tx0 = "The :smile:"
+    tx0 = ".text-landing **A pug and an Equation**"
     # import coloredlogs, logging
     # logger = logging.getLogger("miniprez")
     # fmt = "%(message)s"

@@ -20,8 +20,9 @@ import coloredlogs, logging
 
 # Create a logger object.
 logger = logging.getLogger("miniprez")
-fmt = '%(asctime)s %(levelname)s %(message)s'
-coloredlogs.install(level='DEBUG', logger=logger, fmt=fmt)
+fmt = "%(asctime)s %(levelname)s %(message)s"
+coloredlogs.install(level="DEBUG", logger=logger, fmt=fmt)
+
 
 def main():
     args = docopt(__doc__, version=__version__)

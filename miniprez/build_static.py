@@ -4,6 +4,7 @@ import logging
 
 logger = logging.getLogger("miniprez")
 
+
 def include_resource(filename):
 
     if not os.path.exists(filename):

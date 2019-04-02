@@ -104,8 +104,17 @@ def build_body(html):
             cdn=True,
             integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij",
             crossorigin="anonymous",
-            defer=None,
+            #defer=None,
         )
+
+        add_css(
+            soup,
+            "https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css",
+            cdn=True,
+            integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ",
+            crossorigin="anonymous"
+        )
+        
         # include_resource("static/fonts/KaTeX_Main-Regular.woff")
         # add_css(soup, "static/css/katex.min.css")
         # add_script(soup, "static/js/katex.min.js")

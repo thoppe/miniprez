@@ -39,12 +39,18 @@ def add_script(soup, src, cdn=False, *args, **kwargs):
     soup.body.append(tag)
 
 
-def add_css(soup, src):
+def add_css(soup, src, cdn=False, *args, **kwargs):
     """
     Takes a bs4 soup and adds the following css to the header
     """
-    include_resource(src)
 
+    if not cdn:
+        include_resource(src)
+    
     css_args = {"rel": "stylesheet", "type": "text/css", "media": "all"}
     tag = soup.new_tag("link", href=src, **css_args)
+
+    for key, val in kwargs.items():
+        tag[key] = val
+    
     soup.head.append(tag)

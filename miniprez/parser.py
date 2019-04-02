@@ -35,7 +35,6 @@ CDN_KaTeX_js = {
 Roboto_FontLink = "https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
 
 
-
 def slide_parser(html):
     """
     Takes a single slide after being markdown parsed and split by ----
@@ -61,8 +60,8 @@ def slide_parser(html):
 
     # For all the background spans, append the correct class
     for ele in soup.find_all("span", {"data-is-bg": True}):
-        ele['class'].append('background')
-        del ele['data-is-bg']
+        ele["class"].append("background")
+        del ele["data-is-bg"]
 
     # Add the parsed soup to the section and unwrap the body tags
     section.append(soup.body)
@@ -135,11 +134,22 @@ def build_body(html):
     soup.insert(0, bs4.element.Doctype("HTML"))
 
     # Unwrap all useless p tags
-    for ele in soup.find_all('p'):
+    for ele in soup.find_all("p"):
         if isinstance(ele, bs4.element.Tag):
             if not ele.get_text().strip():
                 ele.unwrap()
-                
+
+    for ele in soup.find_all("span"):
+        parent = ele.parent
+        if parent.name not in ['h1', 'h2', 'h3', 'h4', 'h5', 'h6']:
+            continue
+        if "class" not in ele.attrs:
+            continue
+        if 'class' not in parent.attrs:
+            parent['class'] = []
+        parent["class"].extend(ele["class"])
+        ele.unwrap()
+
     return soup
 
 

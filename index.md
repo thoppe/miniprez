@@ -9,19 +9,19 @@
 ..text-intro miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
 
 -----
-
 ...bg-black 
 
-## .text-landing The problem
+# .text-landing The problem
 
 ..text-intro
 + I want simple and beautiful presentations.
 + Presentations that compile from text to interactive webpages.
 + Presentations that seperate content from style like Markdown. 
 + Presentations that render mathematics and highlight code.
-..
 
+<br>
 Oh, and it should work well* on mobile too.
+..
 
 .@footer
 .alignright *just show me the content!

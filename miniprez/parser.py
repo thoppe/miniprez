@@ -85,18 +85,23 @@ def build_body(html):
         include_resource("static/fonts/fontawesome-webfont.woff2")
 
     if soup.find("code"):
-        # Google's prettifier
-        add_script(soup, "static/js/run_prettify.js")
-
+        has_found_code_block = False
+        
         # Need to add the class tag
         for ele in soup.find_all("code"):
-            ele["class"] = "prettyprint"
+            if ele.parent.name == "pre":
+                ele["class"] = "prettyprint"
+                has_found_code_block = True
+
+        if has_found_code_block:
+            # Google's prettifier
+            add_script(soup, "static/js/run_prettify.js")
 
     # If we have an equation, add the static information
     if soup.find(class_="inline-equation") or soup.find(
         class_="block-equation"
     ):
-        logger.warning("EQUATION DETECTED. Currently disabled.")
+        logger.warning("EQUATION DETECTED. Currently using CDN.")
 
         add_script(
             soup,
@@ -114,10 +119,7 @@ def build_body(html):
             integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ",
             crossorigin="anonymous"
         )
-        
-        # include_resource("static/fonts/KaTeX_Main-Regular.woff")
-        # add_css(soup, "static/css/katex.min.css")
-        # add_script(soup, "static/js/katex.min.js")
+
         add_script(soup, "static/js/render_equations.js")
 
     # Add the HTML doctype

@@ -81,24 +81,23 @@ def build_body(html):
         include_resource("static/fonts/fontawesome-webfont.woff")
         include_resource("static/fonts/fontawesome-webfont.woff2")
 
+    if soup.find("code"):
+        # Google's prettifier
+        add_script(soup, "static/js/run_prettify.js")
+
+        # Need to add the class tag
+        for ele in soup.find_all("code"):
+            ele["class"] = "prettyprint"
+
     # If we have an equation, add the static information
     if soup.find(class_="inline-equation") or soup.find(
         class_="block-equation"
     ):
         print("FOUND EQUATION, ADD RESOURCES, still a work in progress")
-        #include_resource("static/fonts/KaTeX_Main-Regular.woff")
-        #add_css(soup, "static/css/katex.min.css")
-        #add_script(soup, "static/js/katex.min.js")
-        #add_script(soup, "static/js/start_katex.js")
-
-    if soup.find("code"):
-        # Google's prettifier
-        add_script(soup, "static/js/run_prettify.py")
-
-        # Need to add the class tag
-        for ele in soup.find_all("code"):
-            ele['class'] = "prettyprint"
-
+        # include_resource("static/fonts/KaTeX_Main-Regular.woff")
+        # add_css(soup, "static/css/katex.min.css")
+        # add_script(soup, "static/js/katex.min.js")
+        # add_script(soup, "static/js/start_katex.js")
 
     # Add the HTML doctype
     soup.insert(0, bs4.element.Doctype("HTML"))

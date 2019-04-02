@@ -4,7 +4,6 @@
   <link href="static/css/webslides.css" media="all" rel="stylesheet" type="text/css"/>
   <link href="static/css/miniprez.css" media="all" rel="stylesheet" type="text/css"/>
   <link href="static/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
-  <link href="static/css/katex.min.css" media="all" rel="stylesheet" type="text/css"/>
  </head>
  <body>
   <article id="webslides">
@@ -124,7 +123,7 @@ easily on mobile.
       <strong>
        bold
       </strong>
-      <code>
+      <code class="prettyprint">
        **text**
       </code>
      </li>
@@ -133,7 +132,7 @@ easily on mobile.
       <em>
        fire
       </em>
-      <code>
+      <code class="prettyprint">
        *text*
       </code>
      </li>
@@ -142,16 +141,16 @@ easily on mobile.
       <em>
        emph
       </em>
-      <code>
+      <code class="prettyprint">
        _text_
       </code>
      </li>
      <li>
       💻
-      <code>
+      <code class="prettyprint">
        code
       </code>
-      <code>
+      <code class="prettyprint">
        &amp;&amp;&amp;
       </code>
       code&amp;&amp;&amp;``
@@ -182,26 +181,26 @@ easily on mobile.
     <div class="text-intro">
      <ul>
       <li>
-       <code>
+       <code class="prettyprint">
         :battery:
        </code>
        🔋
       </li>
       <li>
-       <code>
+       <code class="prettyprint">
         :heart_eyes:
        </code>
        😍
       </li>
       <li>
-       <code>
+       <code class="prettyprint">
         ::meetup::
        </code>
        <span aria-hidden="true" class="fa fa-meetup">
        </span>
       </li>
       <li>
-       <code>
+       <code class="prettyprint">
         ::ra::
        </code>
        <span aria-hidden="true" class="fa fa-ra">
@@ -234,7 +233,7 @@ easily on mobile.
      </span>
     </h3>
     <br/>
-    <code>
+    <code class="prettyprint">
      $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
     </code>
    </section>
@@ -252,14 +251,14 @@ easily on mobile.
     <a href="https://github.com/google/code-prettify">
      code prettify
     </a>
-    <pre><code>sort [] = []
+    <pre><code class="prettyprint">sort [] = []
 sort (x:xs) = sort lower ++ [x] ++ sort higher
     where
         lower = filter (&lt; x) xs
         higher = filter (&gt;= x) xs
 </code></pre>
     Code blocks are context-aware
-    <pre><code>// to convert prefix to postfix
+    <pre><code class="prettyprint">// to convert prefix to postfix
 main() {
   char c = getchar();
   (c == '+' || c == '-' || c == '*' || c == '/') ? main(), main() : 0;
@@ -328,9 +327,7 @@ main() {
   </script>
   <script src="static/js/slider.js">
   </script>
-  <script src="static/js/katex.min.js">
-  </script>
-  <script src="static/js/start_katex.js">
+  <script src="static/js/run_prettify.py">
   </script>
  </body>
 </html>

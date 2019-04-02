@@ -6,6 +6,7 @@ Desired functionality
 + [~] recreate tutorial.md
 + [X] Add back in emoji/fontawesome
 + [X] (double dot) .. syntax
++ [X] code prettify
 + [ ] colored logs
 + [ ] pulling external resources locally
 + [ ] Math support (optionally loaded)

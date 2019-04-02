@@ -28,14 +28,14 @@ def add_script(soup, src, cdn=False, *args, **kwargs):
     """
     Takes a bs4 soup and adds the following script to the end of the body.
     """
-    
+
     if not cdn:
         include_resource(src)
 
     tag = soup.new_tag("script", src=src)
     for key, val in kwargs.items():
         tag[key] = val
-        
+
     soup.body.append(tag)
 
 
@@ -46,11 +46,11 @@ def add_css(soup, src, cdn=False, *args, **kwargs):
 
     if not cdn:
         include_resource(src)
-    
+
     css_args = {"rel": "stylesheet", "type": "text/css", "media": "all"}
     tag = soup.new_tag("link", href=src, **css_args)
 
     for key, val in kwargs.items():
         tag[key] = val
-    
+
     soup.head.append(tag)

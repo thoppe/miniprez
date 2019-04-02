@@ -1,6 +1,9 @@
 import copy, re, itertools
 from mistune import Renderer, InlineGrammar, InlineLexer, Markdown
 from mistune import BlockGrammar, BlockLexer, Markdown
+import logging
+
+logger = logging.getLogger("miniprez")
 
 
 def get_classnames(class_string):
@@ -44,26 +47,31 @@ class DivClassInlineLexer(InlineLexer):
 
         rule_n = itertools.count()
 
-        # OpenBlock, ...align-center.bg-black
-        grammar = r"\.\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
+        # SectionTags, ...align-center.bg-black
+        grammar = r"[\s]*\.\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
         self.rules.SectionTags = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "SectionTags")
 
         # OpenBlock, ..align-center.bg-black
         # Matching pattern, two dots then valid class names dot separated
-        grammar = r"\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
+        grammar = r"[\s]*\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
         self.rules.OpenBlock = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "OpenBlock")
 
         # CloseBlock, ..
-        grammar = r"[^\\]\.\."
+        grammar = r"[\s]*[^\\]\.\."
         self.rules.CloseBlock = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "CloseBlock")
 
         # LineBlock, .text-data
-        grammar = r"\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)"
+        grammar = r"[\s]*\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)"
         self.rules.LineBlock = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "LineBlock")
+
+        # Short image link
+        # grammar = (r'''^!\s*(<)?([\s\S]*?)(?(2)>)(?:\s+['"]([\s\S]*?)['"])?\s*\)''')
+        # self.rules.ShortImageLink = re.compile(grammar)
+        # self.default_rules.insert(next(rule_n), "ShortImageLink")
 
         # Emoji, :stuck_out_tongue_closed_eyes:
         grammar = r"::([\w\_]+)::"
@@ -76,7 +84,6 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.insert(next(rule_n), "Emoji")
 
         # Block LaTeX, $$\int_{-\infty}^\infty \n \hat \f\xi\,e^{2 \pi i \xi x} \,d\xi$$
-        # Not working yet
         grammar = "\$\$([^\$]*)\$\$"
         self.rules.BlockLaTeX = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "BlockLaTeX")
@@ -91,10 +98,16 @@ class DivClassInlineLexer(InlineLexer):
         self.rules.SlashDotEscape = re.compile(grammar)
         self.default_rules.insert(-1, "SlashDotEscape")
 
-        # AlmostText, anything but a prefixed (:.@)
-        grammar = r"^[\s\S]+?(?=[\\<!\[_*`~@.:\$]|https?://| {2,}\n|$)"
-        self.rules.AlmostText = re.compile(grammar)
-        self.default_rules.insert(-1, "AlmostText")
+        # AlmostText1 matches \w\d and then things with a token
+        tokens = r"\\<!\[_*`~@.:\$"
+        grammar = r"^[\s]+[a-zA-Z0-9.-][\w\d%s]+" % tokens
+        self.rules.AlmostText1 = re.compile(grammar)
+        self.default_rules.insert(-1, "AlmostText1")
+
+        # AlmostText2 matches up to a special token
+        grammar = r"^[\s\S]+?(?=[%s ]|$)" % tokens
+        self.rules.AlmostText2 = re.compile(grammar)
+        self.default_rules.insert(-1, "AlmostText2")
 
     def output_LineBlock(self, m):
         tags = get_classnames(m.group(1))
@@ -129,7 +142,12 @@ class DivClassInlineLexer(InlineLexer):
     def output_SlashDotEscape(self, m):
         return "."
 
-    def output_AlmostText(self, m):
+    def output_AlmostText1(self, m):
+        # logger.debug(f"AlmostText1 {m.group(0)}")
+        return m.group()
+
+    def output_AlmostText2(self, m):
+        # logger.debug(f"AlmostText1 {m.group(0)}")
         return m.group()
 
     def output_text(self, m):
@@ -170,11 +188,16 @@ here *we* go
 
 $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} 
 \,d\xi $$ 
-
-dsdfsd
-
-sdasdasd
 """
+
+    # tx0 = "The end _of_ the *world* ."
+
+    # import coloredlogs, logging
+    # logger = logging.getLogger("miniprez")
+    # fmt = "%(message)s"
+    # coloredlogs.install(level="DEBUG", logger=logger, fmt=fmt)
+    # logger.setLevel(logging.DEBUG)
+
     print(inline.default_rules)
     print(tx0)
     print("MARKDOWNED")

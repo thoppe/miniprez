@@ -1,7 +1,7 @@
-!!(https://source.unsplash.com/4mta-DkJUAg class="dark")
+!!(https://source.unsplash.com/4mta-DkJUAg class="light")
 
-...bg-white
-..aligncenter.wrap
+...bg-black
+..aligncenter
 
 ### .text-data **miniprez** 
 #### Beautiful presentations in minimalist format
@@ -54,7 +54,7 @@ easily on mobile.
 ## _simple markdown support_
 Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweaks!
 
-<hr>
+.line
 
 + :muscle: **bold** `**text**`
 + :fire: *fire* `*text*`
@@ -64,7 +64,7 @@ Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweak
 -----
 !!(https://source.unsplash.com/pmX9BkDDr_A class="light")
 
-...align-left ...bg-apple
+...align-left.bg-black
 
 
 ## .text-landing Slide 3
@@ -81,15 +81,14 @@ Standard emoji and [font-awesome](http://fontawesome.io/)
 + `::ra::` ::ra:: 
 
 -----
+!!(https://source.unsplash.com/5mZ_M06Fc9g class="dark")
 ...bg-apple ...align-left
-
-@unsplash(5mZ_M06Fc9g) .dark
 
 ## .text-landing Slide 4
 ## _math support_
 LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)  
 
-@line
+.line
 
 ### $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
 
@@ -98,13 +97,14 @@ LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)
 `$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$`
 
 -----
-...align-left ...bg-black
-@unsplash(7BiMECHFgFY)
+!!(https://source.unsplash.com/7BiMECHFgFY)
+...align-left.bg-black
 
 .text-landing Slide 5
 ## _pretty code blocks_
-Syntax highlighting Google's [code prettify](https://github.com/google/code-prettify)  
+Syntax highlighting Google's [code prettify](https://github.com/google/code-prettify). Code blocks are context-aware.
 
+..bg-white
 ```
 sort [] = []
 sort (x:xs) = sort lower ++ [x] ++ sort higher
@@ -112,7 +112,7 @@ sort (x:xs) = sort lower ++ [x] ++ sort higher
         lower = filter (< x) xs
         higher = filter (>= x) xs
 ```
-Code blocks are context-aware
+
 ```
 // to convert prefix to postfix
 main() {
@@ -132,8 +132,9 @@ Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com
 
 -----
 
-...slide-bottom ...bg-black
-@unsplash(U5rMrSI7Pn4) .light
+!!(https://source.unsplash.com/U5rMrSI7Pn4 class="light")
+
+...slide-bottom.bg-black
 
 ..content-center.text-shadow 
 ## .text-landing **A pug and an Equation**
@@ -144,7 +145,6 @@ this slide looks important right? It's not! It's an inline $x^2$ equation.
 ------
 
 ...bg-apple
-
 ..wrap
 
 ## .text-data Thanks, you!

@@ -48,9 +48,11 @@ def slide_parser(html):
     section = soup.new_tag("section")
 
     # Note the slide-level classes and remove them
-    meta = soup.find("meta", attrs={"data-slide-classes": True})
-    if meta:
-        section["class"] = meta["data-slide-classes"]
+    for meta in soup.find_all("meta", attrs={"data-slide-classes": True}):
+        if "class" not in section.attrs:
+            section["class"] = []
+    
+        section["class"].append(meta["data-slide-classes"])
         meta.decompose()
 
     # Replace the emoji with their targets
@@ -59,13 +61,27 @@ def slide_parser(html):
         ele.replace_with(symbol)
 
     # For all the background spans, append the correct class
+    bg = None
     for ele in soup.find_all("span", {"data-is-bg": True}):
+        if "class" not in ele.attrs:
+            ele["class"] = []
         ele["class"].append("background")
         del ele["data-is-bg"]
+        bg = ele.extract()
 
     # Add the parsed soup to the section and unwrap the body tags
     section.append(soup.body)
     section.body.unwrap()
+
+    # For background add to the begining of the section; wrap everything else
+    if bg is not None:
+
+        wrap = soup.new_tag("div", attrs={"class":"wrap"})
+        children = list(section.children)
+        section.clear()
+        section.append(bg)
+        section.append(wrap)
+        wrap.extend(children)
 
     return section
 
@@ -120,16 +136,17 @@ def build_body(html):
             # Google's prettifier
             add_script(soup, "static/js/run_prettify.js")
 
+    '''
     # If we have an equation, add the static information
     if soup.find(class_="inline-equation") or soup.find(
         class_="block-equation"
     ):
-        logger.warning("EQUATION DETECTED. Currently using CDN.")
-
+        #logger.warning("EQUATION DETECTED. Currently using CDN.")
         add_script(soup, **CDN_KaTeX_js)
         add_css(soup, **CDN_KaTeX_css)
         add_script(soup, "static/js/render_equations.js")
-
+    '''
+    
     # Add the HTML doctype
     soup.insert(0, bs4.element.Doctype("HTML"))
 

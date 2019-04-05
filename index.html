@@ -5,6 +5,7 @@
   <link href="static/css/miniprez.css" media="all" rel="stylesheet" type="text/css"/>
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;amp;subset=latin-ext" media="all" rel="stylesheet" type="text/css"/>
   <link href="static/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" media="all" rel="stylesheet" type="text/css"/>
  </head>
  <body>
   <article id="webslides">
@@ -233,7 +234,9 @@ easily on mobile.
      </p>
      <span class="line">
      </span>
-     <h3 class="inline-equation">
+     <h3>
+      <span class="inline-equation" data-expr="P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}">
+      </span>
      </h3>
      <br/>
      <p>
@@ -353,6 +356,10 @@ main() {
   <script src="static/js/slider.js">
   </script>
   <script src="static/js/run_prettify.js">
+  </script>
+  <script crossorigin="anonymous" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js">
+  </script>
+  <script src="static/js/render_equations.js">
   </script>
  </body>
 </html>

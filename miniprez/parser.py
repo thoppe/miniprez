@@ -51,7 +51,7 @@ def slide_parser(html):
     for meta in soup.find_all("meta", attrs={"data-slide-classes": True}):
         if "class" not in section.attrs:
             section["class"] = []
-    
+
         section["class"].append(meta["data-slide-classes"])
         meta.decompose()
 
@@ -75,8 +75,7 @@ def slide_parser(html):
 
     # For background add to the begining of the section; wrap everything else
     if bg is not None:
-
-        wrap = soup.new_tag("div", attrs={"class":"wrap"})
+        wrap = soup.new_tag("div", attrs={"class": "wrap"})
         children = list(section.children)
         section.clear()
         section.append(bg)
@@ -136,17 +135,15 @@ def build_body(html):
             # Google's prettifier
             add_script(soup, "static/js/run_prettify.js")
 
-    '''
     # If we have an equation, add the static information
     if soup.find(class_="inline-equation") or soup.find(
         class_="block-equation"
     ):
-        #logger.warning("EQUATION DETECTED. Currently using CDN.")
+        # logger.warning("EQUATION DETECTED. Currently using CDN.")
         add_script(soup, **CDN_KaTeX_js)
         add_css(soup, **CDN_KaTeX_css)
         add_script(soup, "static/js/render_equations.js")
-    '''
-    
+
     # Add the HTML doctype
     soup.insert(0, bs4.element.Doctype("HTML"))
 
@@ -156,12 +153,20 @@ def build_body(html):
             if not ele.get_text().strip():
                 ele.unwrap()
 
+    # Wrap the parent element codes if needed
     for ele in soup.find_all("span"):
+        if "class" not in ele.attrs:
+            continue
+
+        if "inline-equation" in ele["class"]:
+            continue
+        if "block-equation" in ele["class"]:
+            continue
+
         parent = ele.parent
         if parent.name not in ["h1", "h2", "h3", "h4", "h5", "h6"]:
             continue
-        if "class" not in ele.attrs:
-            continue
+
         if "class" not in parent.attrs:
             parent["class"] = []
         parent["class"].extend(ele["class"])

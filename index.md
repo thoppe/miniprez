@@ -50,31 +50,23 @@ easily on mobile.
 
 ...align-left.bg-black
 
-# .text-landing.text-content _Slide 2_
+# _markdown_
+### Basic [Markdown](https://daringfireball.net/projects/markdown/syntax)
+<br>
 
-## _simple markdown support_
-Basic [Markdown](https://daringfireball.net/projects/markdown/syntax) with tweaks!
-
-.line
-
-+ :muscle: **bold** `**text**`
-+ :fire: *fire* `*text*`
-+ :cloud: _emph_ `_text_`
-+ :computer: `code` `&&&`code&&&``
++ **bold** `**text**`
++ *fire* `*text*`
++ _emph_ `_text_`
 
 -----
-!!(https://source.unsplash.com/pmX9BkDDr_A class="light")
+!!(https://source.unsplash.com/pmX9BkDDr_A class="dark")
 
 ...align-left.bg-black
 
+# _emoji_
+### standard emoji and [font-awesome](http://fontawesome.io/)
+<br>
 
-## .text-landing Slide 3
-
-## _emoji_
-
-Standard emoji and [font-awesome](http://fontawesome.io/)  
-
-### Emoji
 ..text-intro
 + `:battery:` :battery:
 + `:heart_eyes:` :heart_eyes:
@@ -85,27 +77,23 @@ Standard emoji and [font-awesome](http://fontawesome.io/)
 !!(https://source.unsplash.com/5mZ_M06Fc9g class="dark")
 ...bg-apple ...align-left
 
-## .text-landing Slide 4
-## _math support_
+# _math support_
 LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)  
 
 .line
 
 ### $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
-
 <br>
-
 `$P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$`
 
 -----
 !!(https://source.unsplash.com/7BiMECHFgFY)
 ...align-left.bg-black
 
-.text-landing Slide 5
-## _pretty code blocks_
+..bg-white.wrap
+# _pretty code blocks_
 Syntax highlighting Google's [code prettify](https://github.com/google/code-prettify). Code blocks are context-aware.
 
-..bg-white
 ```
 sort [] = []
 sort (x:xs) = sort lower ++ [x] ++ sort higher
@@ -113,7 +101,7 @@ sort (x:xs) = sort lower ++ [x] ++ sort higher
         lower = filter (< x) xs
         higher = filter (>= x) xs
 ```
-
+<br>
 ```
 // to convert prefix to postfix
 main() {
@@ -124,9 +112,9 @@ main() {
 ```
 
 ------
-...slide-top
 @background_video(https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4)
 
+..slide-top
 .text-landing Slide 6
 ## _looping background animations_
 Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
@@ -137,11 +125,13 @@ Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com
 
 ...slide-bottom.bg-black
 
-..content-center.text-shadow 
+..content-center.text-shadow
 ## .text-landing **A pug and an Equation**
 ### $$i \hbar \frac{\partial}{\partial t}\Psi(\mathbf{r},t) = \hat H \Psi(\mathbf{r},t)$$
   
-this slide looks important right? It's not! It's an inline $x^2$ equation.
+this slide looks important right? It's not!
+
+Oh look, an inline $x^2$ equation.
 
 ------
 

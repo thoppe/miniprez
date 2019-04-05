@@ -56,7 +56,9 @@
      </p>
     </div>
     <footer>
-     .alignright *just show me the content!
+     <span class="alignright">
+      *just show me the content!
+     </span>
     </footer>
    </section>
    <section class="align-right bg-white" data-slide-number="2">
@@ -98,28 +100,20 @@ easily on mobile.
     <span class="dark background" style="background-image:url('https://source.unsplash.com/F1dSr7I4AmY')">
     </span>
     <div class="wrap">
-     <h1 class="text-landing text-content">
+     <h1>
       <em>
-       Slide 2
+       markdown
       </em>
      </h1>
-     <h2>
-      <em>
-       simple markdown support
-      </em>
-     </h2>
-     <p>
+     <h3>
       Basic
       <a href="https://daringfireball.net/projects/markdown/syntax">
        Markdown
       </a>
-      with tweaks!
-     </p>
-     <span class="line">
-     </span>
+     </h3>
+     <br/>
      <ul>
       <li>
-       💪
        <strong>
         bold
        </strong>
@@ -128,7 +122,6 @@ easily on mobile.
        </code>
       </li>
       <li>
-       🔥
        <em>
         fire
        </em>
@@ -137,7 +130,6 @@ easily on mobile.
        </code>
       </li>
       <li>
-       ☁
        <em>
         emph
        </em>
@@ -145,40 +137,25 @@ easily on mobile.
         _text_
        </code>
       </li>
-      <li>
-       💻
-       <code>
-        code
-       </code>
-       <code>
-        &amp;&amp;&amp;
-       </code>
-       code&amp;&amp;&amp;``
-      </li>
      </ul>
     </div>
    </section>
    <section class="align-left bg-black" data-slide-number="4">
-    <span class="light background" style="background-image:url('https://source.unsplash.com/pmX9BkDDr_A')">
+    <span class="dark background" style="background-image:url('https://source.unsplash.com/pmX9BkDDr_A')">
     </span>
     <div class="wrap">
-     <h2 class="text-landing">
-      Slide 3
-     </h2>
-     <h2>
+     <h1>
       <em>
        emoji
       </em>
-     </h2>
-     <p>
-      Standard emoji and
+     </h1>
+     <h3>
+      standard emoji and
       <a href="http://fontawesome.io/">
        font-awesome
       </a>
-     </p>
-     <h3>
-      Emoji
      </h3>
+     <br/>
      <div class="text-intro">
       <ul>
        <li>
@@ -215,14 +192,11 @@ easily on mobile.
     <span class="dark background" style="background-image:url('https://source.unsplash.com/5mZ_M06Fc9g')">
     </span>
     <div class="wrap">
-     <h2 class="text-landing">
-      Slide 4
-     </h2>
-     <h2>
+     <h1>
       <em>
        math support
       </em>
-     </h2>
+     </h1>
      <p>
       LaTeX rendered inline with
       <a href="https://github.com/Khan/KaTeX">
@@ -235,8 +209,8 @@ easily on mobile.
       <span class="inline-equation" data-expr="P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}">
       </span>
      </h3>
-     <br/>
      <p>
+      <br/>
       <code>
        $P(x)=\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma ^2}}$
       </code>
@@ -247,30 +221,26 @@ easily on mobile.
     <span class="background" style="background-image:url('https://source.unsplash.com/7BiMECHFgFY')">
     </span>
     <div class="wrap">
-     <p>
-      <span class="text-landing">
-       Slide 5
-      </span>
-     </p>
-     <h2>
-      <em>
-       pretty code blocks
-      </em>
-     </h2>
-     <p>
-      Syntax highlighting Google's
-      <a href="https://github.com/google/code-prettify">
-       code prettify
-      </a>
-      . Code blocks are context-aware.
-     </p>
-     <div class="bg-white">
+     <div class="bg-white wrap">
+      <h1>
+       <em>
+        pretty code blocks
+       </em>
+      </h1>
+      <p>
+       Syntax highlighting Google's
+       <a href="https://github.com/google/code-prettify">
+        code prettify
+       </a>
+       . Code blocks are context-aware.
+      </p>
       <pre><code class="prettyprint">sort [] = []
 sort (x:xs) = sort lower ++ [x] ++ sort higher
     where
         lower = filter (&lt; x) xs
         higher = filter (&gt;= x) xs
 </code></pre>
+      <br/>
       <pre><code class="prettyprint">// to convert prefix to postfix
 main() {
   char c = getchar();
@@ -281,7 +251,7 @@ main() {
      </div>
     </div>
    </section>
-   <section class="slide-top" data-slide-number="7">
+   <section data-slide-number="7">
     <p>
      @background_video(https://cdn
      <span class="shutterstock com">
@@ -291,23 +261,23 @@ main() {
       </span>
      </span>
     </p>
-    <p>
+    <div class="slide-top">
      <span class="text-landing">
       Slide 6
      </span>
-    </p>
-    <h2>
-     <em>
-      looping background animations
-     </em>
-    </h2>
-    <p>
-     Embed/hotlink any video file (thanks
-     <a href="https://www.shutterstock.com/">
-      Shutterstock
-     </a>
-     !)
-    </p>
+     <h2>
+      <em>
+       looping background animations
+      </em>
+     </h2>
+     <p>
+      Embed/hotlink any video file (thanks
+      <a href="https://www.shutterstock.com/">
+       Shutterstock
+      </a>
+      !)
+     </p>
+    </div>
    </section>
    <section class="slide-bottom bg-black" data-slide-number="8">
     <span class="light background" style="background-image:url('https://source.unsplash.com/U5rMrSI7Pn4')">
@@ -324,7 +294,10 @@ main() {
        </div>
       </h3>
       <p>
-       this slide looks important right? It's not! It's an inline
+       this slide looks important right? It's not!
+      </p>
+      <p>
+       Oh look, an inline
        <span class="inline-equation" data-expr="x^2">
        </span>
        equation.

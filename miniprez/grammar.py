@@ -1,6 +1,7 @@
 import copy, re, itertools
 from mistune import Renderer, InlineGrammar, InlineLexer, Markdown
 from mistune import BlockGrammar, BlockLexer, Markdown
+from mistune import _pre_tags
 import logging
 
 logger = logging.getLogger("miniprez")
@@ -49,6 +50,8 @@ class DivClassRenderer(Renderer):
 
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
+
+        self._parse_inline_html = True
 
         self.default_rules.remove("escape")
         self.default_rules.remove("linebreak")
@@ -179,6 +182,27 @@ class DivClassInlineLexer(InlineLexer):
         # We normally shouldn't be here, but return even if we do
         return m.group()
 
+    """
+    def output_inline_html(self, m):
+        print("HTML", m.group(1), m.group(2), m.group(3))
+
+        exit()
+        tag = m.group(1)
+        if self._parse_inline_html and tag in _inline_tags:
+            text = m.group(3)
+            if tag == 'a':
+                self._in_link = True
+                text = self.output(text, rules=self.inline_html_rules)
+                self._in_link = False
+            else:
+                text = self.output(text, rules=self.inline_html_rules)
+            extra = m.group(2) or ''
+            html = '<%s%s>%s</%s>' % (tag, extra, text, tag)
+        else:
+            html = m.group(0)
+        return self.renderer.inline_html(html)
+    """
+
 
 # Monkeypatch the paragraph
 class Markdown_NP(Markdown):
@@ -186,6 +210,18 @@ class Markdown_NP(Markdown):
         text = self.token["text"].strip()
         result = self.inline(text + " ")
         return f"<p>{result}</p>"
+
+    def output_open_html(self):
+        """
+        Override this, as we would like to always use our full inline parser
+        """
+        text = self.token["text"]
+        tag = self.token["tag"]
+        if self._parse_block_html and tag not in _pre_tags:
+            text = self.inline(text)
+        extra = self.token.get("extra") or ""
+        html = "<%s%s>%s</%s>" % (tag, extra, text, tag)
+        return self.renderer.block_html(html)
 
 
 # Globally build the parser
@@ -196,7 +232,7 @@ inline = DivClassInlineLexer(renderer)
 # Enable the features
 inline.enable()
 
-markdown_parser = Markdown_NP(renderer, inline=inline)
+markdown_parser = Markdown_NP(renderer, inline=inline, parse_block_html=True)
 
 
 if __name__ == "__main__":
@@ -215,8 +251,9 @@ here *we* go
 $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} 
 \,d\xi $$ 
 """
+    tx0 = "\n.alignright foobar"
     # tx0 = "www.google.com"
-    tx0 = "www.google.com \n <hr> sdfsdf"
+    # tx0 = "www.google.com \n <hr> sdfsdf"
     # tx0 = "The !(www.google.com foobar) "
     # tx0 = "The !!(www.google.com class='dark')"
     # tx0 = "The !(www.google.com height=300 width=400)"
@@ -232,5 +269,5 @@ $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x}
     print(inline.default_rules)
     print(tx0)
     print("MARKDOWNED")
-    tx1 = parser(tx0)
+    tx1 = markdown_parser(tx0)
     print(tx1)

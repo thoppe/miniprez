@@ -23,8 +23,9 @@
 Oh, and it should work well* on mobile too.
 ..
 
-.@footer
+<footer>
 .alignright *just show me the content!
+</footer>
 
 --------
 ...align-right.bg-white 

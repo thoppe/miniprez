@@ -196,7 +196,7 @@ inline = DivClassInlineLexer(renderer)
 # Enable the features
 inline.enable()
 
-parser = Markdown_NP(renderer, inline=inline)
+markdown_parser = Markdown_NP(renderer, inline=inline)
 
 
 if __name__ == "__main__":

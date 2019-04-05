@@ -2,20 +2,16 @@ import mistune
 import bs4
 from emoji import emojize
 from build_static import add_css, add_script, include_resource
-from custom_mistune import parser
+from grammar import markdown_parser
 import logging
 
 logger = logging.getLogger("miniprez")
 
+# References
 # https://github.com/webslides/WebSlides
 # https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md
 # https://webslides.tv/demos/
 # https://github.com/lepture/mistune
-
-# Must start the line
-# _line_class_pattern = re.compile("^\s*\.([\-\w\d]+[\.[\-\w\d]+]?)(.*)")
-# _tag_pattern = re.compile(".@([a-z]+)")
-# slide_class_pattern = re.compile(r"[^\\]\.\.[\-\w\d]+[\.[\-\w\d]+]?\s")
 
 CDN_KaTeX_css = {
     "src": "https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css",
@@ -86,7 +82,7 @@ def slide_parser(html):
 
 
 def miniprez_markdown(markdown_text):
-    html = parser(markdown_text)
+    html = markdown_parser(markdown_text)
     # html = _tag_pattern.sub(r"<\1>", html)
 
     # Nest each block in a section div

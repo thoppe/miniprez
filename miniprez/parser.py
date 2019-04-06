@@ -1,11 +1,12 @@
 import mistune
-import bs4
+import bs4, os
 from emoji import emojize
 from build_static import add_css, add_script, include_resource
 from grammar import markdown_parser
 import logging
 
 logger = logging.getLogger("miniprez")
+_video_extensions = set(["mp4", "webm", "flac"])
 
 # References
 # https://github.com/webslides/WebSlides
@@ -42,12 +43,11 @@ def slide_parser(html):
 
     # Create a new section and the slide-level classes in
     section = soup.new_tag("section")
+    section["class"] = ["slide"]
+    # section['style'] = 'display: none;'
 
     # Note the slide-level classes and remove them
     for meta in soup.find_all("meta", attrs={"data-slide-classes": True}):
-        if "class" not in section.attrs:
-            section["class"] = []
-
         section["class"].append(meta["data-slide-classes"])
         meta.decompose()
 
@@ -59,11 +59,38 @@ def slide_parser(html):
     # For all the background spans, append the correct class
     bg = None
     for ele in soup.find_all("span", {"data-is-bg": True}):
-        if "class" not in ele.attrs:
-            ele["class"] = []
-        ele["class"].append("background")
-        del ele["data-is-bg"]
+
         bg = ele.extract()
+        src = bg["data-bg-src"]
+        del bg["data-is-bg"]
+        del bg["data-bg-src"]
+
+        if "class" not in bg.attrs:
+            bg["class"] = []
+
+        src_ext = os.path.splitext(src)[-1].strip(".")
+        bg["class"].append("background")
+
+        if src_ext in _video_extensions:
+            # Handle case for background videos (DOES NOT WORK YET)
+            logger.error("bg videos not implemented yet. sorry")
+
+            """
+            video = soup.new_tag(
+                'video', **{
+                    "loop":None,
+                    "muted":None, "autoplay":None, "poster":None,
+                })
+            
+            source = soup.new_tag('source', **{"src":src, "type":"video/mp4"})
+            video.append(source)
+            bg.append(video)
+            #bg.append(video)
+            #section['class'].append('fullscreen')
+            """
+        else:
+            bg["class"].append("background")
+            bg["style"] = f"background-image:url('{src}')"
 
     # Add the parsed soup to the section and unwrap the body tags
     section.append(soup.body)

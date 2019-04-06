@@ -45,7 +45,7 @@ class DivClassRenderer(Renderer):
 
     def BackgroundImageLink(self, src, arguments):
         arguments = " ".join(arguments)
-        return f"""<span {arguments} style="background-image:url('{src}')" data-is-bg=true></span>"""
+        return f'<span {arguments} data-bg-src="{src}" data-is-bg=true></span>'
 
 
 class DivClassInlineLexer(InlineLexer):

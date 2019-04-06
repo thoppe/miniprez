@@ -88,7 +88,7 @@ LaTeX rendered inline with [KaTex](https://github.com/Khan/KaTeX)
 
 -----
 !!(https://source.unsplash.com/7BiMECHFgFY)
-...align-left.bg-black
+...align-left.bg-black.fullscreen
 
 ..bg-white.wrap
 # _pretty code blocks_
@@ -112,10 +112,9 @@ main() {
 ```
 
 ------
-@background_video(https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4)
+!!(https://cdn.shutterstock.com/shutterstock/videos/15778135/preview/stock-footage-office-chair-race-slow-motion-young-guys-have-fun-in-the-office-during-a-break-games-of-businessm.mp4)
 
 ..slide-top
-.text-landing Slide 6
 ## _looping background animations_
 Embed/hotlink any video file (thanks [Shutterstock](https://www.shutterstock.com/)!)
 

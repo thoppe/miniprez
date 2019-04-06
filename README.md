@@ -7,8 +7,9 @@ Desired functionality
 + [X] code prettify
 + [x] colored logs
 + [x] Math support
-+ [ ] unsplash
-+ [ ] footers
++ [x] unsplash
++ [x] footers
++ [ ] videos
 + [ ] pulling external resources locally
 + [ ] Math support off CDN 
 + [ ] Check python version?

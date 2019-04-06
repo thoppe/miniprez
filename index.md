@@ -1,3 +1,6 @@
+Title: Miniprez tutorial
+Author: Travis Hoppe
+
 !!(https://source.unsplash.com/4mta-DkJUAg class="light")
 
 ...bg-black

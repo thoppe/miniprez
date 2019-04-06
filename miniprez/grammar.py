@@ -47,6 +47,8 @@ class DivClassRenderer(Renderer):
         arguments = " ".join(arguments)
         return f'<span {arguments} data-bg-src="{src}" data-is-bg=true></span>'
 
+    def MetaInformation(self, key, value):
+        return f'<meta name="{key}" content="{value}" data-is-header=true>'
 
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
@@ -57,6 +59,11 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.remove("linebreak")
 
         rule_n = itertools.count()
+
+        # Meta information
+        grammar = re.compile(r'^([A-Z]\w*):\s*(.+?)\n')
+        self.rules.MetaInformation = re.compile(grammar)
+        self.default_rules.insert(next(rule_n), "MetaInformation")
 
         # SectionTags, ...align-center.bg-black
         grammar = r"[\s]*\.\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
@@ -124,6 +131,10 @@ class DivClassInlineLexer(InlineLexer):
         grammar = r"^[\s\S]+?(?=[%s ]|$)" % tokens
         self.rules.AlmostText2 = re.compile(grammar)
         self.default_rules.insert(-1, "AlmostText2")
+
+    def output_MetaInformation(self, m):
+        key, value = m.group(1), m.group(2)
+        return self.renderer.MetaInformation(key, value)
 
     def output_LineBlock(self, m):
         tags = get_classnames(m.group(1))
@@ -252,6 +263,7 @@ $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x}
 \,d\xi $$ 
 """
     tx0 = "\n.alignright foobar"
+    tx0 = "Title: foo bar\nAuthor: dogs\nspaz\nTitle: foo bar"
     # tx0 = "www.google.com"
     # tx0 = "www.google.com \n <hr> sdfsdf"
     # tx0 = "The !(www.google.com foobar) "

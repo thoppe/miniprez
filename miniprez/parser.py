@@ -167,6 +167,13 @@ def build_body(html):
         add_css(soup, **CDN_KaTeX_css)
         add_script(soup, "static/js/render_equations.js")
 
+    # Move the markdown header information to the right place
+    for meta in soup.find_all("meta", attrs={"data-is-header":True}):
+        del meta['data-is-header']
+        meta.extract()
+        print(meta)
+        exit()
+
     # Add the HTML doctype
     soup.insert(0, bs4.element.Doctype("HTML"))
 
@@ -194,6 +201,7 @@ def build_body(html):
             parent["class"] = []
         parent["class"].extend(ele["class"])
         ele.unwrap()
+
 
     return soup
 

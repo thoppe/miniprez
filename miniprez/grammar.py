@@ -135,7 +135,6 @@ class DivClassInlineLexer(InlineLexer):
 
     def output_MetaInformation(self, m):
         key, value = m.group(1), m.group(2)
-        print("THIS", m.group(), m.group()[-1])
         return self.renderer.MetaInformation(key, value)
 
     def output_LineBlock(self, m):
@@ -249,7 +248,7 @@ $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x}
 %Title: Miniprez tutorial
 
 sdfsdf
-%Foo:bar
+% Foo:bar
 
 !!(https://source.unsplash.com/4mta-DkJUAg class="light")
 """

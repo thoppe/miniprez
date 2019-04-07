@@ -10,8 +10,8 @@ Desired functionality
 + [x] unsplash
 + [x] footers
 + [x] meta info
-+ [ ] pull out CDN information
++ [x] pull out CDN information
 + [ ] videos
 + [ ] pulling external resources locally
 + [ ] Check python version?
-+ [ ] make into module (deprecate old version to directory)
++ [ ] make into module 

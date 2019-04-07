@@ -9,15 +9,6 @@ import CDN_assets as assets
 logger = logging.getLogger("miniprez")
 _video_extensions = set(["mp4", "webm", "flac"])
 
-# References
-# https://github.com/webslides/WebSlides
-# https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md
-# https://webslides.tv/demos/
-# https://github.com/lepture/mistune
-
-Roboto_FontLink = "https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
-
-
 def slide_parser(html):
     """
     Takes a single slide after being markdown parsed and split by ----
@@ -120,7 +111,7 @@ def build_body(html):
 
     add_css(soup, "static/css/webslides.css")
     add_css(soup, "static/css/miniprez.css")
-    add_css(soup, Roboto_FontLink, cdn=True)
+    add_css(soup, assets.Roboto_FontLink, cdn=True)
 
     add_script(soup, "static/js/jquery-3.1.1.min.js")
     add_script(soup, "static/js/slider.js")

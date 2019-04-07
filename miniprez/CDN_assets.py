@@ -12,3 +12,5 @@ CDN_KaTeX_js = {
     "crossorigin": "anonymous",
     # defer=None,
 }
+
+Roboto_FontLink = "https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"

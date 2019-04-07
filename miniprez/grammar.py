@@ -50,6 +50,7 @@ class DivClassRenderer(Renderer):
     def MetaInformation(self, key, value):
         return f'<meta name="{key}" content="{value}" data-is-header=true>'
 
+
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
 
@@ -61,7 +62,7 @@ class DivClassInlineLexer(InlineLexer):
         rule_n = itertools.count()
 
         # Meta information
-        grammar = re.compile(r'^([A-Z]\w*):\s*(.+?)\n')
+        grammar = re.compile(r"%\s*([A-Z]\w*):\s*(.+?)(\n|$)")
         self.rules.MetaInformation = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "MetaInformation")
 
@@ -134,6 +135,7 @@ class DivClassInlineLexer(InlineLexer):
 
     def output_MetaInformation(self, m):
         key, value = m.group(1), m.group(2)
+        print("THIS", m.group(), m.group()[-1])
         return self.renderer.MetaInformation(key, value)
 
     def output_LineBlock(self, m):
@@ -193,27 +195,6 @@ class DivClassInlineLexer(InlineLexer):
         # We normally shouldn't be here, but return even if we do
         return m.group()
 
-    """
-    def output_inline_html(self, m):
-        print("HTML", m.group(1), m.group(2), m.group(3))
-
-        exit()
-        tag = m.group(1)
-        if self._parse_inline_html and tag in _inline_tags:
-            text = m.group(3)
-            if tag == 'a':
-                self._in_link = True
-                text = self.output(text, rules=self.inline_html_rules)
-                self._in_link = False
-            else:
-                text = self.output(text, rules=self.inline_html_rules)
-            extra = m.group(2) or ''
-            html = '<%s%s>%s</%s>' % (tag, extra, text, tag)
-        else:
-            html = m.group(0)
-        return self.renderer.inline_html(html)
-    """
-
 
 # Monkeypatch the paragraph
 class Markdown_NP(Markdown):
@@ -262,8 +243,19 @@ here *we* go
 $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x} 
 \,d\xi $$ 
 """
-    tx0 = "\n.alignright foobar"
-    tx0 = "Title: foo bar\nAuthor: dogs\nspaz\nTitle: foo bar"
+    tx0 = """
+%Author: Travis Hoppe
+%Author: Travis Hoppe
+%Title: Miniprez tutorial
+
+sdfsdf
+%Foo:bar
+
+!!(https://source.unsplash.com/4mta-DkJUAg class="light")
+"""
+
+    # tx0 = "\n.alignright foobar"
+    # tx0 = "Title: foo bar\nAuthor: dogs\nspaz\nTitle: foo bar"
     # tx0 = "www.google.com"
     # tx0 = "www.google.com \n <hr> sdfsdf"
     # tx0 = "The !(www.google.com foobar) "
@@ -277,6 +269,13 @@ $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x}
     # fmt = "%(message)s"
     # coloredlogs.install(level="DEBUG", logger=logger, fmt=fmt)
     # logger.setLevel(logging.DEBUG)
+
+    # Create a logger object.
+    import coloredlogs
+
+    logger = logging.getLogger("miniprez")
+    fmt = "%(asctime)s %(levelname)s %(message)s"
+    coloredlogs.install(level="DEBUG", logger=logger, fmt=fmt)
 
     print(inline.default_rules)
     print(tx0)

@@ -9,8 +9,9 @@ Desired functionality
 + [x] Math support
 + [x] unsplash
 + [x] footers
++ [x] meta info
++ [ ] pull out CDN information
 + [ ] videos
 + [ ] pulling external resources locally
-+ [ ] Math support off CDN 
 + [ ] Check python version?
 + [ ] make into module (deprecate old version to directory)

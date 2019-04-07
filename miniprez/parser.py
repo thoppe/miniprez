@@ -4,6 +4,7 @@ from emoji import emojize
 from build_static import add_css, add_script, include_resource
 from grammar import markdown_parser
 import logging
+import CDN_assets as assets
 
 logger = logging.getLogger("miniprez")
 _video_extensions = set(["mp4", "webm", "flac"])
@@ -13,21 +14,6 @@ _video_extensions = set(["mp4", "webm", "flac"])
 # https://raw.githubusercontent.com/thoppe/miniprez/gh-pages/tutorial.md
 # https://webslides.tv/demos/
 # https://github.com/lepture/mistune
-
-CDN_KaTeX_css = {
-    "src": "https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css",
-    "cdn": True,
-    "integrity": "sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ",
-    "crossorigin": "anonymous",
-}
-
-CDN_KaTeX_js = {
-    "src": "https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js",
-    "cdn": True,
-    "integrity": "sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij",
-    "crossorigin": "anonymous",
-    # defer=None,
-}
 
 Roboto_FontLink = "https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
 
@@ -163,8 +149,8 @@ def build_body(html):
         class_="block-equation"
     ):
         # logger.warning("EQUATION DETECTED. Currently using CDN.")
-        add_script(soup, **CDN_KaTeX_js)
-        add_css(soup, **CDN_KaTeX_css)
+        add_script(soup, **assets.CDN_KaTeX_js)
+        add_css(soup, **assets.CDN_KaTeX_css)
         add_script(soup, "static/js/render_equations.js")
 
     # Move the markdown header information to the head

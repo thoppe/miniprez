@@ -12,6 +12,8 @@
 ..text-intro miniprez is a static, mobile-friendly version of [webslides](https://github.com/jlantunez/webslides)
 
 -----
+
+% Triple dots indicate a slide level class
 ...bg-black 
 
 # .text-landing The problem

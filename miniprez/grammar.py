@@ -50,6 +50,9 @@ class DivClassRenderer(Renderer):
     def MetaInformation(self, key, value):
         return f'<meta name="{key}" content="{value}" data-is-header=true>'
 
+    def Comment(self, text):
+        return ""
+
 
 class DivClassInlineLexer(InlineLexer):
     def enable(self):
@@ -62,9 +65,14 @@ class DivClassInlineLexer(InlineLexer):
         rule_n = itertools.count()
 
         # Meta information
-        grammar = re.compile(r"%\s*([A-Z]\w*):\s*(.+?)(\n|$)")
+        grammar = re.compile(r"^%\s*([A-Z]\w*):\s*(.+?)(\n|$)")
         self.rules.MetaInformation = re.compile(grammar)
         self.default_rules.insert(next(rule_n), "MetaInformation")
+
+        # Comment information
+        grammar = re.compile(r"^%(.*)(\n|$)")
+        self.rules.Comment = re.compile(grammar)
+        self.default_rules.insert(next(rule_n), "Comment")
 
         # SectionTags, ...align-center.bg-black
         grammar = r"[\s]*\.\.\.[\-\w\d]+[\.[\-\w\d]+]?\s"
@@ -123,7 +131,7 @@ class DivClassInlineLexer(InlineLexer):
         self.default_rules.insert(-1, "SlashDotEscape")
 
         # AlmostText1 matches \w\d and then things with a token
-        tokens = r"\\<!\[_*`~@.:\$"
+        tokens = r"\\<!\[_*`~@.:\$\%"
         grammar = r"^[\s]*[a-zA-Z0-9.-][\w\d%s]+" % tokens
         self.rules.AlmostText1 = re.compile(grammar)
         self.default_rules.insert(-1, "AlmostText1")
@@ -136,6 +144,9 @@ class DivClassInlineLexer(InlineLexer):
     def output_MetaInformation(self, m):
         key, value = m.group(1), m.group(2)
         return self.renderer.MetaInformation(key, value)
+
+    def output_Comment(self, m):
+        return self.renderer.Comment(m.group(1))
 
     def output_LineBlock(self, m):
         tags = get_classnames(m.group(1))
@@ -248,7 +259,7 @@ $$ \int_{-\infty}^\infty \hat \f\xi\,e^{2 \pi i \xi x}
 %Title: Miniprez tutorial
 
 sdfsdf
-% Foo:bar
+% Foo bar
 
 !!(https://source.unsplash.com/4mta-DkJUAg class="light")
 """

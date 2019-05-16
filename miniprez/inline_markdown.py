@@ -6,14 +6,9 @@ QS = pyp.QuotedString
 
 
 class Inline_Markdown_Paser(object):
-
     def __init__(self):
         # Keep track of the tags that were used
-        self.used = {
-            "emoji": False,
-            "font_awesome": False,
-            "math": False,
-        }
+        self.used = {"emoji": False, "font_awesome": False, "math": False}
 
         strongred = QS("*").setParseAction(self._strongred)
         strong = QS("**").setParseAction(self._strong)
@@ -21,7 +16,7 @@ class Inline_Markdown_Paser(object):
         emoji = QS(":").setParseAction(self._emoji)
         font_awesome = QS("::").setParseAction(self._font_awesome)
 
-        code = QS("`", escChar='&&&', convertWhitespaceEscapes=False)
+        code = QS("`", escChar="&&&", convertWhitespaceEscapes=False)
         code.setParseAction(self._code)
 
         math = QS(quoteChar="$", convertWhitespaceEscapes=False)
@@ -32,10 +27,9 @@ class Inline_Markdown_Paser(object):
         link = (text + href).setParseAction(self._link)
 
         text_transforms = strong | strongred | italic
-        transforms = (math | text_transforms | code |
-                      font_awesome | emoji | link)
+        transforms = math | text_transforms | code | font_awesome | emoji | link
         plain_text = pyp.Word(pyp.printables)
-        whitespace = pyp.White(' ') | pyp.White('\t')
+        whitespace = pyp.White(" ") | pyp.White("\t")
         self.grammar = pyp.OneOrMore(transforms | plain_text | whitespace)
 
     def _strongred(self, x):
@@ -64,7 +58,7 @@ class Inline_Markdown_Paser(object):
         return tag
 
     def _font_awesome(self, x):
-        self.used['font_awesome'] = True
+        self.used["font_awesome"] = True
 
         tag = soup.new_tag("i")
         tag["class"] = ["fa", "fa-{}".format(x[0])]
@@ -72,25 +66,25 @@ class Inline_Markdown_Paser(object):
         return tag
 
     def _emoji(self, x):
-        self.used['emoji'] = True
+        self.used["emoji"] = True
         return emojize(":{}:".format(x[0]), use_aliases=True)
 
     def _math(self, x):
-        self.used['math'] = True
+        self.used["math"] = True
 
         tag = soup.new_tag("div")
-        tag["class"] = ["equation", ]
+        tag["class"] = ["equation"]
         tag["data-expr"] = x[0]
         return tag
 
     def __call__(self, text):
         tags = self.grammar.parseString(text)
-        return ' '.join(map(unicode, tags))
+        return " ".join(map(str, tags))
 
 
 # Create one shared instance
 inline_markdown_parser = Inline_Markdown_Paser()
-soup = bs4.BeautifulSoup("<div></div>", 'html.parser')
+soup = bs4.BeautifulSoup("<div></div>", "html.parser")
 
 if __name__ == "__main__":
 

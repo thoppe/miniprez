@@ -3,8 +3,8 @@ import bs4
 import pyparsing as pyp
 from pyparsing import Word, Group, QuotedString, Combine
 from pyparsing import ZeroOrMore, OneOrMore, Optional, Literal
-from custom_tags import _registered_custom_tags
-from inline_markdown import inline_markdown_parser
+from .custom_tags import _registered_custom_tags
+from .inline_markdown import inline_markdown_parser
 
 _soup = bs4.BeautifulSoup("", "html.parser")
 
@@ -233,4 +233,4 @@ if __name__ == "__main__":
     # T1 = tagline('@background(foobar)')
     # T = tagline('@background(src="www") .blue @h2 dogs')
     #print tagline('@figure(src="www" width=700) ')
-    print tagline('@img(src="www" width=700) ')
+    #print tagline('@img(src="www" width=700) ')

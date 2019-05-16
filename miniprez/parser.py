@@ -2,10 +2,10 @@ import itertools
 import bs4
 import copy
 
-from tagline import tagline
+from .tagline import tagline
 
-_section_header_token = '----'
-_comment_marker_token = '//'
+_section_header_token = "----"
+_comment_marker_token = "//"
 _code_block_marker = "```"
 
 
@@ -20,7 +20,7 @@ def section_iterator(lines):
     for line in lines:
         if is_section_header(line) and section:
             yield section
-            section = [line, ]
+            section = [line]
         else:
             section.append(line)
 
@@ -38,11 +38,11 @@ def file_iterator(f_md):
                 continue
             yield line.rstrip()
 
+
 #
 
 
 class section(object):
-
     def __init__(self, lines):
 
         self.lines = []
@@ -62,15 +62,15 @@ class section(object):
                 code_buffer.append(line.rstrip())
 
             if is_code_block and not is_inside_code_block:
-                space_ITR = itertools.takewhile(lambda x: x == ' ', line)
+                space_ITR = itertools.takewhile(lambda x: x == " ", line)
                 code_block_indent = len(list(space_ITR))
 
                 # Remove the code buffer lines
                 code_buffer = code_buffer[1:-1]
 
                 # Empty out the contents of the buffer
-                code_block = '__CODE_BLOCK_SPACE'.join(code_buffer)
-                header = code_block_indent * ' ' + '@codeblock '
+                code_block = "__CODE_BLOCK_SPACE".join(code_buffer)
+                header = code_block_indent * " " + "@codeblock "
                 block = header + code_block
                 self.lines.append(block)
 
@@ -82,30 +82,30 @@ class section(object):
         self.lines = [x for x in map(tagline, self.lines) if not x.empty]
 
         # Section shouldn't be empty
-        assert(self.lines)
+        assert self.lines
 
         # Section should start with a header
-        assert(self.lines[0].is_header())
+        assert self.lines[0].is_header()
 
-        soup = bs4.BeautifulSoup("", 'html.parser')
+        soup = bs4.BeautifulSoup("", "html.parser")
         lines = iter(self)
 
         # Parse the header
-        z = lines.next().build(indent=-5)
+        z = next(lines).build(indent=-5)
         soup.append(z)
 
         for x in lines:
             tag = x.build(indent=x.indent)
             name = x.primary_name
             if name in ["background", "background_video", "unsplash"]:
-                assert(z.name == "section")
+                assert z.name == "section"
                 z.append(tag)
                 tag = soup.new_tag("div", indent=-2)
-                tag["class"] = ["wrap", ]
+                tag["class"] = ["wrap"]
                 z.append(tag)
 
             elif name == "footer":
-                z.findParent('section').append(tag)
+                z.findParent("section").append(tag)
 
             elif x.indent > z["indent"]:
                 # Append to the deepest child
@@ -128,7 +128,7 @@ class section(object):
             z = tag
 
         # We need to resoup the pot
-        soup = bs4.BeautifulSoup(unicode(soup), 'html.parser')
+        soup = bs4.BeautifulSoup(str(soup), "html.parser")
 
         # Remove all the indent tags
         for tag in soup.find_all(True, indent=True):
@@ -136,14 +136,14 @@ class section(object):
 
         # If there are any li elements without a proper parent ul,ol
         # wrap them in one
-        for tag in soup.find_all('li'):
+        for tag in soup.find_all("li"):
             parent = tag.parent
 
-            if parent.name not in ['ol', 'ul']:
-                ul = soup.new_tag('ul')
-                ul['class'] = ['markdownlist', ]
+            if parent.name not in ["ol", "ul"]:
+                ul = soup.new_tag("ul")
+                ul["class"] = ["markdownlist"]
 
-                for x in tag.find_next_siblings('li'):
+                for x in tag.find_next_siblings("li"):
                     ul.append(x.extract())
                 ul.insert(0, copy.copy(tag))
 
@@ -166,13 +166,13 @@ class section(object):
 #
 
 if __name__ == "__main__":
-    section_text = '''----
+    section_text = """----
 This is a code block
 ```
 print x
 ```
 And we're done!
-'''
+"""
 
-    S = section(section_text.split('\n'))
+    S = section(section_text.split("\n"))
     print(S.soup.prettify())

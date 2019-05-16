@@ -33,9 +33,9 @@ def main():
 
     if args["OUTPUT"] is None:
         f_base = os.path.basename(f_md)
-        args["OUTPUT"] = '.'.join(f_base.split('.')[:-1]) + '.html'
+        args["OUTPUT"] = ".".join(f_base.split(".")[:-1]) + ".html"
 
-    if args["--watch"] == 'once':
+    if args["--watch"] == "once":
         miniprez.build(args)
         exit()
 

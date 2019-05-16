@@ -18,7 +18,7 @@ def build_environment(**args):
     for root, dirs, files in os.walk(static_path):
 
         # Create any missing directories
-        rel_dir = root.split('miniprez/')[-1]
+        rel_dir = root.split("miniprez/")[-1]
 
         if not os.path.exists(rel_dir):
             if verbose:
